@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link href="css/style1.css" rel="stylesheet" type="text/css" />
+
+	<body>
+
+		<div class="header2">
+
+			<div style="float: left;display: inline;vertical-align:center;line-height: 80px;">
+				<span>新闻发布网站注冊平台</span>
+			</div>
+		</div>
+		<div class="hr">
+			<hr align="center">
+		</div>
+		<div class="container">
+			<div class="main">
+				<div class="main_login" style="height: 500px;">
+					<div class="login_text">
+				
+				账号<br /><br /><br />
+				
+				密码<br /><br /><br />
+				
+				确认密码<br /><br /><br />
+				
+				验证码<br /><br /><br />
+				
+				
+			</div>
+					<div class="login_view">
+
+						<input type="text" name="ture_name" id="ture_name" placeholder="请输入姓名" />
+						<input type="password" placeholder="密码长度最少六位数" id="password" />
+						<input type="password" placeholder="请再次输入密码" id="password1" />
+						<input type="text" id="input" style="width:220px" />
+						<input type="button" id="code" onclick="createCode()" style="width:80px" text='点击更换验证码' />
+						<input type='submit' class="login_btn" value='注册'  onclick="validate()">
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="footer">
+			版权所有&copy;2019 16网络工程B1班 林晓婷 <br /> 使用条款 | 服务协议|
+			<a href="javascript:alert('87654321,有问题可以联系我哦！')">联系我们</a> |
+			<a href="#top">返回顶部</a><br />
+		</div>
+		<script type='text/javascript'>
+			var code; //在全局定义验证码   
+
+			function createCode() {
+				code = "";
+				var codeLength = 4; //验证码的长度   
+				var checkCode = document.getElementById("code");
+				var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+					'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //随机数   
+				for(var i = 0; i < codeLength; i++) { //循环操作   
+					var index = Math.floor(Math.random() * 36); //取得随机数的索引（0~35）   
+					code += random[index]; //根据索引取得随机数加到code上   
+				}
+				checkCode.value = code; //把code值赋给验证码   
+			}
+			//校验验证码   
+			function validate() {
+
+				var password = document.getElementById("password").value;
+				var password1 = document.getElementById("password1").value;
+				if(password != password1) {
+					alert("密码前后不同！");
+					return false;
+				} else if(password.length < 6) {
+					alert("密码至少为6位！");
+					return false;
+				}
+				var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写         
+				if(inputCode.length <= 0) { //若输入的验证码长度为0   
+					alert("请输入验证码！"); //则弹出请输入验证码   
+				} else if(inputCode != code) { //若输入的验证码与产生的验证码不一致时   
+					alert("验证码输入错误！"); //则弹出验证码输入错误   
+					createCode(); //刷新验证码   
+					document.getElementById("input").value = ""; //清空文本框   
+				} else { //输入正确时   
+					alert("验证码正确！");
+				}
+			}
+		</script>
+	</body>
+
+</html>
