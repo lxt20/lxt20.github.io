@@ -569,14 +569,19 @@ a.currcent {
 }
 
 .footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
-	height: 65px;
+	height: 60px;
 	background: #191970;
 	text-align: center;
 	font-family: "微软雅黑";
 	color: #FFFFFF;
 	overflow: hidden;
-	padding-top: 20px;
+	padding-top: 10px;
+	bottom: 0;
 }
 
 .footer a {
