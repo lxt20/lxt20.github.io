@@ -97,7 +97,7 @@ $(function () {
             }
             $wolfImg.attr("src",wolfType[wolfIndex]);
             wolfIndex++;
-        },150)
+        },300)
 
         //6.将图片添加到界面上
         $(".container").append($wolfImg)
