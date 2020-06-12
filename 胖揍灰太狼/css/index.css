@@ -12,6 +12,7 @@
 .container>h1{
     color: #FFFF;
     margin-left: 60px;
+    padding-top: 18px;
 }
 .container>.progress{
     width: 180px;
