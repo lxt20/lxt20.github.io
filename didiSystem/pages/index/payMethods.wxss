@@ -1,0 +1,15 @@
+/* pages/index/payMethods.wxss */
+page{background-color: #eee;}
+.content-box{display: flex;flex-direction: column;}
+.content-head{padding:15px;font-size:14px;border-bottom:1px solid #eee;color:#333;background-color: #fff;}
+.content-detail{width: 95%;padding:15px 20px;box-sizing: border-box;display: flex;flex-direction: column;background-color: #fff;margin: auto;margin-top: 10px;border-radius: 8px;}
+.content-price{width: 100%;text-align: center;line-height: 40px;margin-top:20px;font-size: 20px;color: #f00;}
+.content-type{width:100%;display: flex;flex-direction: column;box-sizing: border-box;margin-top: 40px;border-radius: 4px;}
+.type-item{display: flex;flex-direction: row;align-items: center;justify-content: space-between;border-top: 1px solid #eee;padding:20px 0;}
+.type-item:last-child{border-bottom:1px solid #eee ;}
+.type-item-left{display: flex;flex-direction: row;align-items: center;color:#333;font-size: 16px;}
+.type-item-left image{width: 30px;height: 30px;margin-right:10px;}
+.type-item-right{width: 18px;height: 18px;border:1px solid #999;border-radius: 50%;display: flex;flex-direction: row;align-items: center;justify-content: center;}
+.type-item-select{width:12px;height:12px;border-radius: 50%;background-color: #28abaf;}
+.content-bottom{position: fixed;bottom: 0;right: 0;z-index: 999;width: 100%;display: flex;flex-direction: row;align-items: center;justify-content: center;height: 60px;}
+.content-button{width: 80%;background-color: #28abaf;color: #fff;font-weight: bold;text-align: center;line-height: 50px;border-radius: 4px;font-size: 18px;}

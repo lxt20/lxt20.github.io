@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/login",
+    "pages/index/index",
+    "pages/index/order",
+    "pages/index/lastArrears",
+    "pages/index/personal",
+    "pages/index/customerList",
+    "pages/index/salesOrder",
+    "pages/index/settleList",
+    "pages/index/historyList",
+    "pages/index/payMethods",
+    "pages/index/paymentPage"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "派车收款小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#01c4b0",
+    "list": [
+      {
+        "selectedIconPath": "pages/icon/send2.png",
+        "iconPath": "pages/icon/send.png",
+        "pagePath": "pages/index/index",
+        "text": "派车收款"
+      },
+      {
+        "selectedIconPath": "pages/icon/last2.png",
+        "iconPath": "pages/icon/last.png",
+        "pagePath": "pages/index/lastArrears",
+        "text": "上欠收款"
+      },
+      {
+        "selectedIconPath": "pages/icon/personal2.png",
+        "iconPath": "pages/icon/personal.png",
+        "pagePath": "pages/index/personal",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

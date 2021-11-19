@@ -1,0 +1,35 @@
+<!--pages/index/paymentPage.wxml-->
+<view class="content-box">
+  <view class="wxpay-box" wx:if="{{wx}}">
+    <view class="wxpay-title">商家收款</view>
+    <view class="wxpay-detail">
+      <image src="../icon/code.png"></image>
+    </view>
+    <view class="wxpay-text2">广州xxxx有限公司</view>
+    <view class="wxpay-text">本次支付为微信支付</view>
+    <view class="wxpay-button" bindtap="gobackDetail">
+      已支付,前往查看
+    </view>
+  </view>
+  <view class="zfb-box" wx:if="{{zfb}}" >
+    <view class="wxpay-title">商家收款</view>
+    <view class="wxpay-detail">
+      <image src="../icon/code.png"></image>
+    </view>
+    <view class="wxpay-text2">广州xxxx有限公司</view>
+    <view class="wxpay-text">本次支付为支付宝支付</view>
+    <view class="wxpay-button" bindtap="gobackDetail">
+      已支付,前往查看
+    </view>
+  </view>
+  <view class="xj-box" wx:if="{{xj}}">
+    <view class="xj-title">商家收款</view>
+    <view class="xj-detail">
+      <image src="../icon/xjlogo.png"></image>
+    </view>
+    <view class="xj-text">本次支付为现金支付</view>
+    <view class="xj-button" bindtap="gobackDetail">
+      已支付,前往查看
+    </view>
+  </view>
+</view>

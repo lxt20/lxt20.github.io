@@ -1,0 +1,39 @@
+/* pages/index/salesOrder.wxss */
+.content-box{width: 100%;display: flex;flex-direction: column;}
+.content-cusName{font-size: 14px;width: 100%;margin-top: 5px;padding: 15px;color: #333;}
+.content-search{width: 100%;display: flex;flex-direction: row;align-items: center;padding: 0 15px;box-sizing: border-box;color: #333;font-size: 14px;}
+.search-box{width:70%;display: flex;flex-direction: row;align-items: center;border: 1px solid #b8b8b8;border-radius: 4px;justify-content: space-between;}
+.search-box input{padding: 3px 15px;width: 80%;}
+.input-box{font-size: 13px;}
+.search-box image{width: 20px;height: 20px;}
+.content-list{width: 100%;display: flex;flex-direction: column;padding: 15px;box-sizing: border-box;}
+.content-item{width: 100%;border: 1px solid #dddddd;border-radius: 4px;padding: 15px;box-sizing: border-box;display: flex;flex-direction: row;align-items: center;margin-bottom: 10px;}
+.content-check{margin-right: 5px;}
+checkbox .wx-checkbox-input {
+	width: 34rpx;
+	height: 34rpx;
+	border-radius: 50%;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #f03304;
+  border-color:#f03304;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 20rpx;
+  height: 20rpx;  
+  line-height: 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+.content-detail{display: flex;flex-direction: column;font-size: 13px;color: #333;line-height: 20px;}
+.content-detail-li{display: flex;flex-direction: row;align-items: center;justify-content: space-between;}
+.bottom-box{position: fixed;z-index: 999;width:100%;height: 50px;background-color: #fff;box-shadow: inset 0px 15px 10px -15px rgb(233, 233, 233);bottom: 0;right: 0;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;}
+.bottom-view{font-style: 13px;font-weight: normal;padding: 5px 20px;margin-right: 5px;border-radius: 8px;}
+.btn1{background-color: #28abaf;color: #fff;}
+.btn2{background-color: #28abaf;color: #fff;position: relative;}
+.btn2-money{position: absolute;background-color: #f00;color: #fff;z-index: 1000;top: -13px;right: 0;font-size: 11px;padding: 1px 3px;border-radius: 8px;}
+.btn3{background-color: #28abaf;color: #fff;}

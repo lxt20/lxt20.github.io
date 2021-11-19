@@ -1,0 +1,77 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/index/login",
+          "pathName": "pages/index/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/customerList",
+          "pathName": "pages/index/customerList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/salesOrder",
+          "pathName": "pages/index/salesOrder",
+          "query": "index=0",
+          "scene": null
+        },
+        {
+          "name": "pages/index/historyList",
+          "pathName": "pages/index/historyList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/payMethods",
+          "pathName": "pages/index/payMethods",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/paymentPage",
+          "pathName": "pages/index/paymentPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/lastArrears",
+          "pathName": "pages/index/lastArrears",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/personal",
+          "pathName": "pages/index/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/settleList",
+          "pathName": "pages/index/settleList",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

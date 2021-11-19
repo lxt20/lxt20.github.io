@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="content-box">
+  <view class="content-title">请选择装车单进行发货</view>
+  <view class="table-box">
+    <view class="tr">
+      <view class="th">车牌</view>
+      <view class="th">装车单</view>
+      <view class="th">客户数</view>
+    </view>
+    <view wx:for="{{tableList}}" wx:key="index">
+      <view class="tr" bindtap="gotoCustomer" data-index="{{index}}">
+        <view class="td">{{item.plateId}}</view>
+        <view class="td">{{item.Loading}}</view>
+        <view class="td">{{item.quantity}}</view>
+      </view>
+    </view>
+  </view>
+</view>
