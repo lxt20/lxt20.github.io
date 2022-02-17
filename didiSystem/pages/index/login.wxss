@@ -1,8 +1,0 @@
-/* pages/index/login.wxss */
-.container{width: 100%;display:flex;flex-direction: column;align-items: center;}
-.table-item{width: 80%;display: flex;flex-direction: row;align-items: center;height: 40px;border-bottom: 2px solid #f32e2e;margin-bottom: 40px;}
-.table-item image{width: 25px;height: 25px;margin-right: 10px;}
-/* .table-item input{border: 1px solid #b6b6b6;height: 35px;border-radius: 4px;} */
-.input-box{color: #d3d3d3;}
-.table-button{margin-top: 30px;width: 100%;}
-.table-button button{background-color: #01c4b0;color: #fff;height: 50px;width: 80% !important;display: flex;flex-direction: row;align-items: center;justify-content: center;}
