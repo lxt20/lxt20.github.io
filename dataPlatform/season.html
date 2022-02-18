@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>季节大数据</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style type="text/css">
+			.content{width:100%;display: flex;flex-direction: column;margin: 0 auto;}
+			.content-one-head{display: flex;flex-direction: row;align-items: center;justify-content: space-between;margin-top: 35px;}
+			.content-one-title{display: flex;flex-direction: row;align-items: center;color: #FFF;width: 50%;}
+			.content-one-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-one-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-one-btn{width: 50%;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;}
+		/* 	.content-one-btn input:nth-of-type(1){width:15%;height: 32px;
+			border: 1px solid #FFFFFF;border-radius: 4px;background: inherit;font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;} */
+			.content-one-btn input:nth-of-type(1){height: 30px;
+background: #00B491;border-radius: 4px;margin-left: 3%;padding: 0 10px;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;border:none}
+			.content-one-btn input:nth-of-type(2){height: 30px;
+background: #00B491;border-radius: 4px;margin-left: 3%;padding: 0 10px;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;border:none}
+			.btn-active{color:#00B491 !important;background-color: #fff !important;}
+			.content-one-box{width: 100%;background: rgba(11, 36, 76, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;margin-top: 21px;}
+			.content-one-ul{width: 100%;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;align-items: center;}
+			.content-one-left{width: 50%;height:558px;}
+			.content-one-right{width: 50%;height:558px;}
+			.content-one-right ul{width: 100%;height:558px;display: flex;flex-direction: column;}
+			.content-one-thead{width: 100%;display: flex;flex-direction: row;align-items: center;height: 58px;line-height: 58px;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.content-one-right li{width: 100%;display: flex;flex-direction:row;height: 49px;border-bottom: solid 2px rgba(5,54,71,0.7);line-height: 49px;}
+			/* .content-one-right li:last-child{border-bottom: none;} */
+			.content-one-right-td{font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;text-align: center;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+			.content-one-thead .content-one-right-td{border-right:solid 2px transparent !important;}
+			.content-one-right-td:nth-of-type(1){width: 10.3%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(2){width: 13.2%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(3){width: 9%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(4){width: 13.2%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(5){width: 9%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(6){width: 13.2%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(7){width: 9%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(8){width: 13.2%; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-right-td:nth-of-type(9){width: 9%;}
+			.jd-num{font-size: 18px;font-family: Helvetica;font-weight: bold;color: #368FFF;}
+			.tb-zf{font-size: 16px;font-family: Helvetica;font-weight: 400;color: #DD2122;}
+			.tb-df{font-size: 16px;font-family: Helvetica;font-weight: 400;color: #1BB429;}
+			
+			.content-two-detail{height: 558px;display: flex;flex-direction: column;border-radius: 8px;margin-top: 30px;}
+			.content-two-details{width: 100%;height: 558px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction:column;}
+			.content-two-detail:last-child{margin-right: 0;}
+			.content-two-title{width: 100%;height: 60px;text-align: center;line-height: 60px;font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;}
+			.content-two-thead{width: 100%;height: 49px;line-height: 49px;border-bottom: 1px solid rgba(9,84,109,0.5);display: flex;flex-direction: row;}
+			.content-two-thead .content-two-td{border-right:solid 2px transparent !important;}
+			.content-two-ul{width: 100%;height: 498px;display: flex;flex-direction: column;list-style: none;}
+			.content-two-ul li{display: flex;flex-direction: row;height: 43px;    border-bottom: solid 2px rgba(5,54,71,0.7);line-height: 43px;}
+			/* .content-two-ul li:nth-of-type(1){height: 49px;line-height: 49px;} */
+			.content-two-ul li:last-child{border-bottom: none;}
+			.content-two-td{text-align: center;font-size: 15px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+			.content-two-td:nth-of-type(1){width: 13.8%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(2){width: 21%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(3){width: 21%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(4){width: 20%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(5){width: 22.3%;}
+			.phb-num{font-size: 16px;font-family: Helvetica;font-weight: bold;color: #368FFF;}
+			.phb-gs{font-size: 16px;font-family: Helvetica;font-weight: bold;color: #00DFBE;}
+			.phb-pro{font-size: 16px;font-family: Helvetica;font-weight: bold;color: #FFBB44;}
+			
+			.content-three-box{margin-bottom: 30px;}
+			.content-three-detail{height: 558px;display: flex;flex-direction: column;border-radius: 8px;margin-top: 30px;}
+			.content-three-details{width: 100%;height: 558px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction:column;}
+			.content-three-title{width: 100%;height: 60px;text-align: center;line-height: 60px;font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;}
+			#three-one-table{width: 100%;height: 498px;}
+			#three-two-table{width: 100%;height: 498px;}
+			#three-three-table{width: 100%;height: 498px;}
+			#three-four-table{width: 100%;height: 498px;}
+			
+			.content-cover{width: 100%;height: 100%;position:fixed;z-index: 999;background-color: rgba(0,0,0,0.2);top: 0;left: 0;}
+			.content-loading{position:fixed;width: 100px;height: 100px;z-index: 998;top: 250px;left: 45%;}
+			.content-loading img{width: 150px;height: 110px;}
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				.content-one-ul{display: flex;flex-direction: column;}
+				.content-one-left{width: 100%;}
+				.content-one-right{width: 100%;}
+			}
+				
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+				.circle{display: none;}
+				.content-five-title{display: flex;flex-direction: column;align-items: start;}
+				.five-right-btn{justify-content: flex-start;display: flex;flex-direction: row;align-items: center;box-sizing: border-box;margin-top: 20px;}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<!-- <li>
+						<a href="javascript:;">
+							<div class="li-content">
+								<img src="img/中台1.png" >
+								<span>展示中台</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li> -->
+					<li>
+						<a href="area.html">
+							<div class="li-content">
+								<img src="img/区域1.png" >
+								<span>区域大数据</span>
+							</div>
+						</a>
+						<div class="li-tips  "></div>
+					</li>
+					<li>
+						<a href="variety.html">
+							<div class="li-content">
+								<img src="img/品种1.png" >
+								<span>品种大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="disease.html">
+							<div class="li-content">
+								<img src="img/病症1.png" >
+								<span>病症大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="javascirpt:;">
+							<div class="li-content li-active">
+								<img src="img/季节.png" >
+								<span>季节大数据</span>
+							</div>
+						</a>
+						<div class="li-tips li-tips-active"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">医药大数据展示</div>
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li>
+					<a href="area.html" class="show-btn">
+						<img src="img/区域1.png" >
+						<span>区域大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="variety.html" class="show-btn">
+						<img src="img/品种1.png" >
+						<span>品种大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="disease.html" class="show-btn">
+						<img src="img/病症1.png" >
+						<span>病症大数据</span>
+					</a>
+				</li>
+				<li class="menu-active">
+					<a href="season.html" class="show-btn">
+						<img src="img/季节.png" >
+						<span>季节大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="commonlyUse.html" class="show-btn">
+						<img src="img/常用药1.png" >
+						<span>常用药大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="pharmacy.html" class="show-btn">
+						<img src="img/处方药1.png" >
+						<span>处方药大数据</span>
+					</a>
+				</li>
+			</ul>
+			<div class="right-title">
+				<div class="right-data-title">
+					<ul>
+						<li>
+							<a href="commonlyUse.html">
+								<div class="li-content ">
+									<img src="img/常用药1.png" >
+									<span>常用药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips "></div>
+						</li>
+						<li>
+							<a href="pharmacy.html">
+								<div class="li-content">
+									<img src="img/处方药1.png" >
+									<span>处方药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-type-title layui-form">
+					<div class="right-select-data">
+						<!-- <select id="selectItem" lay-filter="selectItem">
+						<option value="">全部</option>
+					</select> -->
+					</div>
+					<div class="right-select-data2">
+						<select lay-filter="selectYear" id="year">
+							<option value="2021">2021</option>
+							<option value="2020">2020</option>
+							<option value="2019">2019</option>
+					</select>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="content container">
+			<div class="content-one-head">
+				<div class="content-one-title">
+					<p></p>
+					<p>季度销售数据</p>
+				</div>
+				<div class="content-one-btn">
+					<!-- <input type="button" name="" id="" value="2020" /> -->
+					<input type="button" name="" id="" class="btn-active" value="销售业绩" />
+					<input type="button" name="" id="" value="利润" />
+				</div>
+			</div>
+			
+			<div class="content-one-box">
+				<div class="content-one-ul">
+					<div class="content-one-left" id="one-left-table"></div>
+					<div class="content-one-right">
+						<div class="content-one-thead">
+							<div class="content-one-right-td">年份</div>
+							<div class="content-one-right-td">第一季度/元</div>
+							<div class="content-one-right-td">同比</div>
+							<div class="content-one-right-td">第二季度/元</div>
+							<div class="content-one-right-td">同比</div>
+							<div class="content-one-right-td">第三季度/元</div>
+							<div class="content-one-right-td">同比</div>
+							<div class="content-one-right-td">第四季度/元</div>
+							<div class="content-one-right-td">同比</div>
+						</div>
+						<ul id='latelyyear'>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="content-two-box row">
+				<div class="content-two-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-two-details">
+						<div class="content-two-title">
+							第一季度药品销售排行榜
+						</div>
+						<div class="content-two-thead">
+							<div class="content-two-td">排名</div>
+							<div class="content-two-td">品种</div>
+							<div class="content-two-td">销售额/元</div>
+							<div class="content-two-td">销量/个</div>
+							<div class="content-two-td">利润/元</div>
+						</div>
+						<ul class="content-two-ul" id="one-med">
+							<li>
+								<div class="content-two-td">1</div>
+								<div class="content-two-td">抗感冒类</div>
+								<div class="content-two-td phb-num">0.8</div>
+								<div class="content-two-td phb-gs">1200</div>
+								<div class="content-two-td phb-pro">1200</div>
+							</li>
+							<li>
+								<div class="content-two-td">2</div>
+								<div class="content-two-td">抗感冒类抗感冒类</div>
+								<div class="content-two-td phb-num">1.1</div>
+								<div class="content-two-td phb-gs">1008</div>
+								<div class="content-two-td phb-pro">1008</div>
+							</li>
+							<li>
+								<div class="content-two-td">3</div>
+								<div class="content-two-td">抗高血压类</div>
+								<div class="content-two-td phb-num">32.05</div>
+								<div class="content-two-td phb-gs">21.2</div>
+								<div class="content-two-td phb-pro">21.2</div>
+							</li>
+							<li>
+								<div class="content-two-td">4</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">5</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">6</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">7</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">8</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">9</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">10</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-two-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-two-details">
+						<div class="content-two-title">
+							第二季度药品销售排行榜
+						</div>
+						<div class="content-two-thead">
+							<div class="content-two-td">排名</div>
+							<div class="content-two-td">品种</div>
+							<div class="content-two-td">销售额/元</div>
+							<div class="content-two-td">销量/个</div>
+							<div class="content-two-td">利润/元</div>
+						</div>
+						<ul class="content-two-ul" id="two-med">
+							<li>
+								<div class="content-two-td">1</div>
+								<div class="content-two-td">抗感冒类</div>
+								<div class="content-two-td phb-num">0.8</div>
+								<div class="content-two-td phb-gs">1200</div>
+								<div class="content-two-td phb-pro">1200</div>
+							</li>
+							<li>
+								<div class="content-two-td">2</div>
+								<div class="content-two-td">抗感冒类抗感冒类</div>
+								<div class="content-two-td phb-num">1.1</div>
+								<div class="content-two-td phb-gs">1008</div>
+								<div class="content-two-td phb-pro">1008</div>
+							</li>
+							<li>
+								<div class="content-two-td">3</div>
+								<div class="content-two-td">抗高血压类</div>
+								<div class="content-two-td phb-num">32.05</div>
+								<div class="content-two-td phb-gs">21.2</div>
+								<div class="content-two-td phb-pro">21.2</div>
+							</li>
+							<li>
+								<div class="content-two-td">4</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">5</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">6</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">7</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">8</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">9</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">10</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-two-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-two-details">
+						<div class="content-two-title">
+							第三季度药品销售排行榜
+						</div>
+						<div class="content-two-thead">
+							<div class="content-two-td">排名</div>
+							<div class="content-two-td">品种</div>
+							<div class="content-two-td">销售额/元</div>
+							<div class="content-two-td">销量/个</div>
+							<div class="content-two-td">利润/元</div>
+						</div>
+						<ul class="content-two-ul" id="three-med">
+							<li>
+								<div class="content-two-td">1</div>
+								<div class="content-two-td">抗感冒类</div>
+								<div class="content-two-td phb-num">0.8</div>
+								<div class="content-two-td phb-gs">1200</div>
+								<div class="content-two-td phb-pro">1200</div>
+							</li>
+							<li>
+								<div class="content-two-td">2</div>
+								<div class="content-two-td">抗感冒类抗感冒类</div>
+								<div class="content-two-td phb-num">1.1</div>
+								<div class="content-two-td phb-gs">1008</div>
+								<div class="content-two-td phb-pro">1008</div>
+							</li>
+							<li>
+								<div class="content-two-td">3</div>
+								<div class="content-two-td">抗高血压类</div>
+								<div class="content-two-td phb-num">32.05</div>
+								<div class="content-two-td phb-gs">21.2</div>
+								<div class="content-two-td phb-pro">21.2</div>
+							</li>
+							<li>
+								<div class="content-two-td">4</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">5</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">6</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">7</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">8</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">9</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">10</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-two-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-two-details">
+						<div class="content-two-title">
+							第四季度药品销售排行榜
+						</div>
+						<div class="content-two-thead">
+							<div class="content-two-td">排名</div>
+							<div class="content-two-td">品种</div>
+							<div class="content-two-td">销售额/元</div>
+							<div class="content-two-td">销量/个</div>
+							<div class="content-two-td">利润/元</div>
+						</div>
+						<ul class="content-two-ul" id="four-med">
+							<li>
+								<div class="content-two-td">1</div>
+								<div class="content-two-td">抗感冒类</div>
+								<div class="content-two-td phb-num">0.8</div>
+								<div class="content-two-td phb-gs">1200</div>
+								<div class="content-two-td phb-pro">1200</div>
+							</li>
+							<li>
+								<div class="content-two-td">2</div>
+								<div class="content-two-td">抗感冒类抗感冒类</div>
+								<div class="content-two-td phb-num">1.1</div>
+								<div class="content-two-td phb-gs">1008</div>
+								<div class="content-two-td phb-pro">1008</div>
+							</li>
+							<li>
+								<div class="content-two-td">3</div>
+								<div class="content-two-td">抗高血压类</div>
+								<div class="content-two-td phb-num">32.05</div>
+								<div class="content-two-td phb-gs">21.2</div>
+								<div class="content-two-td phb-pro">21.2</div>
+							</li>
+							<li>
+								<div class="content-two-td">4</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">5</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">6</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">7</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">8</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">9</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+							<li>
+								<div class="content-two-td">10</div>
+								<div class="content-two-td"></div>
+								<div class="content-two-td phb-num"></div>
+								<div class="content-two-td phb-gs"></div>
+								<div class="content-two-td phb-pro"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="content-three-box row">
+				<div class="content-three-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-three-details">
+						<div class="content-three-title">
+							第一季地区销售排行榜
+							<div id="three-one-table"></div>
+						</div>
+					</div>
+				</div>
+				<div class="content-three-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-three-details">
+						<div class="content-three-title">
+							第二季地区销售排行榜
+							<div id="three-two-table"></div>
+						</div>
+					</div>
+				</div>
+				<div class="content-three-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-three-details">
+						<div class="content-three-title">
+							第三季地区销售排行榜
+							<div id="three-three-table"></div>
+						</div>
+					</div>
+				</div>
+				<div class="content-three-detail col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-three-details">
+						<div class="content-three-title">
+							第四季地区销售排行榜
+							<div id="three-four-table"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="content-cover display_none"></div>
+		<div class="content-loading display_none">
+			<img src="img/timg.gif" >
+		</div>
+		
+		<script src="js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/echarts-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.24'
+			layui.use('form', function(){
+			    var form = layui.form; 
+					form.on('select(selectYear)', function(data){
+						// console.log(data.value)
+						var thisitem=$('#selectItem').val()
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						seasondata(data.value,thisitem)
+						seasondetailfour(data.value)
+						seasonregionfour(data.value)
+					});
+			});
+			
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			$('.content-cover').removeClass('display_none')
+			$('.content-loading').removeClass('display_none')
+			var year=$('#year').val()
+			seasondata(year,'')
+			latelyyear(1)
+			seasondetailfour(year)
+			seasonregionfour(year)
+			// 获取季度销售数据
+			function seasondata(time,item){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/seasondata',
+						data:{
+							"time":time,
+							"item":item
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							seasondataTable(data)
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 季度销售数据金额和利润切换
+			$('.content-one-btn input').click(function(){
+				$(this).addClass('btn-active')
+				$(this).siblings().removeClass('btn-active')
+				// console.log($(this).index()+1)
+				$('.content-cover').removeClass('display_none')
+				$('.content-loading').removeClass('display_none')
+				latelyyear($(this).index()+1)
+			})
+			
+			
+			// 获取近几年销售数据
+			function latelyyear(type){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/latelyyear',
+						data:'',
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							if(type==1){
+								var str=$('#latelyyear').text('')
+								for(var i=0;i<10;i++){
+									if(i<data.length){
+										str.append(`
+										<li>
+											<div class="content-one-right-td">`+data[i].time+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_moneya+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_moneya_bi)+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_moneyb+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_moneyb_bi)+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_moneyc+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_moneyc_bi)+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_moneyd+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_moneyd_bi)+`</div>
+										</li>`)
+										continue;
+									}
+									str.append(`
+									<li>
+										<div class="content-one-right-td"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+									</li>`)
+								}
+								
+							}else if(type==2){
+								var str=$('#latelyyear').text('')
+								for(var i=0;i<10;i++){
+									if(i<data.length){
+										str.append(`
+										<li>
+											<div class="content-one-right-td">`+data[i].time+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_profita+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_profita_bi)+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_profitb+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_profitb_bi)+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_profitc+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_profitc_bi)+`</div>
+											<div class="content-one-right-td jd-num">`+data[i].order_profitd+`</div>
+											<div class="content-one-right-td tb-zf">`+getPent(data[i].order_profitd_bi)+`</div>
+										</li>`)
+										continue;
+									}
+									str.append(`
+									<li>
+										<div class="content-one-right-td"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+										<div class="content-one-right-td jd-num"></div>
+										<div class="content-one-right-td tb-zf"></div>
+									</li>`)
+								}
+							}
+							
+							
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 季度销售数据
+			function seasondataTable(data){
+				var arr=data
+				// console.log(arr)
+				var saleNum=[]
+				for(var i=0;i<arr.length;i++){
+					saleNum.push(arr[i].order_money)
+				}
+				var saleOrder=[]
+				for(var i=0;i<arr.length;i++){
+					saleOrder.push(arr[i].order_number)
+				}
+				var saleProfit=[]
+				for(var i=0;i<arr.length;i++){
+					saleProfit.push(arr[i].order_profit)
+				}
+				var myChart = echarts.init(document.getElementById('one-left-table'))
+				var option ={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					grid: {
+						left: '7%',
+						right: '7%',
+						bottom: '5%',
+						top:'20%',
+						containLabel: true
+					},
+					legend: {
+						data: ['代表销售利润','代表销售订单','代表销售金额'],
+						top:20,
+						textStyle:{
+							color:'#fff'
+						},
+						itemHeight: 10,
+						itemWidth:18
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data: ['第一季度', '第二季度', '第三季度', '第四季度'],
+							axisLabel:{
+								show: true,
+								textStyle: {
+									color: '#fff'
+								},
+								interval: 0
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value',
+							name: '金额  （单位：元）',
+							nameTextStyle: {
+								color: '#fff'
+							},
+							splitLine: {
+								show:false
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							},
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#fff'
+								}
+							},
+						},
+						{
+							type: 'value',
+							name: '订单 （单位：个）',
+							nameTextStyle: {
+								color: '#fff'
+							},
+							splitLine: {
+								show:false
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							},
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#fff'
+								}
+							},
+						}
+					],
+					series:[
+						{
+							name: '代表销售利润',
+							type: 'bar',
+							data: saleProfit,
+							color:'#FF6360',
+							barWidth:40,
+							yAxisIndex: 0
+						},
+						{
+							name: '代表销售订单',
+							type: 'line',
+							data: saleOrder,
+							color:'#FFE153',
+							yAxisIndex: 1,
+							itemStyle:{
+								normal:{
+									label:{
+										show: true,
+										color:'#fff'
+									},
+								},
+							}
+						},
+						{
+							name: '代表销售金额',
+							type: 'bar',
+							data: saleNum,
+							color:'#1599FF',
+							barWidth:40,
+							yAxisIndex: 0
+						}
+						
+					]
+				}
+				
+				myChart.setOption(option)
+				
+				
+			}
+			
+			// 获取药品销售排行榜
+			function seasondetailfour(time){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/seasondetailfour',
+						data:{
+							"time":time
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							var str=$('#one-med').html('')
+							var strTwo=$('#two-med').html('')
+							var strThree=$('#three-med').html('')
+							var strFour=$('#four-med').html('')
+							if(data.list1 !=''){
+								for(var i=0;i<10;i++){
+									str.append(`<li>
+										<div class="content-two-td">`+(i+1)+`</div>
+										<div class="content-two-td">`+data.list1[i].type+`</div>
+										<div class="content-two-td phb-num">`+data.list1[i].order_money+`</div>
+										<div class="content-two-td phb-gs">`+data.list1[i].order_number+`</div>
+										<div class="content-two-td phb-pro">`+data.list1[i].order_profit+`</div>
+									</li>`)
+								}
+							}
+							if(data.list2 !=''){
+								for(var i=0;i<10;i++){
+									strTwo.append(`<li>
+										<div class="content-two-td">`+(i+1)+`</div>
+										<div class="content-two-td">`+data.list2[i].type+`</div>
+										<div class="content-two-td phb-num">`+data.list2[i].order_money+`</div>
+										<div class="content-two-td phb-gs">`+data.list2[i].order_number+`</div>
+										<div class="content-two-td phb-pro">`+data.list2[i].order_profit+`</div>
+									</li>`)
+								}
+							}
+							if(data.list3 !=''){
+								for(var i=0;i<10;i++){
+									strThree.append(`<li>
+										<div class="content-two-td">`+(i+1)+`</div>
+										<div class="content-two-td">`+data.list3[i].type+`</div>
+										<div class="content-two-td phb-num">`+data.list3[i].order_money+`</div>
+										<div class="content-two-td phb-gs">`+data.list3[i].order_number+`</div>
+										<div class="content-two-td phb-pro">`+data.list3[i].order_profit+`</div>
+									</li>`)
+								}
+							}
+							if(data.list4 !=''){
+								for(var i=0;i<10;i++){
+									strFour.append(`<li>
+										<div class="content-two-td">`+(i+1)+`</div>
+										<div class="content-two-td">`+data.list4[i].type+`</div>
+										<div class="content-two-td phb-num">`+data.list4[i].order_money+`</div>
+										<div class="content-two-td phb-gs">`+data.list4[i].order_number+`</div>
+										<div class="content-two-td phb-pro">`+data.list4[i].order_profit+`</div>
+									</li>`)
+								}
+							}
+							
+							
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 获取地区销售排行榜
+			function seasonregionfour(time){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/seasonregionfour',
+						data:{
+							"time":time
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							console.log(data)
+							regionOne(data.list1)
+							regionTwo(data.list2)
+							regionThree(data.list3)
+							regionFour(data.list4)
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			
+			// 第一地区销售排行榜
+			function regionOne(data){
+				var threeData1=data
+				var threeTitle1=[]
+				for(var i=0;i<threeData1.length;i++){
+					threeTitle1.push(threeData1[i].provice_name)
+				}
+				var threeValue1=[]
+				for(var i=0;i<threeData1.length;i++){
+					threeValue1.push(threeData1[i].order_money)
+				}
+				
+				var myChart2 = echarts.init(document.getElementById('three-one-table'))
+				var option2={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter: function (params) {
+								var tar = params[0];
+								return tar.marker+'第一季'+tar.name + '地区销售金额 : ' + tar.value+'元';
+						}
+					},
+					grid: {
+						left: '5%',
+						right: '5%',
+						bottom: '3%',
+						top:'3%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'value',
+						show:false
+					},
+					yAxis: {
+						type: 'category',
+						data: threeTitle1,
+						axisLabel: {
+							show: true,
+							textStyle: {
+									color: '#fff'
+							}
+						 },
+						axisLine:{
+							show:false
+						},
+						axisTick:{
+							show:false
+						}
+					},
+					series: [
+						{
+							type:'bar',
+							data:threeValue1,
+							barWidth:28,
+							itemStyle:{
+								normal:{
+									color:'#00EC69',
+									label: {
+										show: true,
+										position: 'insideRight',
+										formatter: function(params) {
+											var zongren = sum(threeValue1); //总人数
+											var baifenbi_num = params.value / zongren
+											var str = Number(baifenbi_num * 100).toFixed(1);
+											return str += "%";
+										},　　　　//这是关键，在需要的地方加上就行了
+										align:'right'
+									}	,
+								},
+							},
+							 
+						}
+						
+					]
+				}
+				myChart2.setOption(option2)
+				
+			}
+			
+			// 第二地区销售排行榜
+			function regionTwo(data){
+				var threeData2=data
+				var threeTitle2=[]
+				for(var i=0;i<threeData2.length;i++){
+					threeTitle2.push(threeData2[i].provice_name)
+				}
+				var threeValue2=[]
+				for(var i=0;i<threeData2.length;i++){
+					threeValue2.push(threeData2[i].order_money)
+				}
+				var myChart3 = echarts.init(document.getElementById('three-two-table'))
+				var option3={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter: function (params) {
+								var tar = params[0];
+								return tar.marker+'第二季'+tar.name + '地区销售金额 : ' + tar.value+'元';
+						}
+					},
+					grid: {
+						left: '5%',
+						right: '5%',
+						bottom: '3%',
+						top:'3%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'value',
+						show:false
+					},
+					yAxis: {
+						type: 'category',
+						data: threeTitle2,
+						axisLabel: {
+							show: true,
+							textStyle: {
+									color: '#fff'
+							}
+						 },
+						axisLine:{
+							show:false
+						},
+						axisTick:{
+							show:false
+						}
+					},
+					series: [
+						{
+							type:'bar',
+							data:threeValue2,
+							barWidth:28,
+							itemStyle:{
+								normal:{
+									color:'#FAC958',
+									label: {
+										show: true,
+										position: 'insideRight',
+										formatter: function(params) {
+											var zongren = sum(threeValue2); //总人数
+											var baifenbi_num = params.value / zongren
+											var str = Number(baifenbi_num * 100).toFixed(1);
+											return str += "%";
+										},　　　　//这是关键，在需要的地方加上就行了
+										align:'right'
+									}	,
+								},
+							},
+							 
+						}
+						
+					]
+				}
+				myChart3.setOption(option3)
+			}
+			
+			// 第三地区销售排行榜
+			function regionThree(data){
+				var threeData3=data
+				var threeTitle3=[]
+				for(var i=0;i<threeData3.length;i++){
+					threeTitle3.push(threeData3[i].provice_name)
+				}
+				var threeValue3=[]
+				for(var i=0;i<threeData3.length;i++){
+					threeValue3.push(threeData3[i].order_money)
+				}
+				var myChart4 = echarts.init(document.getElementById('three-three-table'))
+				var option4={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter: function (params) {
+								var tar = params[0];
+								return tar.marker+'第三季'+tar.name + '地区销售金额 : ' + tar.value+'元';
+						}
+					},
+					grid: {
+						left: '5%',
+						right: '5%',
+						bottom: '3%',
+						top:'3%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'value',
+						show:false
+					},
+					yAxis: {
+						type: 'category',
+						data: threeTitle3,
+						axisLabel: {
+							show: true,
+							textStyle: {
+									color: '#fff'
+							}
+						 },
+						axisLine:{
+							show:false
+						},
+						axisTick:{
+							show:false
+						}
+					},
+					series: [
+						{
+							type:'bar',
+							data:threeValue3,
+							barWidth:28,
+							itemStyle:{
+								normal:{
+									color:'#D634FF',
+									label: {
+										show: true,
+										position: 'insideRight',
+										formatter: function(params) {
+											var zongren = sum(threeValue3); //总人数
+											var baifenbi_num = params.value / zongren
+											var str = Number(baifenbi_num * 100).toFixed(1);
+											return str += "%";
+										},　　　　//这是关键，在需要的地方加上就行了
+										align:'right'
+									}	,
+								},
+							},
+							 
+						}
+						
+					]
+				}
+				myChart4.setOption(option4)
+			}
+			
+			// 第四地区销售排行榜
+			function regionFour(data){
+				var threeData5=data
+				var threeTitle5=[]
+				for(var i=0;i<threeData5.length;i++){
+					threeTitle5.push(threeData5[i].provice_name)
+				}
+				var threeValue5=[]
+				for(var i=0;i<threeData5.length;i++){
+					threeValue5.push(threeData5[i].order_money)
+				}
+				var myChart5 = echarts.init(document.getElementById('three-four-table'))
+				var option5={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter: function (params) {
+								var tar = params[0];
+								return tar.marker+'第四季'+tar.name + '地区销售金额 : ' + tar.value+'元';
+						}
+					},
+					grid: {
+						left: '5%',
+						right: '5%',
+						bottom: '3%',
+						top:'3%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'value',
+						show:false
+					},
+					yAxis: {
+						type: 'category',
+						data: threeTitle5,
+						axisLabel: {
+							show: true,
+							textStyle: {
+									color: '#fff'
+							}
+						 },
+						axisLine:{
+							show:false
+						},
+						axisTick:{
+							show:false
+						}
+					},
+					series: [
+						{
+							type:'bar',
+							data:threeValue5,
+							barWidth:28,
+							itemStyle:{
+								normal:{
+									color:'#2880FF',
+									label: {
+										show: true,
+										position: 'insideRight',
+										formatter: function(params) {
+											var zongren = sum(threeValue5); //总人数
+											var baifenbi_num = params.value / zongren
+											var str = Number(baifenbi_num * 100).toFixed(1);
+											return str += "%";
+										},　　　　//这是关键，在需要的地方加上就行了
+										align:'right'
+									}	,
+								},
+							},
+							 
+						}
+						
+					]
+				}
+				myChart5.setOption(option5)
+			}
+			
+			// 返回百分比
+			function getPent(num){
+				if(num != '' && num!='/'){
+					return num+'%'
+				}else{
+					return num
+				}
+				
+			}
+			
+			
+			
+			// 递归求和
+			function sum(arr) {
+					var len = arr.length;
+					if(len == 0){
+							return 0;
+					} else if (len == 1){
+							return arr[0];
+					} else {
+							return arr[0] + sum(arr.slice(1));
+					}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>品种大数据</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		
+		<style type="text/css">
+			.head-box{width: 100%;}
+			.content{width: 100%;padding: 20px 30px;}
+			.content-one-left{height: 331px;border-radius: 8px;margin-top: 34px;}
+			.content-one-right{height: 331px;border-radius: 8px;display: flex;flex-direction: row;margin-top: 34px;}
+			.content-one-ul{width: 100%;height: 331px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: column;list-style: none;}
+			.content-one-ul li{width: 100%;height: 164px;display: flex;flex-direction: row;align-items: center;}
+			.content-one-ul li:nth-of-type(1){border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.content-one-td{width: 50%;height: 164px; border-right: solid 2px rgba(5,54,71,0.4);display: flex;flex-direction: column;align-items: center;justify-content: center;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;line-height: 32px;}
+			.content-one-td2{width: 50%;height: 164px;display: flex;flex-direction: column;align-items: center;justify-content: center;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;line-height: 32px;}
+			.content-one-num{text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);font-size: 30px;font-family: Helvetica;font-weight: bold;line-height: 45px;}
+			.content-one-right-datail{width: 100%;height: 331px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;}
+			.content-one-ul2{width: 36%;height: 331px; border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-one-li{width: 100%;height: 164px;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;line-height: 32px;text-align: center;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+			.content-one-li:nth-of-type(1){border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.content-one-data{display: flex;flex-direction: column;width: 66%;height: 331px;}
+			.content-one-li2:nth-of-type(1){width: 100%;height: 120px;display: flex;flex-direction: row;}
+			.one-li2-td{display: flex;flex-direction: column;align-items: center;width: 50%;justify-content: center;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;line-height: 32px;}
+			.content-one-li2:nth-of-type(2){width: 100%;height: 211px;display: flex;flex-direction: row;}
+			.one-li2-td2{display: flex;flex-direction: column;align-items: center;justify-content: flex-end;margin-left: 5%;}
+			.one-li2-td2:nth-of-type(1){height: 211px;width: 12.8%;}
+			.one-li2-td2:nth-of-type(2){height: 211px;width: 15.6%;}
+			.one-li2-td2:nth-of-type(3){height: 211px;width: 18.3%;}
+			.one-li2-td2:nth-of-type(4){height: 211px;width: 23.1%;}
+			.one-li2-logo{background: #2992FF;border-radius: 50%;display: flex;flex-direction: row;align-items: center;justify-content: center;/* font-size: 24px; */font-family: Helvetica;font-weight: bold;color: #FFFFFF;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);
+			}
+			
+			.logo-width1{width:70px;height: 70px;}
+			.logo-width2{width:85px;height: 85px;}
+			.logo-width3{width:100px;height: 100px;}
+			.logo-width4{width:126px;height: 126px;}
+			.one-li2-title{font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;line-height: 53px;}
+			.content-two-title{margin-top: 35px;display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-two-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-two-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-two-box{width: 100%;border-radius: 8px;margin-top: 21px;}
+			.content-two-ul{width: 100%;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;align-items: center;}
+			.content-two-left{width: 50%;height: 561px;}
+			.content-two-right{width: 50%;height: 561px;}
+			.content-two-right-div{height: 55px; border-bottom: solid 2px rgba(5,54,71,0.7);
+display: flex;flex-direction: row;align-items: center;line-height: 55px;}
+			.content-two-right-div .content-two-right-td{border-right:solid 2px transparent}
+			.content-two-right-ul{list-style: none;width: 100%;height: 561px;display: flex;flex-direction: column;}
+			.content-two-right-li{height: 49px; border-bottom: solid 2px rgba(5,54,71,0.7);
+display: flex;flex-direction: row;align-items: center;line-height: 49px;}
+			
+			.content-two-right-li:last-child{border-bottom: none;}
+			.content-two-right-td{ border-right: solid 2px rgba(5,54,71,0.4);;text-align: center;color: #fff; display: flex;flex-direction: row;align-items: center;justify-content: center;}
+			.content-two-right-td:nth-of-type(1){display: flex;flex:9.4;border-right:solid 2px rgba(5,54,71,0.4);height: 100%;}
+			.content-two-right-td:nth-of-type(2){display: flex;flex:17.8;display: block !important;white-space: nowrap !important;overflow: hidden !important;text-overflow: ellipsis !important;position: relative !important;border-right:solid 2px rgba(5,54,71,0.4);height: 100%;}
+			.content-two-right-td:nth-of-type(3){display: flex;flex: 17.8;border-right:solid 2px rgba(5,54,71,0.4);height: 100%;}
+			.content-two-right-td:nth-of-type(4){display: flex;flex:15.2;border-right:solid 2px rgba(5,54,71,0.4);height: 100%;}
+			.content-two-right-td:nth-of-type(5){display: flex;flex:17.4;height: 100%;}
+			/* .content-two-right-td:nth-of-type(6){width: 22%;position: relative;} */
+			
+			.content-three-head{display: flex;flex-direction: row;margin-top: 35px;align-items: center;justify-content: space-between;}
+			.content-three-title{display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-three-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-three-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-three-date{width: 50%;display: flex;flex-direction: row;justify-content: flex-end;}
+			.three-right-select{width:15%;height: 34px;background-color: #081833;}
+			.layui-form-select dl::-webkit-scrollbar {
+			  display: none; /* Chrome Safari */
+			}
+			.three-right-select .layui-input, .layui-textarea{padding-left: 0px !important;}
+			.three-right-select .layui-form-select .layui-input{border: 1px solid #fff;background-color: #081833;}
+			.three-right-input input{height: 30px;
+background: #00B491;border-radius: 4px;margin-left: 3%;padding: 0 10px;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;border:none;margin-left: 12%;}
+			.three-right-input{width: 200px;;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;}
+			
+			.btn-active{color:#00B491 !important;background-color: #fff !important;}
+			.content-three-box{width: 100%;margin-top: 21px;background: rgba(11, 36, 76, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;}
+			.content-three-ul{width: 100%;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;border-radius: 8px;}
+			.content-three-left{width: 40%;height: 500px;}
+			.content-three-right{width: 60%;height: 500px;}
+			
+			.content-four-head{display: flex;flex-direction: row;margin-top: 35px;align-items: center;justify-content: space-between;}
+			.content-four-date{width: 50%;display: flex;flex-direction: row;justify-content: flex-end;}
+			.content-four-title{display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-four-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-four-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.four-right-select{width:100px;height: 34px;background-color: #081833;}
+			.four-right-select .layui-input, .layui-textarea{padding-left: 0px !important;}
+			.four-right-select .layui-form-select .layui-input{border: 1px solid #fff;background-color: #081833;}
+			.four-right-input input{height: 30px;
+background: #00B491;border-radius: 4px;margin-left: 3%;padding: 0 10px;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;border:none;margin-left: 12%;}
+			.four-right-input{width: 200px;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;}
+						
+
+			.content-four-box{width: 100%;margin: 21px 0 15px 0;background: rgba(11, 36, 76, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;}
+			.content-four-ul{width: 100%;display: flex;flex-direction: row;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			.content-four-li{width: 33.3%;height: 558px;list-style: none;display: flex;flex-direction: column;}
+			.content-four-thead{width: 100%;display: flex;flex-direction: row;height: 58px;line-height: 58px;border-bottom: solid 2px rgba(5,54,71,0.7);font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;text-align: center;}
+			.content-four-thead .four-li-td{border-right:2px solid transparent;}
+			.content-four-li li{height: 48px;width: 100%;display: flex;flex-direction: row;align-items: center;border-bottom: solid 2px rgba(5,54,71,0.7);line-height: 48px;text-align: center;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;}
+		/* 	.content-four-li li:last-child{border-bottom:none} */
+			.four-li-td{border-right: solid 2px rgba(5,54,71,0.4);display: flex;flex-direction: row;align-items: center;justify-content: center;}
+			.four-li-td:nth-of-type(1){display:flex;flex:12.6;}
+			.four-li-td:nth-of-type(2){display:flex;flex: 21.6;display: block !important;white-space: nowrap !important;overflow: hidden !important;text-overflow: ellipsis !important;position: relative !important;}
+			.four-li-td:nth-of-type(3){display:flex;flex: 17.1;}
+			.four-li-td:last-child{display:flex;flex: 21.1;border-right: none;}
+			/* .four-li-td:nth-of-type(5){display:flex;flex: 27.6;border-right: none;position: relative;} */
+			.kind-box{font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;}
+			.pro-box{font-size: 18px;font-family: PingFang SC;font-weight: 500;color: #FFFFFF;}
+			.sale-box{font-size: 18px;font-family: Helvetica;font-weight: bold;color: #368FFF;}
+			.content-cover{width: 100%;height: 100%;position:fixed;z-index: 999;background-color: rgba(0,0,0,0.2);top: 0;left: 0;}
+			.content-loading{position:fixed;width: 100px;height: 100px;z-index: 998;top: 250px;left: 45%;}
+			.content-loading img{width: 150px;height: 110px;}
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				
+				.content-two-ul{display: flex;flex-direction: column;}
+				.content-two-left{width: 100%;height: 561px;}
+				.content-two-right{width: 100%;height: 561px;}
+				.content-three-ul{display: flex;flex-direction: column;}
+				.content-three-left{width: 100%;height: 500px;}
+				.content-three-right{width: 100%;height: 500px;}
+				.content-four-ul{display: flex;flex-direction: column;}
+				.content-four-li{width: 100%;height: 558px;}
+			}
+			
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+				.circle{display: none;}
+				.content-five-title{display: flex;flex-direction: column;align-items: start;}
+				.five-right-btn{justify-content: flex-start;display: flex;flex-direction: row;align-items: center;box-sizing: border-box;margin-top: 20px;}
+			}
+			.circle {width: 34px;height: 34px;  position: absolute;border-radius: 50%;background: #EBFF65;right: 3%;
+			}
+			.pie_left, .pie_right {width: 34px; height: 34px;position: absolute;top: 0;left: 0;}
+			.left, .right {display: block;width:34px; height:34px;background:#D0D0D0;border-radius: 50%;position: absolute;top: 0;left: 0;transform: rotate(0deg);}
+			.pie_right, .right {clip:rect(0,auto,auto,17px);}
+			.pie_left, .left {clip:rect(0,17px,auto,0);}
+			.mask {width: 22px;height: 22px;border-radius: 50%;left: 6px;top: 6px;background: #081833;position: absolute;text-align: center;line-height: 50px;font-size: 16px;}
+			.circle .mask span{color: rgba(255,255,255,0);}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<!-- <li>
+						<a href="javascript:;">
+							<div class="li-content">
+								<img src="img/中台1.png" >
+								<span>展示中台</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li> -->
+					<li>
+						<a href="area.html">
+							<div class="li-content">
+								<img src="img/区域1.png" >
+								<span>区域大数据</span>
+							</div>
+						</a>
+						<div class="li-tips  "></div>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<div class="li-content li-active">
+								<img src="img/品种.png" >
+								<span>品种大数据</span>
+							</div>
+						</a>
+						<div class="li-tips li-tips-active"></div>
+					</li>
+					<li>
+						<a href="disease.html">
+							<div class="li-content">
+								<img src="img/病症1.png" >
+								<span>病症大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="season.html">
+							<div class="li-content">
+								<img src="img/季节1.png" >
+								<span>季节大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">医药大数据展示</div>
+			
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li>
+					<a href="area.html" class="show-btn">
+						<img src="img/区域1.png" >
+						<span>区域大数据</span>
+					</a>
+				</li>
+				<li  class="menu-active">
+					<a href="javascript:;" class="show-btn">
+						<img src="img/品种.png" >
+						<span>品种大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="disease.html" class="show-btn">
+						<img src="img/病症1.png" >
+						<span>病症大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="season.html" class="show-btn">
+						<img src="img/季节1.png" >
+						<span>季节大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="commonlyUse.html" class="show-btn">
+						<img src="img/常用药1.png" >
+						<span>常用药大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="pharmacy.html" class="show-btn">
+						<img src="img/处方药1.png" >
+						<span>处方药大数据</span>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="right-title">
+				<div class="right-data-title">
+					<ul>
+						<li>
+							<a href="commonlyUse.html">
+								<div class="li-content ">
+									<img src="img/常用药1.png" >
+									<span>常用药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips "></div>
+						</li>
+						<li>
+							<a href="pharmacy.html">
+								<div class="li-content">
+									<img src="img/处方药1.png" >
+									<span>处方药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-type-title layui-form">
+					<div class="right-select-data">
+						<select lay-filter="selectItem" id="selectItem">
+							<option value="">请选择</option>
+						</select>
+					</div>
+					<div class="right-select-data2">
+						<select lay-filter="selectYear" id="year">
+							<option value="2021">2021</option>
+							<option value="2020">2020</option>
+							<option value="2019">2019</option>
+						</select>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- 内容 -->
+		<div class="content container">
+			<div class="content-one-box row">
+				<div class="content-one-left col-lg-6 col-md-12 col-sm-12 col-xs-12">
+					<ul class="content-one-ul">
+						<li>
+							<div class="content-one-td">
+								<div class="content-one-num" style="color:#00D5AC" id="shopcount">25631</div>
+								<div class="content-one-title">现有药品种数/个</div>
+							</div>
+							<div class="content-one-td2">
+								<div class="content-one-num" style="color:#FFE488" id="allcount">25631.00</div>
+								<div class="content-one-title">现有药品类目/个</div>
+							</div>
+						</li>
+						<li>
+							<div class="content-one-td">
+								<div class="content-one-num" style="color:#FF44DE" id="levela">25631</div>
+								<div class="content-one-title">一级类目/个</div>
+							</div>
+							<div class="content-one-td2">
+								<div class="content-one-num" style="color:#21AEFF" id="levelb">25631</div>
+								<div class="content-one-title">二级类目/个</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="content-one-right col-lg-6 col-md-12 col-sm-12 col-xs-12">
+					<div class="content-one-right-datail">
+						<div class="content-one-ul2">
+							<div class="content-one-li">
+								<div class="content-one-num" style="color:#FF6380" id="numStock">2563</div>
+								<div class="content-one-title">现有药品库存/件</div>
+							</div>
+							<div class="content-one-li">
+								<div class="content-one-num" style="color:#FF82C6" id="pridceall">2563</div>
+								<div class="content-one-title">货值金额/万元</div>
+							</div>
+						</div>
+						<div class="content-one-data">
+							<div class="content-one-li2">
+								<div class="one-li2-td">
+									<div class="content-one-num" style="color:#FFF66D" id="allMoney">2563</div>
+									<div class="content-one-title">销售额/万元</div>
+								</div>
+								<div class="one-li2-td">
+									<div class="content-one-num" style="color:#55A8FF" id="thisMonthMoeny">2563</div>
+									<div class="content-one-title">本月销售额/万元</div>
+								</div>
+							</div>
+							<div class="content-one-li2">
+								<div class="one-li2-td2">
+									<div class="one-li2-logo logo-width1" id="lastMonthMoeny">2563</div>
+									<div class="one-li2-title">上月</div>
+								</div>
+								<div class="one-li2-td2">
+									<div class="one-li2-logo logo-width2" id="threeMonthMoeny">2563</div>
+									<div class="one-li2-title">最近3月</div>
+								</div>
+								<div class="one-li2-td2">
+									<div class="one-li2-logo logo-width3" id="sixMonthMoeny">2563</div>
+									<div class="one-li2-title">最近6月</div>
+								</div>
+								<div class="one-li2-td2">
+									<div class="one-li2-logo logo-width4" id="twelveMonthMoeny">2563</div>
+									<div class="one-li2-title">最近1年</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="content-two-title">
+				<p></p>
+				<p>各类目药品品种占比</p>
+			</div>
+			<div class="content-two-box">
+				<div class="content-two-ul">
+					<div class="content-two-left" id="two-left-table">
+					</div>
+					<div class="content-two-right">
+						<div class="content-two-right-div">
+							<div class="content-two-right-td">排名</div>
+							<div class="content-two-right-td">二级类目</div>
+							<div class="content-two-right-td">药品种类/个</div>
+							<div class="content-two-right-td">库存/件</div>
+							<div class="content-two-right-td">货值金额/元</div>
+						</div>
+						<ul class="content-two-right-ul" id="twoRightUl">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="content-three-head">
+				<div class="content-three-title">
+					<p></p>
+					<p>各品类销售金额/利润排行榜</p>
+				</div>
+				<div class="content-three-date layui-form">
+					<div class="three-right-select">
+						<select name="" lay-filter="threeSelectMonth" id="threeSelectMonth">
+							<option value="">选择月份</option>
+							<option value="1">1月</option>
+							<option value="2">2月</option>
+							<option value="3">3月</option>
+							<option value="4">4月</option>
+							<option value="5">5月</option>
+							<option value="6">6月</option>
+							<option value="7">7月</option>
+							<option value="8">8月</option>
+							<option value="9">9月</option>
+							<option value="10">10月</option>
+							<option value="11">11月</option>
+							<option value="12">12月</option>
+						</select>
+					</div>
+					<div class="three-right-input" id='three-input'>
+						<input type="button" name="" id="" class="btn-active" value="销售业绩" />
+						<input type="button" name="" id="" value="利润" />
+					</div>
+					
+				</div>
+			</div>
+			<div class="content-three-box">
+				<div class="content-three-ul">
+					<div class="content-three-left" id="three-left-table"></div>
+					<div class="content-three-right" id="three-right-table"></div>
+				</div>
+			</div>
+			
+			<div class="content-four-head">
+				<div class="content-four-title">
+					<p></p>
+					<p>各品类销售业绩/利润地区排行榜</p>
+				</div>
+				<div class="content-four-date layui-form">
+					<div class="four-right-select">
+						<select name="" lay-filter="fourSelectMonth" id="fourSelectMonth">
+							<option value="">选择月份</option>
+							<option value="1">1月</option>
+							<option value="2">2月</option>
+							<option value="3">3月</option>
+							<option value="4">4月</option>
+							<option value="5">5月</option>
+							<option value="6">6月</option>
+							<option value="7">7月</option>
+							<option value="8">8月</option>
+							<option value="9">9月</option>
+							<option value="10">10月</option>
+							<option value="11">11月</option>
+							<option value="12">12月</option>
+						</select>
+					</div>
+					<div class="four-right-input" id='four-input'>
+						<input type="button" name="" id="" class="btn-active" value="销售业绩" />
+						<input type="button" name="" id="" value="利润" />
+					</div>
+					
+				</div>
+			</div>
+			<div class="content-four-box">
+				<div class="content-four-ul">
+					<div class="content-four-li" >
+						<div class="content-four-thead">
+							<div class="four-li-td">排名</div>
+							<div class="four-li-td">品类</div>
+							<div class="four-li-td">省份</div>
+							<div class="four-li-td" id='four-ss1'>销售额/元</div>
+							<!-- <div class="four-li-td">占比</div> -->
+						</div>
+						<ul id="four-left-table">
+						</ul>
+					</div>
+					
+					<div class="content-four-li" id="four-middle-table">
+					</div>
+					
+					<div class="content-four-li" >
+						<div class="content-four-thead">
+							<div class="four-li-td">排名</div>
+							<div class="four-li-td">品类</div>
+							<div class="four-li-td">城市</div>
+							<div class="four-li-td" id='four-ss2'>销售额/元</div>
+							<!-- <div class="four-li-td">占比</div> -->
+						</div>
+						<ul id="four-right-table">
+							
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="content-cover display_none"></div>
+		<div class="content-loading display_none">
+			<img src="img/timg.gif" >
+		</div>
+		
+		
+		<script src="js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/echarts-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.24'
+			layui.use('form', function(){
+			    var form = layui.form; 
+					
+					//商家列表 
+					$.ajax({
+					//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/getitem',
+						data:'',
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							var str=$('#selectItem')
+							if(data.length!=0){
+								for(var i=0;i<data.length;i++){
+									str.append(`	
+									<option value="`+data[i].id+`">`+data[i].name+`</option>
+									`)
+									form.render('select');
+								}
+							}
+							
+						}
+					});
+					
+					// 顶部年份选择
+					form.on('select(selectYear)', function(data){
+						var thisitem=$('#selectItem').val()
+						var rightBtn=$('#three-input input').eq(1).hasClass('btn-active')
+						var rightBtnTwo=$('#four-input input').eq(1).hasClass('btn-active')
+						var thisMonth=$('#threeSelectMonth').val()
+						var thisMonthTwo=$('#fourSelectMonth').val()
+						
+						// console.log(thisitem)
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						plstock(thisitem,data.value)
+						various(thisitem,data.value)
+						if(rightBtn){
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							variousSalev('order_profit',thisitem,data.value,thisMonth)
+						}else{
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							variousSalev('order_money',thisitem,data.value,thisMonth)
+						}
+						if(rightBtnTwo){
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							regionVarious('order_profit',thisitem,data.value,thisMonthTwo)
+						}else{
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							regionVarious('order_money',thisitem,data.value,thisMonthTwo)
+						}
+						mapList(data.value)
+					});
+					// 顶部项目选择
+					form.on('select(selectItem)', function(data){
+						var thisyear=$('#year').val()
+						var rightBtn=$('#three-input input').eq(1).hasClass('btn-active')
+						var rightBtnTwo=$('#four-input input').eq(1).hasClass('btn-active')
+						var thisMonth=$('#threeSelectMonth').val()
+						var thisMonthTwo=$('#fourSelectMonth').val()
+						// console.log(data.value,thisyear)
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						pinlei(data.value)
+						plstock(data.value,thisyear)
+						various(data.value,thisyear)
+						if(rightBtn){
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							variousSalev('order_profit',data.value,thisyear,thisMonth)
+						}else{
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							variousSalev('order_money',data.value,thisyear,thisMonth)
+						}
+						if(rightBtnTwo){
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							regionVarious('order_profit',data.value,thisyear,thisMonthTwo)
+						}else{
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							regionVarious('order_money',data.value,thisyear,thisMonthTwo)
+						}
+						
+					});
+					// 金额月份选择
+					form.on('select(threeSelectMonth)', function(data){
+						var rightBtn=$('#three-input input').eq(1).hasClass('btn-active')
+						// console.log(data.value)
+						var thisyear=$('#year').val()
+						var thisitem=$('#selectItem').val()
+						if(rightBtn){
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							variousSalev('order_profit',thisitem,thisyear,data.value)
+						}else{
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							variousSalev('order_money',thisitem,thisyear,data.value)
+						}
+						
+					});
+					// 业绩年份选择
+					form.on('select(fourSelectMonth)', function(data){
+						var rightBtnTwo=$('#four-input input').eq(1).hasClass('btn-active')
+						var thisyear=$('#year').val()
+						var thisitem=$('#selectItem').val()
+						if(rightBtnTwo){
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							regionVarious('order_profit',thisitem,thisyear,data.value)
+						}else{
+							$('.content-cover').removeClass('display_none')
+							$('.content-loading').removeClass('display_none')
+							regionVarious('order_money',thisitem,thisyear,data.value)
+						}
+						// console.log(data.value)
+					});
+			});
+			
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			$('.content-cover').removeClass('display_none')
+			$('.content-loading').removeClass('display_none')
+			var item=$('#selectItem').val()
+			var year=$('#year').val()
+			
+			
+			
+			pinlei(item)
+			plstock(item,year)
+			various(item,year)
+			variousSalev('order_money',item,year,'')
+			regionVarious('order_money',item,year,'')
+			mapList(year)
+			
+		
+			
+			
+			// 各品类销售金额/利润排行榜切换按钮
+			$('#three-input input').click(function(){
+				var thisyear=$('#year').val()
+				var thisitem=$('#selectItem').val()
+				var thisMonth=$('#threeSelectMonth').val()
+				$(this).addClass('btn-active')
+				$(this).siblings().removeClass('btn-active')
+				// console.log($(this).index()+1)
+				if(($(this).index())==0){
+					$('.content-cover').removeClass('display_none')
+					$('.content-loading').removeClass('display_none')
+					variousSalev('order_money',thisitem,thisyear,thisMonth)
+				}else if(($(this).index())==1){
+					$('.content-cover').removeClass('display_none')
+					$('.content-loading').removeClass('display_none')
+					variousSalev('order_profit',thisitem,thisyear,thisMonth)
+				}
+			})
+			
+			// 各品类销售业绩/利润地区排行榜切换按钮
+			$('#four-input input').click(function(){
+				var thisyear=$('#year').val()
+				var thisitem=$('#selectItem').val()
+				var thisMonth=$('#fourSelectMonth').val()
+				$(this).addClass('btn-active')
+				$(this).siblings().removeClass('btn-active')
+				if(($(this).index())==0){
+					$('.content-cover').removeClass('display_none')
+					$('.content-loading').removeClass('display_none')
+					regionVarious('order_money',thisitem,thisyear,thisMonth)
+				}else if(($(this).index())==1){
+					$('.content-cover').removeClass('display_none')
+					$('.content-loading').removeClass('display_none')
+					regionVarious('order_profit',thisitem,thisyear,thisMonth)
+				}
+			})
+			
+			
+			// 获取统计品类数据
+			function pinlei(item){
+				$.ajax({
+				//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/pinlei',
+					data:{
+						"item":item
+					},
+					//服务器返回的数据类型
+					success:function(data){
+						// console.log(data)
+						$('#shopcount').text(data.shopcount)
+						$('#allcount').text(data.allcount)
+						$('#levela').text(data.levela)
+						$('#levelb').text(data.levelb)
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					},
+					error: function(msg){
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					}
+				});
+			}
+			
+			// 获取药品库存，货值，销量信息
+			function plstock(item,time){
+				$.ajax({
+				//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/plstock',
+					data:{
+						"item":item,
+						"time":time
+					},
+					//服务器返回的数据类型
+					success:function(data){
+						// console.log(data)
+						$('#numStock').text(data.num)
+						$('#pridceall').text(data.pridceall)
+						$('#allMoney').text(data.all_money)
+						$('#thisMonthMoeny').text(data.this_month_moeny)
+						$('#lastMonthMoeny').text(data.last_month_moeny)
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					},
+					error: function(msg){
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					}
+				});
+			}
+			
+			// 获取各类目药品品种占比数据
+			function various(item,time){
+				// console.log(item,time)
+				$.ajax({
+				//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/Various',
+					data:{
+						"item":item,
+						"time":time
+					},
+					//服务器返回的数据类型
+					success:function(data){
+						// console.log(data)
+						if(data.seconda!=''){
+							 variouspie(data)
+						 }
+						if(data.seconda!=''){
+							var array=[]
+							for(var i=0;i<data.seconda.length;i++){
+								array.push({
+									name:data.seconda[i].name,
+									count:data.seconda[i].count,
+									id:i
+								})
+							}
+							array.sort(function(a,b){
+								if(a.count<b.count) return 1 ;
+								if(a.count>b.count) return -1 ;
+								return 0 ;
+							}) ;
+							variousTable(data.secondb[array[0].id])
+						}
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					},
+					error: function(msg){
+						// console.log(data)
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					}
+				});
+				
+			}
+			
+			// 各类目药品品种占比--饼状图
+			function variouspie(data){
+				var twoLeftNum=data.seconda
+				var twoLeftName=[]
+				var twoLeftCount=[]
+				for(var i=0;i<twoLeftNum.length;i++){
+					twoLeftName.push(twoLeftNum[i].name)
+				}
+				for(var i=0;i<twoLeftNum.length;i++){
+					twoLeftCount.push({
+						name:twoLeftNum[i].name,
+						value:twoLeftNum[i].count,
+						id:i
+					})
+				}
+				twoLeftCount.sort(function(a,b){
+					if(Number(a.value)<Number(b.value)) return -1 ;
+					if(Number(a.value)>Number(b.value)) return 1 ;
+					return 0 ;
+				}) ;
+				// console.log(twoLeftCount)
+				
+				var myChart = echarts.init(document.getElementById('two-left-table'))
+				var option ={
+						legend: {
+							orient: 'vertical',
+							left: '10%',
+							top:'25%',
+							icon:'rect',
+							itemWidth:14,
+							itemHeight:14,
+							itemGap:25,
+							data: twoLeftName,
+							textStyle:{
+								color:'#fff'
+							}
+						},
+						
+						series:[{
+							name:'pie',
+							type:'pie',
+							selectedMode:'single',
+							selectedOffset:30,
+							clockwise:true,
+							radius : '75%',
+							center: ['58%', '50%'],
+							label: {
+								// position: 'inside',
+								color:'rgba(255, 255, 255, 0.3)',
+								formatter: function (params) {
+									// console.log(params.data)
+									return params.data.value+ '种\n' + params.percent+'%'
+								},
+								lineHeight:20
+							},
+							data:twoLeftCount,
+							itemStyle:{
+								normal:{
+									color:function(params){
+										var colorlist = ['#00E600','#7E16FF','#392FFF','#FF4497','#FF7F21','#056EF2','#16FF89','#ffdb0a','#00aaff'];
+										return colorlist[params.dataIndex];
+									},
+								  borderWidth: 3,
+								  borderColor: '#FFF'
+									 
+								},
+							},
+							emphasis: {
+								itemStyle: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							}
+					}]
+				}
+				myChart.setOption(option);
+				myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: twoLeftCount.length-1});
+				myChart.on('click', function(params) {
+						// console.log(params.data.id)
+						variousTable(data.secondb[params.data.id])
+				});
+			}
+			// 各类目药品品种占比--图表
+			function variousTable(data){
+				if(data!=''){
+					var str=$('#twoRightUl').html('')
+					for(var i=0;i<10;i++){
+						if(i<data.length){
+							str.append(`<li class="content-two-right-li">
+										<div class="content-two-right-td">`+(i+1)+`</div>
+										<div class="content-two-right-td">`+data[i].name+`</div>
+										<div class="content-two-right-td">`+data[i].count+`</div>
+										<div class="content-two-right-td">`+data[i].num+`</div>
+										<div class="content-two-right-td">`+data[i].pridceall+`</div>
+										
+									</li>`)
+							continue;
+						}
+						str.append(`<li class="content-two-right-li">
+									<div class="content-two-right-td"></div>
+									<div class="content-two-right-td"></div>
+									<div class="content-two-right-td"></div>
+									<div class="content-two-right-td"></div>
+									<div class="content-two-right-td"></div>
+								</li>`)
+						
+					}
+				}else{
+					var str=$('#twoRightUl').html('')
+				}
+			}
+			// 获取各品类销售金额/利润排行榜数据
+			function variousSalev(type,item,time,month){
+				 // console.log(type,item,time,month)
+				$.ajax({
+				//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/VariousSale/',
+					data:{
+						"type":type,
+						"item":item,
+						"time":time,
+						"month":month
+					},
+					//服务器返回的数据类型
+					success:function(data){
+						// console.log(data)
+						if(data.list.length!=0){
+							saleRanking(data.list,data,type)
+						}
+						if(data.detail.length!=0){
+							saleRankingDetail(data.detail[0],type)
+						}
+						
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					},
+					error: function(msg){
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					}
+				});
+			}
+			
+			// 各品类销售金额/利润排行榜  --柱状图
+			function saleRanking(data,twoData,btnType){
+				if(btnType=='order_money'){
+					var threeLeftData=[]
+					for(var i=data.length-1;i>=0;i--){
+						threeLeftData.push({
+							name:data[i].type,
+							value:data[i].order_money
+						})
+					}
+				}else{
+					var threeLeftData=[]
+					for(var i=data.length-1;i>=0;i--){
+						threeLeftData.push({
+							name:data[i].type,
+							value:data[i].order_profit
+						})
+					}
+				}
+				var threeLeftName=[]
+				for(var i=0;i<threeLeftData.length;i++){
+					threeLeftName.push(threeLeftData[i].name)
+				}
+				var threeLeftNum=[]
+				for(var i=0;i<threeLeftData.length;i++){
+					threeLeftNum.push(Number(threeLeftData[i].value))
+				}
+				
+				var myChart2 = echarts.init(document.getElementById('three-left-table'))
+				var option2={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: { 
+							type: 'shadow'
+						},
+						formatter: function (params) {
+								var tar = params[0];
+								return tar.marker+tar.name + '销售金额 : ' + tar.value+'元';
+						}
+					},
+					grid: {
+						left: '3%',
+						right: '3%',
+						bottom: '3%',
+						top:'6%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'value',
+						show:false
+					},
+					yAxis: {
+						type: 'category',
+						data:threeLeftName ,
+						axisLabel: {
+							show: true,
+							textStyle: {
+									color: '#fff'
+							}
+						 },
+						axisLine:{
+							show:false
+						},
+						axisTick:{
+							show:false
+						}
+					},
+					series: [
+						{
+							type:'bar',
+							data:threeLeftData,
+							barWidth:25,
+							itemStyle:{
+								normal:{
+									color:function(params){
+										var colorlist = ['#5B04FB','#FA3333','#D338FF','#FFC751','#2CCC47','#1B51FF','#FB3B72','#6B6AE1','#04D1BE','#0476FB'];
+										return colorlist[params.dataIndex];
+										},
+									label: {
+										show: true,
+										position: 'insideRight',
+										formatter: function(params) {
+											var zongren = sum(threeLeftNum); //总人数
+											var baifenbi_num = params.value / zongren
+											var str = Number(baifenbi_num * 100).toFixed(1);
+											return str += "%";
+										},　　　　//这是关键，在需要的地方加上就行了
+										align:'right'
+									}	,
+								},
+							},
+							 
+						}
+						
+					]
+				};
+				
+				myChart2.setOption(option2);
+				myChart2.on('mouseover', function(params) {
+						let arrayData =JSON.parse(JSON.stringify(twoData.detail))
+						let twoDetail = arrayData.reverse()
+						var btnType=$('#three-input input').eq(0).hasClass('btn-active')
+						if(btnType){
+							saleRankingDetail(twoDetail[params.dataIndex],'order_money')
+						}else{
+							saleRankingDetail(twoDetail[params.dataIndex],'order_profit')
+						}
+						
+				});
+			}
+			
+			// 各品类销售金额/利润排行榜 --饼状图
+			function saleRankingDetail(data,type){
+				if(type == 'order_money'){
+					var threeRightNum=[]
+					for(var i=0;i<data.length;i++){
+						threeRightNum.push({
+							name:data[i].goods_name,
+							value:data[i].order_money
+						})
+					}
+				}else{
+					var threeRightNum=[]
+					for(var i=0;i<data.length;i++){
+						threeRightNum.push({
+							name:data[i].goods_name,
+							value:data[i].order_profit
+						})
+					}
+				}
+				
+				threeRightNum.sort(function(a,b){
+					if(Number(a.value)<Number(b.value)) return -1 ;
+					if(Number(a.value)>Number(b.value)) return 1 ;
+					return 0 ;
+				}) ;
+				var threeRightName=[]
+				for(var i=0;i<threeRightNum.length;i++){
+					threeRightName.push(threeRightNum[i].name)
+				}
+				console.log(threeRightNum)
+				var myChart3=echarts.init(document.getElementById('three-right-table'))
+				var option3={
+					legend: {
+						orient: 'vertical',
+						left:'70%',
+						top:'15%',
+						icon:'rect',
+						itemGap:20,
+						itemWidth:14,
+						itemHeight:14,
+						data: threeRightName,
+						textStyle:{
+							color:'#fff'
+						}
+					},
+					series:[{
+							name:'pie',
+							type:'pie',
+							selectedMode:'single',
+							selectedOffset:30,
+							clockwise:true,
+							radius : ['25%','75%'],
+							center: ['35%', '50%'],
+							label: {
+								// position: 'inside',
+								color: 'rgba(255, 255, 255, 0.3)',
+								formatter: function (params) {
+									var str=Number(params.data.value).toFixed(2)
+									return str + '元\n' + params.percent+'%'
+								},
+								lineHeight:20
+							},
+							data:threeRightNum,
+							itemStyle:{
+								normal:{
+									color:function(params){
+										var colorlist = ['#774DFF','#7E16FF','#16FF89','#FF1944','#FF4497','#ED8B43','#ded00d','#3887EB','#3EC83E','#3B5BC4'];
+										return colorlist[params.dataIndex];
+									},
+								  borderWidth: 3,
+								  borderColor: '#FFF'
+									 
+								},
+							},
+							emphasis: {
+								itemStyle: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							}
+					}]
+				}
+				myChart3.setOption(option3);
+				myChart3.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 9});
+			}
+			
+			
+			
+			// 获取各品类销售业绩/利润地区排行榜
+			function regionVarious(type,item,time,month){
+				// console.log(type,item,time,month)
+				$.ajax({
+				//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/regionVarious',
+					data:{
+						"type":type,
+						"item":item,
+						"time":time,
+						"month":month
+					},
+					//服务器返回的数据类型
+					success:function(data){
+						// console.log(data)
+						if(type=='order_money'){
+							var leftTable=$('#four-left-table').html('')
+							$('#four-ss1').html('销售额/元')
+							$('#four-ss2').html('销售额/元')
+							for(var i=0;i<10;i++){
+								leftTable.append(`
+								<li>
+									<div class="four-li-td">`+(i+1)+`</div>
+									<div class="four-li-td  kind-box">`+data.provice[i].type+`</div>
+									<div class="four-li-td pro-box">`+data.provice[i].provice_name+`</div>
+									<div class="four-li-td sale-box">`+data.provice[i].order_money+`</div>
+								</li>`)
+							}
+							var rightTable=$('#four-right-table').html('')
+							for(var i=0;i<10;i++){
+								rightTable.append(`
+								<li>
+									<div class="four-li-td">`+(i+1)+`</div>
+									<div class="four-li-td  kind-box">`+data.city[i].type+`</div>
+									<div class="four-li-td pro-box">`+data.city[i].city_name+`</div>
+									<div class="four-li-td sale-box">`+data.city[i].order_money+`</div>
+								</li>`)
+							}
+						}else if(type=="order_profit"){
+							$('#four-ss1').html('利润/元')
+							$('#four-ss2').html('利润/元')
+							var leftTable=$('#four-left-table').html('')
+							for(var i=0;i<10;i++){
+								leftTable.append(`
+								<li>
+									<div class="four-li-td">`+(i+1)+`</div>
+									<div class="four-li-td  kind-box">`+data.provice[i].type+`</div>
+									<div class="four-li-td pro-box">`+data.provice[i].provice_name+`</div>
+									<div class="four-li-td sale-box">`+data.provice[i].order_profit+`</div>
+								</li>`)
+							}
+							var rightTable=$('#four-right-table').html('')
+							for(var i=0;i<10;i++){
+								rightTable.append(`
+								<li>
+									<div class="four-li-td">`+(i+1)+`</div>
+									<div class="four-li-td  kind-box">`+data.city[i].type+`</div>
+									<div class="four-li-td pro-box">`+data.city[i].city_name+`</div>
+									<div class="four-li-td sale-box">`+data.city[i].order_profit+`</div>
+								</li>`)
+							}
+						}
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					},
+					error: function(msg){
+						console.log(data)
+					}
+				});
+			}
+			
+			// 获取地图数据
+			function mapList(time){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/listtop',
+						data:{
+							"time":time
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							var arraydata = []
+							var zongSales = null // 总
+							var zongProfit = null
+							for(let i = 0;i<data.length;i++){
+								zongSales += Number(data[i].order_money)
+								zongProfit += Number(data[i].order_profit)
+							}
+							for(let i = 0;i<data.length;i++){
+								arraydata.push({
+									name:cancelPro(data[i].provice_name),
+									salesValue:data[i].order_money,
+									profitValue:data[i].order_profit,
+									salesPer:zbMethod(data[i].order_money,zongSales),
+									profitPer:zbMethod(data[i].order_profit,zongProfit),
+								})
+							}
+							mapDetail(arraydata)
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			// 销售额占比方法
+			function zbMethod(num,total){
+				return (Math.round(Number(num) / Number(total) * 10000) / 100.00 + "%")
+			}
+			function cancelPro(name){
+				return name.replace("省","")
+			}
+			
+			// 地图信息
+			function mapDetail(dataArray){
+				var fourMiddleData=[
+						{name:"南海诸岛",salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '北京', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '天津', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '上海', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '重庆', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '河北', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '河南', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '云南', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '辽宁', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '黑龙江', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '湖南', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '安徽', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '山东', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '新疆', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '江苏', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '浙江', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '江西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '湖北', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '广西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '甘肃', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '山西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '内蒙古', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '陕西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '吉林', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '福建', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '贵州', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '广东', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '青海',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '西藏',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '四川',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '宁夏',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '海南',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '台湾',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '香港',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '澳门',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'}
+				]
+				
+				fourMiddleData.forEach((item1,index1)=>{
+					dataArray.forEach((item2,index2)=>{
+						if(item1.name == item2.name){
+							fourMiddleData[index1] = dataArray[index2]
+						}
+					})
+				})
+				
+				var myChart4=echarts.init(document.getElementById('four-middle-table'))
+				var option4={
+					tooltip: {
+						formatter:function(params,ticket, callback){
+							return '省份：'+params.name+'<br />本年销售额/万：<span style="color:#F92626;font-weight:bold">'+params.data.salesValue+'</span><br />销售额全国占比：<span style="color:#FFF119;font-weight:bold">'+params.data.salesPer+'</span><br />本年利润/万：<span style="color:#F92626;font-weight:bold">'+params.data.profitValue+'</span><br />利润额全国占比：<span style="color:#FFF119;font-weight:bold">'+params.data.profitPer+'</span>'
+						}//数据格式化
+					},
+					visualMap: {
+						min: 0,
+						max: 1500,
+						left: 'left',
+						top: 'bottom',
+						text: ['高','低'],
+						show:false,
+						textStyle:{
+							color:'#fff'
+						}
+					},
+					geo: {
+						zoom:1.1,
+						show: true,
+						map: 'china',
+						label: {
+							show: true,
+							color:'#fff'
+						},
+						roam: false,
+						itemStyle: {
+							normal: {
+								color:'#0086FF',
+								areaColor: '#0086FF',
+								borderWidth: 3, //设置外层边框
+								borderColor:'#1B006C',
+								shadowColor: '#003e74'/* ,
+								shadowBlur: 5,
+								shadowOffsetY:18 */
+								// opacity:0.8,
+							},
+							emphasis: {
+								 color: '#fff',
+								 opacity:0.8
+							}
+						}
+					},
+					series: [
+						{
+							zoom:1.1,
+							type: 'map',
+							map: 'china',
+							label: {
+								normal: {
+									show: true,
+									// fontSize:'10',
+									color: '#fff'
+									// show:false
+								},
+								emphasis:{
+									 color: '#fff'
+									 // show:false
+								}
+							},
+							roam: false,
+							itemStyle: {
+								normal: {
+									areaColor: '#0086FF',
+									borderColor: '#d9d9d9',
+									borderWidth: 1
+								},
+								emphasis: {
+									areaColor: '#0058a6'
+								}
+							},
+							data:fourMiddleData
+						}
+					]
+				}
+				myChart4.setOption(option4);
+			}
+			
+			
+			
+			
+			// 递归求和
+			function sum(arr) {
+					var len = arr.length;
+					if(len == 0){
+							return 0;
+					} else if (len == 1){
+							return arr[0];
+					} else {
+							return arr[0] + sum(arr.slice(1));
+					}
+			}
+			
+			// 保留两位小数
+			function getTwo(num){
+				var a=num
+				return a.toFixed(2)
+			}
+			
+			$(function() {
+			    $('.circle').each(function(index, el) {
+			        var num = $(this).find('span').text() * 3.6;
+			        if (num<=180) {
+			            $(this).find('.right').css('transform', "rotate(" + num + "deg)");
+			        } else {
+			            $(this).find('.right').css('transform', "rotate(180deg)");
+			            $(this).find('.left').css('transform', "rotate(" + (num - 180) + "deg)");
+			        };
+			    });
+			
+			});
+		</script>
+	</body>
+</html>

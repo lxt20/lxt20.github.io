@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>药品销量监控</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<style type="text/css">
+			.content{width: 100%;padding: 20px 30px;}
+			.contentOne-box{display: block;}
+			.contentOne-one{margin-top: 35px;}
+			.contentOne-title{display: flex;flex-direction: row;align-items: center;}
+			.contentOne-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.contentOne-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.contentOne-one-table{width: 100%;height: 336px;margin-top: 31px;}
+			.contentOne-one-tables{list-style: none;width: 100%;height: 336px;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			.contentOne-one-tr1{width: 100%;height: 169px;display: flex;flex-direction: row;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.contentOne-one-tr2{width: 100%;height: 169px;display: flex;flex-direction: row;}
+			.contentOne-one-td{width: 50%;height: 169px;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+			.contentOne-one-td:nth-child(2n){border-left: solid 2px rgba(5,54,71,0.4);}
+			.contentOne-one-title{font-size: 18px;font-family: PingFang SC;font-weight: 400;color: #E9E9E9;margin-bottom: 21px;}
+			.contentOne-one-num{font-size: 14px;color: #E9E9E9;margin-bottom: 15px;}
+			.contentOne-one-per{font-size: 14px;color: #E9E9E9;}
+			.num{font-size: 20px;font-family: Helvetica;font-weight: bold;color: #FFFA6F;}
+			.increase{color:#FF2B2B;font-size: 18px}
+			.reduce{color: #1AB428;font-size: 18px}
+			
+			.contentOne-two{margin-top: 35px;}
+			.contentOne-two-table{width:100%;height: 336px;margin-top: 31px;}
+			#contentOne-two-tables{list-style: none;width: 100%;height: 336px;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+
+			.contentOne-three{margin-top: 35px;}
+			.contentOne-three-table{width: 100%;height: 336px;margin-top: 31px;}
+			#contentOne-three-tables{list-style: none;width: 100%;height: 336px;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			
+			.contentOne-four{margin-top: 35px;}
+			.contentOne-title2{display: flex;flex-direction: row;justify-content: space-between;}
+			.contentOne-title2 div:nth-of-type(1){display: flex;flex-direction: row;align-items: center;}
+			.contentOne-title2 div p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.contentOne-title2 div p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.contentOne-title2 div:nth-of-type(2){width: 80px;height: 32px;border: 1px solid #FFFFFF;border-radius: 4px;}
+			.contentOne-title2 a{text-decoration: none;width: 100%;line-height: 32px;display: flex;flex-direction: row;align-items: center;justify-content: center;color: #FFFFFF;}
+			.contentOne-four-table{width: 100%;height: 336px;margin-top: 31px;}
+			.contentOne-four-detail{width: 100%;height: 336px;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;}
+			.contentOne-four-left{width: 387px;height: 336px;position: relative;border-right: solid 2px rgba(5,54,71,0.4);overflow:hidden;font-size: 14px}
+			.contentOne-four-left ul{position:absolute;top:0;left:0;width:100%;}
+			.contentOne-four-left ul li{list-style: none;display: flex;flex-direction: row;line-height:47px;height: 47px;border-bottom: solid 2px rgba(5,54,71,0.7);;
+font-size: 14px;font-family: PingFang SC;font-weight: 400;}
+			.pro-time{padding-left: 20px;width: 63px;}
+			.pro-title{width:105px;padding-left: 15px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+			.pro-status{width:180px;padding-left: 3px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis}
+			.increase-box{color:#C90B0C;}
+			.reduce-box{color:#1BB429;}
+			.contentOne-four-right{width: 387px;height: 336px;position: relative;overflow:hidden;font-size: 14px}
+			.contentOne-four-right ul{position:absolute;top:0;left:0;width:100%;}
+			.contentOne-four-right ul li{list-style: none;display: flex;flex-direction: row;line-height:47px;height: 47px;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			
+			.contentTwo-box{}
+			.contentTwo-btn{width: 100%;height: 34px;display: flex;flex-direction: row;margin-top: 35px;}
+			.contentTwo-btn a{width: 80px;height: 32px;border: 1px solid #A7A7A7;border-radius: 4px;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;text-align: center;line-height: 32px;margin-right: 9px;}
+			.btn-active{color: #666666 !important;background-color: #FFFFFF !important;}
+			
+			.contentTwo-one{border-radius: 8px;;margin-top: 35px}
+			.contentTwo-one-table{border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;align-items: center;}
+			.contentTwo-one-left{width: 55%;height: 446px;display: flex;flex-direction: column;align-items: center;position: relative;}
+			.one-left-title{font-size: 18px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;line-height: 53px;width:100%;height: 53px;text-align: center;position: absolute;top: 8px;}
+			#contentTwo-one-left-table{width: 100%;height: 446px;}
+			.contentTwo-one-right{width: 45%;height: 446px;display: flex;flex-direction: column;}
+			.one-right-title{font-size: 18px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;width:100%;height: 60px;text-align: center;line-height: 60px;}
+			
+			.one-right-table{width: 100%;height: 380px;}
+			.one-right-head{font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;display: flex;flex-direction: row;align-items: center;height: 34px;text-align: center;line-height: 34px;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.one-right-head div:nth-of-type(1){width: 20.8%;height:100%}
+			.one-right-head div:nth-of-type(2){width: 28.4%;}
+			.one-right-head div:nth-of-type(3){width: 24.5%;}
+			.one-right-head div:nth-of-type(4){width: 26.2%;}
+			
+			.one-right-table ul{width: 100%;display: flex;flex-direction: column;align-items: center;}
+			.one-right-table ul li{width: 100%;height: 34px;display: flex;flex-direction: row;text-align: center;line-height: 34px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			/* .one-right-table ul li:nth-of-type(1){font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;} */
+			.one-right-table ul li div:nth-of-type(1){width: 20.8%;border-right: solid 2px rgba(5,54,71,0.4);height:100%}
+			.one-right-table ul li div:nth-of-type(2){width: 28.4%;border-right: solid 2px rgba(5,54,71,0.4);white-space: nowrap;overflow: hidden;text-overflow: ellipsis;height:100%}
+			.one-right-table ul li div:nth-of-type(3){width: 24.5%;border-right: solid 2px rgba(5,54,71,0.4);white-space: nowrap;overflow: hidden;text-overflow: ellipsis;height:100%}
+			.one-right-table ul li div:nth-of-type(4){width: 26.2%;height:100%}
+			
+			.contentTwo-two{background: rgba(235, 255, 101, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;margin-top: 35px;}
+			.contentTwo-two-table{border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;align-items: center;}
+			.contentTwo-two-left{width: 45%;height: 446px;display: flex;flex-direction: column;}
+			.contentTwo-two-right{width: 55%;height: 446px;display: flex;flex-direction: column;align-items: center;position: relative;}
+			#contentTwo-two-right-table{width:100%;height: 446px;}
+			
+			.content-cover{width: 100%;height: 100%;z-index: 999;background-color: rgba(0,0,0,0.2);top: 0;left: 0;position:fixed}
+			.content-loading{position:fixed;width: 100px;height: 100px;z-index: 998;top: 250px;left: 45%;}
+			.content-loading img{width: 150px;height: 110px;}
+			
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				.one-right-head{font-size: 12px}
+			}
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+				.contentTwo-one-table{display: flex;flex-direction: column;align-items: center;}
+				.contentTwo-one-left{width: 100%;}
+				.contentTwo-one-right{width: 100%;}
+				.contentTwo-two-table{display: flex;flex-direction: column;align-items: center;}
+				.contentTwo-two-left{width: 100%;}
+				.contentTwo-two-right{width: 100%;}
+			}
+		</style>
+	<body>
+			<div class="head-box">
+				<div class="head-title">
+					<ul>
+						<li>
+							<a href="javascript:;">
+								<div class="li-content li-active">
+									<span class="iconfont icon-yujingtubiao-02"></span>
+									<span>药品销量监控</span>
+								</div>
+							</a>
+							<div class="li-tips li-tips-active"></div>
+						</li>
+						<li>
+							<a href="warningList.html">
+								<div class="li-content">
+									<span class="iconfont icon-yujingtubiao-03"></span>
+									<span>预警信息列表</span>
+								</div>
+							</a>
+							<div class="li-tips"></div>
+						</li>
+						<li>
+							<a href="monitoringSet.html">
+								<div class="li-content ">
+									<span class="iconfont icon-yujingtubiao-01"></span>
+									<span>监控设置</span>
+								</div>
+							</a>
+							<div class="li-tips "></div>
+						</li>
+						<li>
+							<a href="salesRanking.html">
+								<div class="li-content">
+									<span class="iconfont icon-yujingtubiao-04"></span>
+									<span>药品销量排行榜</span>
+								</div>
+							</a>
+							<div class="li-tips"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="main-title">药品销量监控</div>
+				
+				<!-- 小屏幕图标导航 -->
+				<div class="left-title">
+					<div class="top-logo">
+						<span class="iconfont icon-project"></span>
+					</div>
+				</div>
+				<ul class="top-menu">
+					<li class="menu-active">
+						<a href="javascript:;" class="show-btn">
+							<span class="iconfont icon-yujingtubiao-02"></span>
+							<span>药品销量监控</span>
+						</a>
+					</li>
+					<li>
+						<a href="warningList.html" class="show-btn">
+							<span class="iconfont icon-yujingtubiao-03"></span>
+							<span>预警信息列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="monitoringSet.html" class="show-btn">
+							<span class="iconfont icon-yujingtubiao-01"></span>
+							<span>监控设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="salesRanking.html" class="show-btn">
+							<span class="iconfont icon-yujingtubiao-04"></span>
+							<span>药品销量排行榜</span>
+						</a>
+					</li>
+				</ul>
+				<div class="dataTime layui-form">
+					<div class="right-select-data2">
+						<select  lay-filter="selectYear" id="year">
+							<option value="2021">2021</option>
+							<option value="2020">2020</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="content container">
+				<div class="contentOne-box row">
+						<!-- 销量预警监控 -->
+						<div class="contentOne-one col-lg-2 col-md-6 col-sm-12 col-xs-12">
+							<div class="contentOne-title">
+								<p></p>
+								<p>销量预警监控</p>
+							</div>
+							<div class="contentOne-one-table">
+								<div class="contentOne-one-tables">
+								</div>
+							</div>
+						</div>
+						<!-- 销量环比增幅预警类型分析 -->
+						<div class="contentOne-two col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="contentOne-title">
+								<p></p>
+								<p>销量环比增幅预警类型分析</p>
+							</div>
+							<div class="contentOne-two-table">
+								<div id="contentOne-two-tables"></div>
+							</div>
+						</div>
+						<!-- 销量环比降幅预警类型分析 -->
+						<div class="contentOne-three col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="contentOne-title">
+								<p></p>
+								<p>销量环比降幅预警类型分析</p>
+							</div>
+							<div class="contentOne-three-table">
+								<div id="contentOne-three-tables"></div>
+							</div>
+						</div>
+						
+						<!-- 预警日志 -->
+						<div class="contentOne-four col-lg-4 col-md-6 col-sm-12 col-xs-12">
+							<div class="contentOne-title2">
+								<div>
+									<p></p>
+									<p>销量环比降幅预警类型分析</p>
+								</div>
+								<div>
+									<a href="warningList.html">
+										查看更多
+									</a>
+								</div>
+							</div>
+							<div class="contentOne-four-table">
+								<div class="contentOne-four-detail">
+									<div class="contentOne-four-left increase-box">
+										<ul>
+											
+										</ul>
+									</div>
+									<div class="contentOne-four-right reduce-box">
+										<ul>
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="contentTwo-btn">
+					<a href="javascript:;" class="btn-active">昨日</a>
+					<a href="javascript:;">近7天</a>
+					<a href="javascript:;">近30天</a>
+					<a href="javascript:;">近90天</a>
+					<!-- <a href="javascript:;">本年</a> -->
+				</div>
+				<div class="contentTwo-box  row" >
+					<div class="contentTwo-one col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						<div class="contentTwo-one-table">
+							<!-- 总计增长数量 -->
+							<div class="contentTwo-one-left">
+								<div class="one-left-title">
+									总计涨<span class="increase">5000</span>种
+								</div>
+								<div id="contentTwo-one-left-table">
+								</div>
+							</div>
+							<!-- 销量涨幅排行榜 -->
+							<div class="contentTwo-one-right">
+								<div class="one-right-title">销量涨幅排行榜</div>
+								<div class="one-right-table">
+									<div class="one-right-head">
+										<div>排名</div>
+										<div>药品名称</div>
+										<div>订单量/件</div>
+										<div>环比</div>
+									</div>
+									<ul class="one-right-zf">
+										<li>
+											<div>1</div>
+											<div>板蓝根</div>
+											<div class="zf-yellow">5500</div>
+											<div class="zf-green">5.02%</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="contentTwo-two col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						<div class="contentTwo-two-table">
+							<!--	销量降幅排行榜  -->
+							<div class="contentTwo-two-left">
+								<div class="one-right-title">
+									销量降幅排行榜
+								</div>
+								<div class="one-right-table">
+									<div class="one-right-head">
+										<div>排名</div>
+										<div>药品名称</div>
+										<div>订单量/件</div>
+										<div>环比</div>
+									</div>
+									<ul class="one-right-jf">
+										<li>
+											<div>10</div>
+											<div>板蓝根</div>
+											<div class="zf-yellow">5500</div>
+											<div class="zf-green">5.02%</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- 总计下降数量 -->
+							<div class="contentTwo-two-right">
+								<div class="one-left-title">
+									总计涨<span class="reduce">5000</span>种
+								</div>
+								<div id="contentTwo-two-right-table">
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		
+		<div class="content-cover display_none"></div>
+		<div class="content-loading display_none">
+			<img src="../img/timg.gif" >
+		</div>
+		
+		
+		<script src="../js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/echarts-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.24'
+			layui.use(['layer', 'form'], function(){
+			  var layer = layui.layer
+			  ,form = layui.form;
+			});
+			
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			// 销量环比增幅预警类型分析
+			function chartOneTable(numday,numseven,nummouth,numseason){
+				var myChart01 = echarts.init(document.getElementById('contentOne-two-tables'));
+				option01={
+					legend: [
+							{
+								left: 35,
+								bottom:25,
+								data: [/* '每小时销量', */'昨日销量', '近7天销量','近30天销量', '近90天销量'],
+								itemHeight: 12,
+								itemWidth:12,
+								itemGap:15,
+								textStyle:{
+									fontSize:11,
+									color:'#fff'
+								},
+								align:'left'
+							},
+							// {
+							// 	data:['本月销量', '本季销量'],
+							// 	align:'left',
+							// 	textStyle:{
+							// 		fontSize:11,
+							// 		color:'#fff'
+							// 	},
+							// 	itemHeight: 12,
+							// 	itemWidth:12,
+							// 	itemGap:25,
+							// 	left: 30,
+							// 	bottom:20,
+							// }
+							
+					],
+					tooltip: {
+						trigger: 'item',
+						// formatter: '{b}环比增幅{d}%'
+						formatter: params => `<p>${params.marker}${params.name}环比增幅<span style="color:#9D0000;font-weight: bold">${params.percent}</span>%</p>`,
+					},
+					series: [
+							{
+									name: '访问来源',
+									type: 'pie',
+									radius: '65%',
+									center: ['50%', '42%'],
+									label: {
+										position:'inside',
+										formatter:'{d}%'
+									},
+									data: [
+											/* {
+												value: 15,
+												name:'每小时销量',
+												itemStyle:{
+													color:'#D62A2B'
+												}
+											}, */
+											{
+												value: numday,
+												name:'昨日销量',
+												itemStyle:{
+													color:'#C90B0C'
+												}
+											},
+											{
+												value: numseven,
+												name:'近7天销量',
+												itemStyle:{
+													color:'#740102'
+												}
+											},
+											{
+												value: nummouth,
+												name:'近30天销量',
+												itemStyle:{
+													color:'#550102'
+												}
+											},
+											{
+												value:numseason,
+												name:'近90天销量',
+												itemStyle:{
+													color:'#33050A'
+												}
+											}
+									]
+									
+							}
+					]
+				}
+				myChart01.setOption(option01);
+			}
+			
+			// 销量环比降幅预警类型分析
+			function chartTwoTable(numdayfu,numsevenfu,nummouthfu,numseasonfu){
+				var myChart02 = echarts.init(document.getElementById('contentOne-three-tables'));
+				option02={
+					legend: [
+							{
+								left: 35,
+								bottom:25,
+								data: [/* '每小时销量', */'昨日销量', '近7天销量','近30天销量', '近90天销量'],
+								itemHeight: 12,
+								itemWidth:12,
+								itemGap:15,
+								textStyle:{
+									fontSize:11,
+									color:'#fff'
+								},
+								align:'left'
+							},
+							// {
+							// 	data:['本月销量', '本季销量'],
+							// 	align:'left',
+							// 	textStyle:{
+							// 		fontSize:11,
+							// 		color:'#fff'
+							// 	},
+							// 	itemHeight: 12,
+							// 	itemWidth:12,
+							// 	itemGap:36,
+							// 	left: 30,
+							// 	bottom:20,
+							// }
+							
+					],
+					tooltip: {
+						trigger: 'item',
+						// formatter: '{b}环比增幅{d}%'
+						formatter: params => `<p>${params.marker}${params.name}环比增幅<span style="color:#00D65B;font-weight: bold">${params.percent}</span>%</p>`,
+					},
+					series: [
+							{
+									name: '访问来源',
+									type: 'pie',
+									radius: '65%',
+									center: ['50%', '42%'],
+									label: {
+										position:'inside',
+										formatter:'{d}%'
+									},
+									data: [
+											// {
+											// 	value: 15,
+											// 	name:'每小时销量',
+											// 	itemStyle:{
+											// 		color:'#00D65B'
+											// 	}
+											// },
+											{
+												value: numdayfu,
+												name:'昨日销量',
+												itemStyle:{
+													color:'#00B54D'
+												}
+											},
+											{
+												value: numsevenfu,
+												name:'近7天销量',
+												itemStyle:{
+													color:'#008438'
+												}
+											},
+											{
+												value: nummouthfu,
+												name:'近30天销量',
+												itemStyle:{
+													color:'#005D27'
+												}
+											},
+											{
+												value:numseasonfu,
+												name:'近90天销量',
+												itemStyle:{
+													color:'#003E1B'
+												}
+											}
+									]
+									
+							}
+					]
+				}
+				myChart02.setOption(option02);
+			}
+			
+			// 总计增长数量
+			function chartThreeTable(num20,num40,num60,num80,num100,numbig){
+				var myChart03=echarts.init(document.getElementById('contentTwo-one-left-table'));
+				option03={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter:'药品涨幅{b}有<span style="color:#d62a2b;font-weight:bold">{c}</span>种'
+					},
+					grid:{
+						top:'20%',
+						bottom:'8%',
+					},
+					xAxis: {
+						type: 'category',
+						data: ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%', '>=100%'],
+						axisLabel: {
+							color:'#fff'
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#fff'
+							}
+						}
+					},
+					yAxis: {
+						name:'药品/种类',
+						type: 'value',
+						axisLabel: {
+							color:'#fff'
+						},
+						splitLine:{
+							show:false
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#fff'
+							}
+						}
+					},
+					series: [{
+						data: [num20,num40,num60,num80,num100,numbig],
+						type: 'bar',
+						barWidth:28,
+						itemStyle:{
+							color:'#E5393A'
+						}
+					}]
+				};
+				myChart03.setOption(option03);
+			}
+			
+			// 总计下降数量
+			function chartFourTable(num20,num40,num60,num80,num100,numbig){
+				var  myChart04=echarts.init(document.getElementById('contentTwo-two-right-table'));
+				option04={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter:'药品降幅{b}有<span style="color:#00B54D;font-weight:bold">{c}</span>种'
+					},
+					grid:{
+						top:'20%',
+						bottom:'8%',
+					},
+					xAxis: {
+						type: 'category',
+						data: ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%', '>=100%'],
+						axisLabel: {
+							color:'#fff'
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#fff'
+							}
+						}
+					},
+					yAxis: {
+						name:'药品/种类',
+						type: 'value',
+						axisLabel: {
+							color:'#fff'
+						},
+						splitLine:{
+							show:false
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#fff'
+							}
+						}
+					},
+					series: [{
+						data: [num20,num40,num60,num80,num100,numbig],
+						type: 'bar',
+						barWidth:28,
+						itemStyle:{
+							color:'#00B54D'
+						}
+					}]
+				},
+				myChart04.setOption(option04);
+			}
+			
+			
+			// 天数月份年份切换
+			$('.contentTwo-btn a').click(function(){
+				$(this).addClass('btn-active')
+				$(this).siblings().removeClass('btn-active')
+				$('.content-cover').removeClass('display_none')
+				$('.content-loading').removeClass('display_none')
+				upAndDown($(this).index()+1)
+			})
+			
+			$('.content-cover').removeClass('display_none')
+			$('.content-loading').removeClass('display_none')
+			getCountWaring();
+			warningDownUp();
+			warningEx();
+			upAndDown(1);
+			
+			setTimeout(function(){
+				warningEx();
+			},60000)
+			
+			
+			// 获取药品监控的销量预警监控
+			function getCountWaring(){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/countwaring',
+						data:'',
+						//服务器返回的数据类型
+						success:function(data){
+							var str=$('.contentOne-one-tables')
+							str.append(`<div class="contentOne-one-tr1">
+										<div class="contentOne-one-td">
+											<div class="contentOne-one-title">昨日预警</div>
+											<div class="contentOne-one-num"> <span class="num">`+data.numday+`</span> 条</div>
+											<div class="contentOne-one-per">环比: `+getColor(data.growthday)+` %</div>
+										</div>
+										<div class="contentOne-one-td">
+											<div class="contentOne-one-title">近7天预警</div>
+											<div class="contentOne-one-num"> <span class="num">`+data.numseven+`</span> 条</div>
+											<div class="contentOne-one-per">环比: `+getColor(data.growthseven)+` %</div>
+										</div>
+									</div>
+									<div class="contentOne-one-tr2">
+										<div class="contentOne-one-td">
+											<div class="contentOne-one-title">近30天预警</div>
+											<div class="contentOne-one-num"> <span class="num">`+data.nummouth+`</span> 条</div>
+											<div class="contentOne-one-per">环比: `+getColor(data.growthmouth)+` %</div>
+										</div>
+										<div class="contentOne-one-td">
+											<div class="contentOne-one-title">近90天预警</div>
+											<div class="contentOne-one-num"><span class="num">`+data.numseason+`</span> 条</div>
+											<div class="contentOne-one-per">环比:`+getColor(data.growthseason)+`%</div>
+										</div>
+									</div>`)
+						}
+				});
+			}
+			
+			// 销量环比增幅预警类型分析, 销量环比降幅预警类型分析(两图)
+			function warningDownUp(){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/warning_down_up',
+						data:'',
+						//服务器返回的数据类型
+						success:function(data){
+							chartOneTable(data.numday,data.numseven,data.nummouth,data.numseason)
+							chartTwoTable(data.numdayfu,data.numsevenfu,data.nummouthfu,data.numseasonfu)
+						}
+				});
+			}
+			
+			// 销量环比降幅预警类型分析
+			function warningEx(){
+				$.ajax({
+					//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/warning_ex',
+					data:'',
+					//服务器返回的数据类型
+					success:function(data){
+						console.log(data)
+						var strLeft=$('.contentOne-four-left ul').html('')
+						if(data.increase.length<9){
+							for(var i=0;i<9;i++){
+										if(i<data.increase.length){
+											strLeft.append(`<li>
+														<div class="pro-time">`+data.increase[i].time+`</div>
+														<div class="pro-title">`+data.increase[i].goods_name+`</div>
+														<div class="pro-status">`+data.increase[i].msg+data.increase[i].growth+`%</div>
+													</li>`
+											)
+											continue;
+										}
+										strLeft.append(`<li>
+													<div class="pro-time"></div>
+													<div class="pro-title"></div>
+													<div class="pro-status"></div>
+												</li>`
+										)
+							}
+						}else{
+							for(var i=0;i<data.increase.length;i++){
+								strLeft.append(`<li>
+											<div class="pro-time">`+data.increase[i].time+`</div>
+											<div class="pro-title">`+data.increase[i].goods_name+`</div>
+											<div class="pro-status">`+data.increase[i].msg+data.increase[i].growth+`%</div>
+										</li>`
+								)
+							}
+						}
+						
+						var strRight=$('.contentOne-four-right ul').html('')
+						if(data.increase.length<9){
+							for(var i=0;i<9;i++){
+								if(i<data.reduce.length){
+									strRight.append(`<li>
+												<div class="pro-time">`+data.reduce[i].time+`</div>
+												<div class="pro-title">`+data.reduce[i].goods_name+`</div>
+												<div class="pro-status">`+data.reduce[i].msg+getReduceNum(data.reduce[i].growth)+`%</div>
+											</li>`
+									)
+									continue;
+								}
+								strRight.append(`<li>
+											<div class="pro-time"></div>
+											<div class="pro-title"></div>
+											<div class="pro-status"></div>
+										</li>`
+								)
+							}
+						}else{
+							for(var i=0;i<data.reduce.length;i++){
+								strRight.append(`<li>
+											<div class="pro-time">`+data.reduce[i].time+`</div>
+											<div class="pro-title">`+data.reduce[i].goods_name+`</div>
+											<div class="pro-status">`+data.reduce[i].msg+getReduceNum(data.reduce[i].growth)+`%</div>
+										</li>`
+								)
+							}
+						}
+						getScroll();
+						
+					}
+					});
+				}
+			
+			// 滚动方法
+			function getScroll(){
+				// 滚动显示（增幅）
+				var liHeiight = $('.contentOne-four-left li').height();
+				 var num = $('.contentOne-four-left li').size()
+				 if (num < 9) {
+				     $('.contentOne-four-left').css({
+				         'height': liHeiight * (num - 1)
+				     });
+			};
+				
+				function scrollBox(val) {
+					 
+					
+					 var clone = $('.contentOne-four-left li').first().clone();
+					 $('.contentOne-four-left ul').append(clone);
+					 $('.contentOne-four-left ul').stop().animate({
+							 top: -liHeiight
+					 },800, function() {
+							 $('.contentOne-four-left ul').css({
+									 top: 0
+							 });
+							 $('.contentOne-four-left li').eq(0).remove();
+							
+					 })
+				 };
+				 setInterval(function() {
+				    scrollBox();
+				 }, 1500);
+				 
+				 // 滚动显示（降幅）
+				 	
+				 var liHeiight2 = $('.contentOne-four-right li').height();
+				 var num2 = $('.contentOne-four-right li').size()
+				 if (num2 < 9) {
+						 $('.contentOne-four-right').css({
+								 'height': liHeiight2 * (num2 - 1)
+						 });
+				};
+				function scrollBox2(val) {
+					var clone = $('.contentOne-four-right li').first().clone();
+					$('.contentOne-four-right ul').append(clone);
+					$('.contentOne-four-right ul').stop().animate({
+							top: -liHeiight2
+					},800, function() {
+							$('.contentOne-four-right ul').css({
+									top: 0
+							});
+							$('.contentOne-four-right li').eq(0).remove();
+						 
+					})
+			};
+				 setInterval(function() {
+				    scrollBox2();
+				 }, 1500);
+				 						
+			}
+			
+			// 销量涨幅排行榜
+			function upAndDown(type){
+				$.ajax({
+					//请求方式
+					type:'GET',
+					//发送请求的地址以及传输的数据
+					url:urlHead+'/show_all/up_and_down',
+					data:{
+						"type":type
+					},
+					//服务器返回的数据类型
+					success:function(data){
+						// console.log(data)
+						// 涨幅柱状图
+						chartThreeTable(data.increase.num20,data.increase.num40,data.increase.num60,data.increase.num80,data.increase.num100,data.increase.numbig)				
+						var increaseTitle=$('.one-left-title').eq(0).html('')
+						var increaseTotal=data.increase.num20+data.increase.num40+data.increase.num60+data.increase.num80+data.increase.num100+data.increase.numbig
+						increaseTitle.append(`总计涨<span class="increase">`+increaseTotal+`</span>种`)
+						// 销量涨幅排行榜
+						var increaseTable=$('.one-right-zf').html('')
+						for(var i=0;i<data.increase.list.length;i++){
+							increaseTable.append(`<li>
+								<div>`+(i+1)+`</div>
+								<div>`+data.increase.list[i].goods_name+`</div>
+								<div class="zf-yellow">`+data.increase.list[i].goods_number+`</div>
+								<div class="zf-red">`+data.increase.list[i].growth+`%</div>
+							</li>`)
+							
+						}
+						// 销量降幅排行榜
+						var reduceTable=$('.one-right-jf').html('')
+						for(var i=0;i<data.reduce.list.length;i++){
+							reduceTable.append(`<li>
+								<div>`+(i+1)+`</div>
+								<div>`+data.reduce.list[i].goods_name+`</div>
+								<div class="zf-yellow">`+data.reduce.list[i].goods_number+`</div>
+								<div class="zf-green">`+getReduceNum(data.reduce.list[i].growth)+`%</div>
+							</li>`)
+							
+						}
+						// 降幅柱状图
+						chartFourTable(data.reduce.num20,data.reduce.num40,data.reduce.num60,data.reduce.num80,data.reduce.num100,data.reduce.numbig)
+						var reduceTitle=$('.one-left-title').eq(1).html('')
+						var reduceTotal=data.reduce.num20+data.reduce.num40+data.reduce.num60+data.reduce.num80+data.reduce.num100+data.reduce.numbig
+						reduceTitle.append(`总计跌<span class="reduce">`+reduceTotal+`</span>种`)
+						$('.content-cover').addClass('display_none')
+						$('.content-loading').addClass('display_none')
+					}
+				});
+			}
+			
+			
+			function getReduceNum(num){
+				return Math.abs(num)
+			}
+			
+			function getColor(num){
+				if(num<0){
+					var text=Math.abs(num)
+					return "<span class='reduce'>"+num+"</span>"
+				}else{
+					var zfNum="<span class='increase'>"+num+"</span>"
+					return zfNum
+				}
+			}
+			
+		</script>
+	</body>
+</html>

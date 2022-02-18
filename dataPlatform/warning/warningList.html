@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>预警信息列表</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<style type="text/css">
+			.content{width: 100%;padding: 20px 30px;}
+			.contentOne-box{border-radius: 8px;height: 336px;}
+			.contentOne-table{width: 100%;height: 336px;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;margin-top: 35px;}
+			.contentOne-table ul{width: 100%;display: flex;flex-direction: column;}
+			.contentOne-table ul li{display: flex;flex-direction: row;text-align: center;font-size: 14px;font-family: PingFang SC;font-weight: 400;color: #E9E9E9;}
+			.contentOne-table ul li:nth-of-type(1){height: 73px;line-height: 73px;font-size: 18px;font-family: PingFang SC;font-weight: 400;color: #E9E9E9;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.contentOne-table ul li:nth-of-type(2){height: 123px;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.contentOne-table ul li:nth-of-type(3){height: 136px;}
+			.contentOne-one-td{width: 25%;border-right:solid 2px rgba(5,54,71,0.4);display: flex;flex-direction: column;align-items: center;justify-content: center;}
+			.contentOne-one-td:last-child{border-right:none;}
+			.contentOne-one-td:nth-child(6n-5){width: 5.5%;font-size: 18px;font-family: PingFang SC;font-weight: 400;color: #E9E9E9;}
+			.contentOne-num{display: flex;flex-direction: row;margin-bottom: 5px;}
+			.contentOne-per{display: flex;flex-direction: row;align-items: center;}
+			
+			.contentTwo-box{width: 100%;margin: 44px 0px;height: 572px;}
+			.contentTwo-table{width: 100%;height: 572px;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;overflow:hidden;}
+			.contentTwo-table-title{width: 100%;height: 58px;display: flex;flex-direction: row;align-items: center;line-height: 58px;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.contentTwo-table-title .contentTwo-td{border-right: solid 2px transparent;}
+			.contentTwo-table-ul{width: 100%;height: 512px;overflow: hidden;}
+			
+			.contentTwo-table ul{width: 100%;display: flex;flex-direction: column;position: relative;}
+			.contentTwo-table ul li{width: 100%;height: 50px;border-bottom: solid 2px rgba(5,54,71,0.7);display: flex;flex-direction: row;align-items: center;line-height: 50px;}
+			.contentTwo-table ul li:last-child{border-bottom: none;}
+			.contentTwo-td{text-align: left;border-right: solid 2px rgba(5,54,71,0.4);color: #E9E9E9;padding-left: 1%;display: block !important;white-space: nowrap !important;overflow: hidden !important;text-overflow: ellipsis !important;position: relative !important;}
+			.contentTwo-td:nth-child(8n-7){width: 12.8%;min-width:197.6px;height:100%}
+			.contentTwo-td:nth-child(8n-6){width: 15.8%;height:100%}
+			.contentTwo-td:nth-child(8n-5){width: 12.5%;height:100%}
+			.contentTwo-td:nth-child(8n-4){width: 9%;height:100%}
+			.contentTwo-td:nth-child(8n-3){width: 9.1%;height:100%}
+			.contentTwo-td:nth-child(8n-2){width: 9%;height:100%}
+			.contentTwo-td:nth-child(8n-1){width: 19.7%;height:100%}
+			.contentTwo-td:nth-child(8n){width: 11.5%;height:100%;border-right: none;}
+			.contentTwo-td a{font-size: 14px;font-family: PingFang SC;font-weight: 400;color: #1BFFD3;}
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				.one-right-head{font-size: 12px}
+			}
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+				.contentTwo-one-table{display: flex;flex-direction: column;align-items: center;}
+				.contentTwo-one-left{width: 100%;}
+				.contentTwo-one-right{width: 100%;}
+				.contentTwo-two-table{display: flex;flex-direction: column;align-items: center;}
+				.contentTwo-two-left{width: 100%;}
+				.contentTwo-two-right{width: 100%;}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<li>
+						<a href="drugCT.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-02"></span>
+								<span>药品销量监控</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<div class="li-content  li-active">
+								<span class="iconfont icon-yujingtubiao-03"></span>
+								<span>预警信息列表</span>
+							</div>
+						</a>
+						<div class="li-tips  li-tips-active"></div>
+					</li>
+					<li>
+						<a href="monitoringSet.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-01"></span>
+								<span>监控设置</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="salesRanking.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-04"></span>
+								<span>药品销量排行榜</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">预警信息列表</div>
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li>
+					<a href="drugCT.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-02"></span>
+						<span>药品销量监控</span>
+					</a>
+				</li>
+				<li class="menu-active">
+					<a href="warningList.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-03"></span>
+						<span>预警信息列表</span>
+					</a>
+				</li>
+				<li>
+					<a href="monitoringSet.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-01"></span>
+						<span>监控设置</span>
+					</a>
+				</li>
+				<li>
+					<a href="salesRanking.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-04"></span>
+						<span>药品销量排行榜</span>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="dataTime layui-form">
+				<div class="right-select-data2">
+					<!-- <select  lay-filter="selectYear" id="year">
+						<option value="2021">2021</option>
+						<option value="2020">2020</option>
+					</select> -->
+				</div>
+			</div>
+		</div>
+		<div class="content container">
+			<!-- 预警列表1 -->
+			<div class="contentOne-box">
+				<div class="contentOne-table">
+					<ul>
+						<li>
+							<div class="contentOne-one-td"></div>
+							<!-- <div class="contentOne-one-td">每小时销量环比预警</div> -->
+							<div class="contentOne-one-td">昨日销量环比预警</div>
+							<div class="contentOne-one-td">近7日销量环比预警</div>
+							<div class="contentOne-one-td">近30天销量环比预警</div>
+							<div class="contentOne-one-td">近90天销量环比预警</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			<!-- 预警列表2 -->
+			<div class="contentTwo-box">
+				<div class="contentTwo-table">
+					<div class="contentTwo-table-title">
+							<div class="contentTwo-td">预警时间</div>
+							<div class="contentTwo-td">药品名称</div>
+							<div class="contentTwo-td">批准文号</div>
+							<div class="contentTwo-td">订单量/件</div>
+							<div class="contentTwo-td">环比</div>
+							<div class="contentTwo-td">销售额/元</div>
+							<div class="contentTwo-td">预警类型</div>
+							<div class="contentTwo-td"><a href="javascirpt:;" style="color: #E9E9E9;">查看</a></div>
+					</div>
+					<div class="contentTwo-table-ul">
+						<ul>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.24'
+			layui.use(['layer', 'form'], function(){
+			  var layer = layui.layer
+			  ,form = layui.form;
+			});
+			getWarningDown()
+			getWaringUp()
+			getTable()
+			
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			
+			// 获取预警药品涨幅信息
+			function getWaringUp(){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/countwaring',
+						data:{
+							"type":1
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							console.log(data)
+							var str=$('.contentOne-table ul')
+							str.append(`<li>
+							<div class="contentOne-one-td">增幅</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.numday+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="increase">`+data.growthday+`</span>%</div>
+							</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.numseven+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="increase">`+data.growthseven+`</span>%</div>
+							</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.nummouth+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="increase">`+data.growthmouth+`</span>%</div>
+							</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.numseason+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="increase">`+data.growthseason+`</span>%</div>
+							</div>
+						</li>
+						`)
+						}
+				});
+			}
+			
+			// 获取预警药品跌幅信息
+			function getWarningDown(){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/countwaring',
+						data:{
+							"type":2
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							console.log(data)
+							var str=$('.contentOne-table ul')
+							str.append(`
+						<li>
+							<div class="contentOne-one-td">跌幅</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.numday+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="reduce">`+data.growthday+`</span>%</div>
+							</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.numseven+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="reduce">`+data.growthseven+`</span>%</div>
+							</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.nummouth+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="reduce">`+data.growthmouth+`</span>%</div>
+							</div>
+							<div class="contentOne-one-td">
+								<div class="contentOne-num"><span class="num">`+data.numseason+`</span>条</div>
+								<div class="contentOne-per">环比：<span class="reduce">`+data.growthseason+`</span>%</div>
+							</div>
+						</li>`)
+						}
+				});
+			}
+			
+			// 获取预警药品信息
+			function getTable(){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/warning_ex_more',
+						data:'',
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							var str=$('.contentTwo-table-ul ul').html('')
+							if(data.length<10){
+								for(var i=0;i<10;i++){
+									if(i<data.length){
+										str.append(`<li>
+											<div class="contentTwo-td">`+data[i].datetime+`</div>
+											<div class="contentTwo-td">`+data[i].goods_name+`</div>
+											<div class="contentTwo-td">`+data[i].number+`</div>
+											<div class="contentTwo-td"><span class="zf-yellow">`+data[i].goods_number+`</span></div>
+											<div class="contentTwo-td">`+getHBColor(data[i].growth)+`</div>
+											<div class="contentTwo-td"><span class="zf-blue">`+data[i].order_money+`</span></div>
+											<div class="contentTwo-td">`+data[i].msg+getYJColor(data[i].growth)+`%</div>
+											<div class="contentTwo-td"><a href="javascript:;">查看</a></div>
+										</li>`)
+										continue;
+									}
+									str.append(`<li>
+										<div class="contentTwo-td"></div>
+										<div class="contentTwo-td"></div>
+										<div class="contentTwo-td"></div>
+										<div class="contentTwo-td"><span class="zf-yellow"></span></div>
+										<div class="contentTwo-td"></div>
+										<div class="contentTwo-td"><span class="zf-blue"></span></div>
+										<div class="contentTwo-td"></div>
+										<div class="contentTwo-td"></div>
+									</li>`)
+								}
+							}else{
+								for(var i=0;i<data.length;i++){
+									str.append(`<li>
+										<div class="contentTwo-td">`+data[i].datetime+`</div>
+										<div class="contentTwo-td">`+data[i].goods_name+`</div>
+										<div class="contentTwo-td">`+data[i].number+`</div>
+										<div class="contentTwo-td"><span class="zf-yellow">`+data[i].goods_number+`</span></div>
+										<div class="contentTwo-td">`+getHBColor(data[i].growth)+`</div>
+										<div class="contentTwo-td"><span class="zf-blue">`+data[i].order_money+`</span></div>
+										<div class="contentTwo-td">`+data[i].msg+getYJColor(data[i].growth)+`%</div>
+										<div class="contentTwo-td"><a href="javascript:;">查看</a></div>
+									</li>`)
+								}
+							}
+							
+							getScroll()
+						}
+				});
+			}
+			
+			// 滚动方法
+			function getScroll(){
+				 var liHeiight = $('.contentTwo-table li').height();
+				  var num = $('.contentTwo-table li').size()
+				  if (num < 9) {
+				      $('.contentTwo-table').css({
+				          'height': liHeiight * (num - 1)
+				      });
+				  };
+				 
+				  function scrollBox(val) {
+				      var clone = $('.contentTwo-table li').first().clone();
+				      $('.contentTwo-table ul').append(clone);
+				      $('.contentTwo-table ul').stop().animate({
+				          top: -liHeiight
+				      },800, function() {
+				          $('.contentTwo-table ul').css({
+				              top: 0
+				          });
+				          $('.contentTwo-table li').eq(0).remove();
+				         
+				      })
+				  };
+				  setInterval(function() {
+				     scrollBox();
+				  }, 1500);
+			 }
+			 
+			 
+			 // 环比颜色
+			function getHBColor(num){
+				 if(num<0){
+					var text=Math.abs(num)
+					return "<span class='zf-green'>"+num+"</span>"
+				 }else{
+					 var zfNum="<span class='zf-red'>"+num+"%</span>"
+					return zfNum
+				 }
+			}
+			 // 预警类型颜色
+			function getYJColor(num){
+				 if(num<0){
+						var text=Math.abs(num)
+						return "<span class='zf-green'>"+num+"</span>"
+				 }else{
+						var zfNum="<span class='zf-red'>"+num+"</span>"
+						return zfNum
+				 }
+			}
+		</script>
+	</body>
+</html>

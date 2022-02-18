@@ -1,0 +1,63 @@
+*{margin: 0;padding: 0;}
+body{background: url(../img/show_bg.jpg) repeat;}
+
+::-webkit-scrollbar-track-piece{background-color: #007DDB;}
+.head-box{height:77px ;background-color: #0B244C;display: flex;flex-direction: row;align-items: center;justify-content: space-between;}
+.head-title{width: 38%;height: 77px;display: flex;flex-direction: row;align-items: center;}
+.head-title ul{width: 100%;display: flex;flex-direction: row;align-items: center;/* min-width:561.9px */}
+.head-title ul li{list-style: none;display:flex;flex: 1;height: 77px;flex-direction: column;align-items: center;justify-content: center;}
+.head-title ul li a{text-decoration: none;color:#F0F5FF ;display: flex;flex-direction:row;align-items: center;}
+.li-content{display: flex;flex-direction: row;align-items: center;width: 100%;height: 71px;}
+.li-content span:nth-of-type(1){margin-right: 5px;}
+.li-content span:nth-of-type(2){font-size: 16px;}
+.li-tips{height: 6px;width: 100%;}
+.li-tips-active{background-color: #1BFFD3;}
+.li-active{color: #1BFFD3;}
+
+.right-type-title{width: 130px;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;}
+.layui-form-select .layui-input{height: 32px !important;    height: 32px !important;background: #0b244c;color: #fff;border-radius: 4px;}
+.right-select-data2{width: 130px !important;height: 32px !important;margin-left: 2%;}
+.layui-form-select dl dd, .layui-form-select dl dt{line-height: 32px;background-color: #081833;color: #FFFFFF ;    text-align: center;}
+.layui-select-title input::-webkit-input-placeholder{color: #FFFFFF !important;}
+.layui-form-select dl{background-color: #081833 !important;font-size: 14px;}
+.layui-form-select dl dd.layui-this{background-color: #fff;color: #081833;text-align: center;}
+.layui-form-select dl dd:hover{color: #081833;background-color: #fff;}
+.content-title-right{display: flex;flex-direction: row;align-items: center;}
+.layui-edge{display: none;}
+.layui-form-select .layui-input{text-align: center;padding-right: 0px;}
+.layui-input, .layui-textarea{padding-left: 0px;}
+
+			
+.main-title{width:23.5%;height: 77px;font-size: 30px;font-family: Microsoft YaHei;font-weight: bold;color: #E8FFF6;text-shadow: 0px 2px 4px rgba(5, 15, 32, 0.9);text-align: center;line-height: 60px;background-image: url(../img/未标题-1_18.png);background-size: 100% 100%;}
+.dataTime{display: flex;flex-direction: row;align-items: center;width: 38.5%;justify-content: flex-end;padding-right: 20px;font-size: 16px}
+.data{font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;}
+.year{width: 114px;height: 32px;border: 1px solid #FFFFFF;border-radius: 4px;text-align: center;line-height: 32px;color: #FFFFFF;margin-left: 72px;margin-right: 15px;}
+
+.num{font-size: 20px;font-family: Helvetica;font-weight: bold;color: #FFFA6F;}
+.zf-yellow{font-size: 14px;font-family: Helvetica;font-weight: bold;color: #EBFF65;}
+.zf-red{font-size: 14px;font-family: Helvetica;font-weight: bold;color: #DD2122;}
+.zf-green{font-size: 14px;font-family: Helvetica;font-weight: bold;color: #00B54D;}
+.zf-blue{font-size: 14px;font-family: Helvetica;font-weight: bold;color: #0385FF;}
+.zf-sky{font-size: 14px;font-family: PingFang SC;font-weight: 400;color: #1BFFD3;}
+.increase{color:#FF2B2B;font-size: 18px}
+.reduce{color: #1AB428;font-size: 18px}
+.display_none{display: none !important;}
+
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-55, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;}
+		
+	/* 缩小时改变导航 */
+			.left-title{width: 50%;display: flex;flex-direction: row;align-items: center;display: none;}
+			.icon-project{font-size: 25px;color: #fff;margin-left:20px ;}
+			.top-logo img{width: 100%;height: 100%;}
+			.top-menu{z-index: 100;position: absolute;top: 77px;left: 20px;padding: 5px 15px 10px;text-align: left;background-color: rgba(0, 0, 0, 0.8);display: none;}
+			.show-btn{display: inline-block;min-width: 110px;height: 42px;line-height: 42px;padding: 0 10px;font-size: 16px;color: #fff;text-decoration: none;}
+			.show-btn span:nth-of-type(1){font-size: 20px;margin-right: 5px;}
+			.menu-active .show-btn{border-bottom: solid 2px #58fff5;color: #58fff5;}
+			.show-btn:hover{text-decoration: none;}
+			.show-btn:active{text-decoration: none;}

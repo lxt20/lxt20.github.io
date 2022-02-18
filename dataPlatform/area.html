@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>区域大数据</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style>
+			.head-box{width: 100%;}
+			.content{width: 100%;padding: 20px 30px;}
+			.content-one-box{display: block;}
+			.content-one-detail{height: 147px;border-radius: 8px;margin-top: 34px;}
+			.content-one-detail ul{height: 147px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;}
+			.content-one-detail{/* margin-left: 1.7%; */}
+			.content-one-detail:first-child{margin-left: 0px;}
+			.content-one-detail ul li{width: 50%;border-right: solid 2px rgba(5,54,71,0.4);/* display: flex;flex-direction: row;align-items: center; */ }
+			.content-one-detail ul li:last-child{border-right:none}
+			.content-one-li{width: 46% !important;}
+			.content-one-li2{width: 54% !important;}
+			.content-one-li2 div{padding-left: 7%;}
+			.content-one-money{display: flex;flex-direction: column;justifycontent: center;padding-left: 10%;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;}
+			.money-box{font-size: 30px;font-family: Helvetica;font-weight: bold;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);height: 34px;margin-bottom: 10px;margin-top: 35px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+			.yellow-one{color:#FFD563;}
+			.yellow-two{color: #FFDE86;}
+			.blue-one{color: #12A3FF;}
+			.blue-two{color: #45B7FF;}
+			.pink-one{color: #FE2FC1}
+			.pink-two{color: #FF82C6}
+			.content-one-hb{display: flex;flex-direction: column;justify-cotent: center;padding-left: 10%;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;}
+			.hb-box{font-size: 18px;font-family: Helvetica;font-weight: boldtext-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);height: 34px;line-height: 34px;margin-bottom: 10px;font-weight: bold;}
+			
+			/* .content-two-box{} */
+			.content-two-detail{height: 147px;border-radius: 8px;margin-top: 35px;}
+			.content-two-detail:last-child{margin-right: 0px;}
+			.content-two-ul{width: 100%;height: 147px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;align-items: center;justify-content: space-between;padding: 0 15%;box-sizing: border-box;}
+			.two-detail{display: flex;flex-direction: column;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;}
+			.two-detail p:nth-of-type(2){margin-top: 20px;font-size: 30px;font-family: Helvetica;font-weight: bold;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);}
+			.two-logo{width: 61px;height: 66px;}
+			.two-logo img{width: 100%;height: 100%;}
+			
+			.content-three-title{margin-top: 35px;display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-three-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-three-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			
+			.content-three-box{background: rgba(89, 133, 255, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;margin-top: 21px;}
+			.content-three-ul{width: 100%;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;display: flex;flex-direction: row;align-items: center;justify-content: space-between;padding: 0 2%;box-sizing: border-box;}
+			#three-left-table{width: 45%;height: 561px;}
+			.three-right-table{width: 49%;height: 561px;display: flex;flex-direction: column;}
+			.three-right-title{display: flex;flex-direction: row;justify-content: flex-end;height: 30px;width: 100%;margin-top: 22px;}
+			.three-right-title input{height: 30px;background: #00B491;border-radius: 4px;border: none;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;margin-left: 31px;padding: 0 10px;}
+			.three-right-title-active{background-color: #FFFFFF !important;color: #00b491 !important;}
+			#three-right-table{width: 100%;height: 451px;margin-top: 15px;}
+			
+			/* .content-four-box{width: 100%;} */
+			.content-four-left{margin-top: 35px;display: flex;flex-direction: column;}
+			.content-four-right{margin-top: 35px;display: flex;flex-direction: column;}
+			.content-four-title{display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-four-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-four-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-four-detail{width: 100%;height: 391px;margin-top: 24px;background: rgba(89, 133, 255, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;}
+			.content-four-ul{width: 100%;height:391px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			#four-left-table{width: 100%;height: 391PX;}
+			#four-right-table{width: 100%;height: 391PX;}
+			
+		/* 	.content-five-box{} */
+			.content-five-left{display: flex;flex-direction: column;margin-top: 35px;}
+			.content-five-right{display: flex;flex-direction: column;margin-top: 35px;}
+			.content-five-title{display: flex;flex-direction: row;align-items: center;color: #FFF;justify-content: space-between;}
+			.five-left-title{display: flex;flex-direction: row;align-items: center;}
+			.five-left-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.five-left-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.five-right-btn{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;/* width: 70%; */box-sizing: border-box;}
+			.five-right-select{width:35%;height: 34px;background-color: #081833;display: flex;flex-direction: row;align-items: center;margin-right: 10%;}
+			.five-right-select .layui-input, .layui-textarea{padding-left: 0px !important;}
+			.five-right-select .layui-form-select .layui-input{border: 1px solid #fff;background-color: #081833;}
+			.layui-form-select dl::-webkit-scrollbar {display: none;}
+			.five-right-btn input{background-color: #00B491;color: #fff;height: 32px;font-size: 20px;border-radius: 4px;border: none;padding: 0 10px;margin-right: 2%;}
+			.five-right-input{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;}
+			/* .five-right-input input{margin-left: 5%;} */
+			.five-active{color:#00B491 !important;background-color:#ffffff !important;}
+			.five-right-btn .layui-unselect .layui-form-select{width: 23.1%;height: 32px;background-color: inherit;border: 1px solid #FFFFFF;border-radius: 4px;color: #fff;font-size: 20px;}
+			
+			.content-five-detail{width: 100%;margin-top: 24px;border-radius: 8px;}
+			.content-five-border{width: 100%;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			.content-five-ul{list-style: none;}
+			.content-five-head{width: 100%;height: 58px;line-height: 58px;border-radius: 4px 4px 0 0;display: flex;flex-direction: row;text-align: center;color: #fff;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.content-five-head .content-five-td{border-right: solid 2px transparent;}
+			
+			.content-five-ul li{height: 49px;width: 100%;border-bottom: solid 2px rgba(5,54,71,0.7);display: flex;flex-direction: row;align-items: center;text-align: center;color: #fff;line-height: 49px;/* position: relative; */}
+			.content-five-ul li:last-child{border-radius:0 0 4px 4px;}
+			.content-five-td{ border-right: solid 2px rgba(5,54,71,0.4);display: flex;flex-direction: row;align-items: center;justify-content: center;}
+			
+			.content-five-td:nth-of-type(1){display: flex;flex: 9;height: 100%;}
+			.content-five-td:nth-of-type(2){display: block !important;white-space: nowrap !important;overflow: hidden !important;text-overflow: ellipsis !important;height: 100%;display: flex;flex: 18;}
+			.content-five-td:nth-of-type(3){display: flex;flex: 18;display: block !important;white-space: nowrap !important;overflow: hidden !important;text-overflow: ellipsis !important;height: 100%;}
+			.content-five-td:nth-of-type(4){display: flex;flex: 21;position: relative;height: 100%;}
+			.content-five-td:nth-of-type(5){display: flex;flex: 17;height: 100%;}
+			.content-five-td:nth-of-type(6){display: flex;flex: 17;height: 100%;}
+			.blue-box{font-size: 18px;font-weight: bold;color: #368FFF;font-family: Helvetica;}
+			
+			.content-cover{width: 100%;height: 100%;position:fixed;z-index: 999;background-color: rgba(0,0,0,0.2);top: 0;left: 0;}
+			.content-loading{position:fixed;width: 100px;height: 100px;z-index: 998;top: 250px;left: 45%;}
+			.content-loading img{width: 150px;height: 110px;}
+			
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				.content-three-ul{display: flex;flex-direction: column;align-items: center;}
+				#three-left-table{width: 100%;}
+				.three-right-table{width: 100%;}
+			}
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+				.circle{display: none;}
+				.content-five-title{display: flex;flex-direction: column;align-items: start;}
+				.five-right-btn{justify-content: flex-start;display: flex;flex-direction: row;align-items: center;box-sizing: border-box;margin-top: 20px;}
+			}
+			.circle {width: 34px;height: 34px;  position: absolute;border-radius: 50%;background: #EBFF65;right: 3%;top: 0;bottom: 0;margin: auto;
+			}
+			.pie_left, .pie_right {width: 34px; height: 34px;position: absolute;top: 0;left: 0;}
+			.left, .right {display: block;width:34px; height:34px;background:#D0D0D0;border-radius: 50%;position: absolute;top: 0;left: 0;transform: rotate(0deg);}
+			.pie_right, .right {clip:rect(0,auto,auto,17px);}
+			.pie_left, .left {clip:rect(0,17px,auto,0);}
+			.mask {width: 22px;height: 22px;border-radius: 50%;left: 6px;top: 6px;background: #081833;position: absolute;text-align: center;line-height: 50px;font-size: 16px;}
+			.circle .mask span{color: rgba(255,255,255,0);}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<!-- <li>
+						<a href="javascript:;">
+							<div class="li-content">
+								<img src="img/中台1.png" >
+								<span>展示中台</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li> -->
+					<li>
+						<a href="#">
+							<div class="li-content li-active">
+								<img src="img/区域.png" >
+								<span>区域大数据</span>
+							</div>
+						</a>
+						<div class="li-tips  li-tips-active"></div>
+					</li>
+					<li>
+						<a href="variety.html">
+							<div class="li-content ">
+								<img src="img/品种1.png" >
+								<span>品种大数据</span>
+							</div>
+						</a>
+						<div class="li-tips "></div>
+					</li>
+					<li>
+						<a href="disease.html">
+							<div class="li-content">
+								<img src="img/病症1.png" >
+								<span>病症大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="season.html">
+							<div class="li-content">
+								<img src="img/季节1.png" >
+								<span>季节大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">医药大数据展示</div>
+			
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li class="menu-active">
+					<a href="javascript:;" class="show-btn">
+						<img src="img/区域.png" >
+						<span>区域大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="variety.html" class="show-btn">
+						<img src="img/品种1.png" >
+						<span>品种大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="disease.html" class="show-btn">
+						<img src="img/病症1.png" >
+						<span>病症大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="season.html" class="show-btn">
+						<img src="img/季节1.png" >
+						<span>季节大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="commonlyUse.html" class="show-btn">
+						<img src="img/常用药1.png" >
+						<span>常用药大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="pharmacy.html" class="show-btn">
+						<img src="img/处方药1.png" >
+						<span>处方药大数据</span>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="right-title">
+				<div class="right-data-title">
+					<ul>
+						<li>
+							<a href="commonlyUse.html">
+								<div class="li-content ">
+									<img src="img/常用药1.png" >
+									<span>常用药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips "></div>
+						</li>
+						<li>
+							<a href="pharmacy.html">
+								<div class="li-content">
+									<img src="img/处方药1.png" >
+									<span>处方药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-type-title layui-form">
+					<div class="right-select-data">
+						<select lay-filter="Selectprov" id="province">
+							<option value="">全部</option>
+							<option value="14">山西</option>
+							<option value="44">广东</option>
+					</select>
+					</div>
+					<div class="right-select-data2">
+						<select  lay-filter="selectYear" id="year">
+							<option value="2021">2021</option>
+							<option value="2020">2020</option>
+							<option value="2019">2019</option>
+						</select>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- 内容 -->
+		<div class="content container">
+			<div class="content-one-box row">
+				<div class="content-one-detail col-lg-4 col-md-6 col-sm-6 col-xs-12">
+					<ul id="orderMoney">
+						<li>
+							<div class="content-one-money">
+								<p class="money-box yellow-one">25631</p>
+								<p>本年订单金额/元</p>
+							</div>
+						<!-- 	<div class="content-one-hb">
+								<p class="hb-box increase">2.0%</p>
+								<p>同比</p>
+							</div> -->
+						</li>
+						<li>
+							<div class="content-one-money">
+								<p class="money-box yellow-two">25631.00</p>
+								<p>本月订单金额/元</p>
+							</div>
+							<!-- <div class="content-one-hb">
+								<p class="hb-box increase">2.0%</p>
+								<p>同比</p>
+							</div> -->
+						</li>
+					</ul>
+				</div>
+				<div class="content-one-detail col-lg-4 col-md-6 col-sm-6 col-xs-12">
+					<ul id="orderNum">
+						<li>
+							<div class="content-one-money">
+								<p class="money-box blue-one">25631</p>
+								<p>本年订单量（个）</p>
+							</div>
+							<!-- <div class="content-one-hb">
+								<p class="hb-box increase">2.0%</p>
+								<p>同比</p>
+							</div> -->
+						</li>
+						<li>
+							<div class="content-one-money">
+								<p class="money-box blue-two">25631</p>
+								<p>本月订单量（个）</p>
+							</div>
+						<!-- 	<div class="content-one-hb">
+								<p class="hb-box reduce">2.0%</p>
+								<p>同比</p>
+							</div> -->
+						</li>
+					</ul>
+				</div>
+				<div class="content-one-detail col-lg-4 col-md-6 col-sm-6 col-xs-12">
+					<ul id='orderPro'>
+						<li class="content-one-li">
+							<div class="content-one-money">
+								<p class="money-box pink-one">25631</p>
+								<p>本年利润（万元）</p>
+							</div>
+						<!-- 	<div class="content-one-hb">
+								<p class="hb-box reduce">2.0%</p>
+								<p>同比</p>
+							</div> -->
+						</li>
+						<li class="content-one-li2">
+							<div class="content-one-money">
+								<p class="money-box pink-two">25631</p>
+								<p>本月利润（万元）</p>
+							</div>
+						<!-- 	<div class="content-one-hb">
+								<p class="hb-box increase">2.0%</p>
+								<p>同比</p>
+							</div>
+							<div class="content-one-hb">
+								<p class="hb-box reduce">2.0%</p>
+								<p>环比</p>
+							</div> -->
+						</li>
+					</ul>
+				</div>
+			</div>
+		
+			<div class="content-two-box row">
+				<!-- <div class="content-two-detail col-lg-3 col-md-3 col-sm-6">
+					<div class="content-two-ul">
+						<div class="two-detail">
+							<p>现有商家/个</p>
+							<p style="color: #2AB1FF;">25631</p>
+						</div>
+						<div class="two-logo">
+							<img src="img/商家.png" >
+						</div>
+					</div>
+				</div>
+				<div class="content-two-detail col-lg-3 col-md-3 col-sm-6">
+					<div class="content-two-ul">
+						<div class="two-detail">
+							<p>本年新增商家/个</p>
+							<p style="color: #2AB1FF;">25631</p>
+						</div>
+						<div class="two-logo">
+							<img src="img/新增商家.png" >
+						</div>
+					</div>
+				</div>
+				<div class="content-two-detail col-lg-3 col-md-3 col-sm-6">
+					<div class="content-two-ul">
+						<div class="two-detail">
+							<p>现有门店/个</p>
+							<p style="color:#F8FF8B">26980</p>
+						</div>
+						<div class="two-logo">
+							<img src="img/门店.png" >
+						</div>
+					</div>
+				</div>
+				<div class="content-two-detail col-lg-3 col-md-3 col-sm-6">
+					<div class="content-two-ul">
+						<div class="two-detail">
+							<p>本年新增门店/个</p>
+							<p style="color:#F8FF8B">25631</p>
+						</div>
+						<div class="two-logo">
+							<img src="img/新增门店.png" >
+						</div>
+					</div>
+				</div> -->
+			</div>
+			
+			<div class="content-three-title">
+				<p></p>
+				<p>各省销售金额/利润排行榜</p>
+			</div>
+			<div class="content-three-box">
+				<div class="content-three-ul">
+					<div id="three-left-table"></div>
+					<div class="three-right-table">
+						<div class="three-right-title">
+							<input class="three-right-title-active" type="button" name="" id="" value="销售金额" />
+							<input type="button" name="" id="" value="利润" />
+						</div>
+						<div id="three-right-table"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="content-four-box row">
+				<div class="content-four-left col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-four-title">
+						<p></p>
+						<p>近7日销售金额日报表</p>
+					</div>
+					<div class="content-four-detail">
+						<div class="content-four-ul">
+							<div id="four-left-table"></div>
+						</div>
+					</div>
+				</div>
+				<div class="content-four-right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-four-title">
+						<p></p>
+						<p>全年销售金额月报表</p>
+					</div>
+					<div class="content-four-detail">
+						<div class="content-four-ul">
+							<div id="four-right-table">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="content-five-box row">
+				<div class="content-five-left col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-five-title">
+						<div class="five-left-title">
+							<p></p>
+							<p>各商家销售金额/利润排行榜</p>
+						</div>
+						<div class="five-right-btn layui-form">
+							<div class="five-right-select">
+								<select name="" lay-filter="fiveLeftMonth" id="fiveLeftMonth">
+									<option value="">选择月份</option>
+									<option value="1">1月</option>
+									<option value="2">2月</option>
+									<option value="3">3月</option>
+									<option value="4">4月</option>
+									<option value="5">5月</option>
+									<option value="6">6月</option>
+									<option value="7">7月</option>
+									<option value="8">8月</option>
+									<option value="9">9月</option>
+									<option value="10">10月</option>
+									<option value="11">11月</option>
+									<option value="12">12月</option>
+								</select>
+							</div>
+							<div class="five-right-input" id='five-input-one'>
+								<input type="button" class="five-active" name="" id="" value="销售金额" />
+								<input type="button" name="" id="" value="利润" />
+							</div>
+							
+						</div>
+					</div>
+					<div class="content-five-detail">
+						<div class="content-five-border">
+							<div class="content-five-head">
+								<div class="content-five-td">排名</div>
+								<div class="content-five-td">商家</div>
+								<div class="content-five-td" id='five-ss1'>销售额</div>
+								<div class="content-five-td">占比</div>
+								<div class="content-five-td" id='hb-box'>环比</div>
+								<div class="content-five-td">同比</div>
+							</div>
+							<ul class="content-five-ul" id="five-one-ul">
+							
+							<li>
+								<div class="content-five-td">1</div>
+								<div class="content-five-td">广州天河栋宝家康康天河栋宝家康</div>
+								<div class="content-five-td blue-box">1200</div>
+								<div class="content-five-td blue-box">20%
+									<div class="circle">
+											<div class="pie_left"><div class="left"></div></div>
+											<div class="pie_right"><div class="right"></div></div>
+											<div class="mask"><span>20</span></div>
+									</div>
+								</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">2</div>
+								<div class="content-five-td">广州天河栋宝家康康天河栋宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">6</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">7</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">8</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+							<li>
+								<div class="content-five-td">9</div>
+								<div class="content-five-td">宝家康</div>
+								<div class="content-five-td">3</div>
+								<div class="content-five-td">4</div>
+								<div class="content-five-td">5</div>
+								<div class="content-five-td tb-box">6</div>
+							</li>
+						
+							
+						</ul>
+						</div>
+					</div>
+				</div>
+				<div class="content-five-right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-five-title">
+						<div class="five-left-title">
+							<p></p>
+							<p>各门店销售金额/利润排行榜</p>
+						</div>
+						<div class="five-right-btn layui-form">
+							<div class="five-right-select">
+								<select name="" lay-filter="fiveRightMonth" id="fiveRightMonth">
+									<option value="">选择月份</option>
+									<option value="1">1月</option>
+									<option value="2">2月</option>
+									<option value="3">3月</option>
+									<option value="4">4月</option>
+									<option value="5">5月</option>
+									<option value="6">6月</option>
+									<option value="7">7月</option>
+									<option value="8">8月</option>
+									<option value="9">9月</option>
+									<option value="10">10月</option>
+									<option value="11">11月</option>
+									<option value="12">12月</option>
+								</select>
+							</div>
+							<div class="five-right-input" id='five-input-two'>
+								<input type="button" class="five-active" name="" id="" value="销售金额" />
+								<input type="button" name="" id="" value="利润" />
+							</div>
+							
+						</div>
+					</div>
+					<div class="content-five-detail">
+						<div class="content-five-border">
+							<div class="content-five-head">
+								<div class="content-five-td">排名</div>
+								<div class="content-five-td">门店</div>
+								<div class="content-five-td" id='five-ss2'>销售额</div>
+								<div class="content-five-td">占比</div>
+								<div class="content-five-td" id='hb-box2'>环比</div>
+								<div class="content-five-td">同比</div>
+							</div>
+							<ul class="content-five-ul" id="five-two-ul">
+							
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+		
+		<div class="content-cover display_none"></div>
+		<div class="content-loading display_none">
+			<img src="img/timg.gif" >
+		</div>
+		
+		<script src="js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/echarts-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.24'
+			layui.use('form', function(){
+			    var form = layui.form; 
+					var leftBtn=$('#five-input-one input').eq(0).hasClass('five-active')
+					var rightBtn=$('#five-input-two input').eq(0).hasClass('five-active')
+					// 获取下拉框选中值
+					form.on('select(selectYear)', function(data){
+						var mapBtn=$('.three-right-title input').eq(0).hasClass('three-right-title-active')
+						var monthLeft=$('#fiveLeftMonth').val()
+						var monthRight=$('#fiveRightMonth').val()
+						var thisProv=$('#province').val()
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						$("#year").val(data.value);
+						areadate(data.value,thisProv)
+						allyearlist(prov,data.value)
+						if(leftBtn){
+							allitemlist(data.value,monthLeft,thisProv)
+						}else{
+							allitemProlist(data.value,monthLeft,thisProv)
+						}
+						if(rightBtn){
+							allstorelist(data.value,monthRight,thisProv)
+						}else{
+							allstoreProlist(data.value,monthRight,thisProv)
+						}
+						// console.log(mapBtn)
+						if(mapBtn){
+							listtop(1,data.value)
+						}else{
+							listtop(2,data.value)
+						}
+						
+					});
+					
+					form.on('select(Selectprov)', function(data){
+						var thisYears=$('#year').val()
+						var monthLeft=$('#fiveLeftMonth').val()
+						var monthRight=$('#fiveRightMonth').val()
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						areadate(thisYears,data.value)
+						sevenlist(data.value)
+						allyearlist(data.value)
+						if(leftBtn){
+							allitemlist(thisYears,monthLeft,data.value)
+						}else{
+							allitemProlist(thisYears,monthLeft,data.value)
+						}
+						if(rightBtn){
+							allstorelist(thisYears,monthRight,data.value)
+						}else{
+							allstoreProlist(thisYears,monthRight,data.value)
+						}
+						if(data.value == ''){
+							$('.content-three-title').removeClass('display_none')
+							$('.content-three-box').removeClass('display_none')
+						}else if(data.value != ''){
+							$('.content-three-title').addClass('display_none')
+							$('.content-three-box').addClass('display_none')
+						}
+					});
+					
+					form.on('select(fiveLeftMonth)', function(data){
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						var thisYears=$('#year').val()
+						var thisProv=$('#province').val()
+						$("#fiveLeftMonth").val(data.value);
+						if(leftBtn){
+							allitemlist(thisYears,data.value,thisProv)
+						}else{
+							allitemProlist(thisYears,data.value,thisProv)
+						}
+					});
+					form.on('select(fiveRightMonth)', function(data){
+						$('.content-cover').removeClass('display_none')
+						$('.content-loading').removeClass('display_none')
+						var thisYears=$('#year').val()
+						var thisProv=$('#province').val()
+						$("#fiveRightMonth").val(data.value);
+						if(rightBtn){
+							allstorelist(thisYears,data.value,thisProv)
+						}else{
+							allstoreProlist(thisYears,data.value,thisProv)
+						}
+					});
+					
+			});
+			
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			
+			$('.content-cover').removeClass('display_none')
+			$('.content-loading').removeClass('display_none')
+			var years=$('#year').val()
+			var prov=$('#province').val()
+			// 获取区域大数据顶部10个字段
+			areadate(years,prov)
+			// 各省销售金额/利润排行榜
+			listtop(1,years)
+			// 近7日销售金额日报表
+			sevenlist(prov)
+			// 全年销售金额月报表
+			allyearlist(prov,years)
+			// 各商家销售金额/利润排行榜
+			allitemlist(years,'',prov)
+			// 各商家销售金额/利润排行榜
+			allstorelist(years,'',prov)
+			// 销售金额和利润切换--各省
+			$('.three-right-title input').click(function(){
+				var thisYears=$('#year').val()
+				$(this).addClass('three-right-title-active')
+				$(this).siblings().removeClass('three-right-title-active')
+				$('.content-cover').removeClass('display_none')
+				$('.content-loading').removeClass('display_none')
+				listtop($(this).index()+1,thisYears)
+			})
+			
+			// 销售金额和利润切换--各商家
+			$('#five-input-one input').click(function(){
+				var thisYears=$('#year').val()
+				var thisProv=$('#province').val()
+				$(this).addClass('five-active')
+				$(this).siblings().removeClass('five-active')
+				$('.content-cover').removeClass('display_none')
+				$('.content-loading').removeClass('display_none')
+				if(($(this).index()+1)==1){
+					allitemlist(thisYears,$('#fiveLeftMonth').val(),thisProv)
+				}else{
+					allitemProlist(thisYears,$('#fiveLeftMonth').val(),thisProv)
+				}
+			})
+			// 销售金额和利润切换--各门店
+			$('#five-input-two input').click(function(){
+				var thisYears=$('#year').val()
+				var thisProv=$('#province').val()
+				$(this).addClass('five-active')
+				$(this).siblings().removeClass('five-active')
+				$('.content-cover').removeClass('display_none')
+				$('.content-loading').removeClass('display_none')
+				if(($(this).index()+1)==1){
+					allstorelist(thisYears,$('#fiveRightMonth').val(),thisProv)
+				}else{
+					allstoreProlist(thisYears,$('#fiveRightMonth').val(),thisProv)
+				}
+			})
+			
+			
+			// 获取区域大数据顶部10个字段
+			function areadate(time,prov){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/areadate',
+						data:{
+							"time":time,
+							"provice_id":prov
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+							var str=$('#orderMoney').html('')
+							str.append(`
+							<li>
+								<div class="content-one-money">
+									<p class="money-box yellow-one">`+data.orderyear+`</p>
+									<p>本年订单金额/元</p>
+								</div>
+							</li>
+							<li>
+								<div class="content-one-money">
+									<p class="money-box yellow-two">`+data.ordermouth+`</p>
+									<p>本月订单金额/元</p>
+								</div>
+							</li>
+							`)
+							
+							var str2=$('#orderNum').html('')
+							str2.append(`
+							<li>
+								<div class="content-one-money">
+									<p class="money-box blue-one">`+data.orderyearnum+`</p>
+									<p>本年订单量（个）</p>
+								</div>
+							</li>
+							<li>
+								<div class="content-one-money">
+									<p class="money-box blue-two">`+data.ordermouthnum+`</p>
+									<p>本月订单量（个）</p>
+								</div>
+							</li>
+							`)
+							
+							var str3=$('#orderPro').html('')
+							str3.append(`
+							<li class="content-one-li">
+								<div class="content-one-money">
+									<p class="money-box pink-one">`+data.orderyearlirun+`</p>
+									<p>本年利润（万元）</p>
+								</div>
+							</li>
+							<li class="content-one-li2">
+								<div class="content-one-money">
+									<p class="money-box pink-two">`+data.ordermouthlirun+`</p>
+									<p>本月利润（万元）</p>
+								</div>
+							</li>
+							`)
+							
+							var twoStr=$('.content-two-box').html('')
+							twoStr.append(`
+							<div class="content-two-detail col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<div class="content-two-ul">
+									<div class="two-detail">
+										<p>现有商家/个</p>
+										<p style="color: #2AB1FF;">`+data.itemnum+`</p>
+									</div>
+									<div class="two-logo">
+										<img src="img/商家.png" >
+									</div>
+								</div>
+							</div>
+							<div class="content-two-detail col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<div class="content-two-ul">
+									<div class="two-detail">
+										<p>本年新增商家/个</p>
+										<p style="color: #2AB1FF;">`+data.itemnumyear+`</p>
+									</div>
+									<div class="two-logo">
+										<img src="img/新增商家.png" >
+									</div>
+								</div>
+							</div>
+							<div class="content-two-detail col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<div class="content-two-ul">
+									<div class="two-detail">
+										<p>现有门店/个</p>
+										<p style="color:#F8FF8B">`+data.storenum+`</p>
+									</div>
+									<div class="two-logo">
+										<img src="img/门店.png" >
+									</div>
+								</div>
+							</div>
+							<div class="content-two-detail col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<div class="content-two-ul">
+									<div class="two-detail">
+										<p>本年新增门店/个</p>
+										<p style="color:#F8FF8B">`+data.storenumyear+`</p>
+									</div>
+									<div class="two-logo">
+										<img src="img/新增门店.png" >
+									</div>
+								</div>
+							</div>
+							`)
+							
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 各省销售金额/利润排行榜
+			function listtop(type,time){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/listtop',
+						data:{
+							"type":type,
+							"time":time
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							var arraydata = []
+							var zongSales = null // 总
+							var zongProfit = null
+							for(let i = 0;i<data.length;i++){
+								zongSales += Number(data[i].order_money)
+								zongProfit += Number(data[i].order_profit)
+							}
+							for(let i = 0;i<data.length;i++){
+								arraydata.push({
+									name:cancelPro(data[i].provice_name),
+									salesValue:data[i].order_money,
+									profitValue:data[i].order_profit,
+									salesPer:zbMethod(data[i].order_money,zongSales),
+									profitPer:zbMethod(data[i].order_profit,zongProfit),
+								})
+							}
+							// ranking(arraydata,type)
+							listMap(arraydata,type)
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			//近7日销售金额日报表
+			function sevenlist(prov){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/sevenlist',
+						data:{
+							"provice_id":prov
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data,prov)
+							sevenTable(data)
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+		
+			//全年销售金额月报表
+			function allyearlist(prov,time){
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/allyearlist',
+						data:{
+							"provice_id":prov,
+							"time":time
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							console.log(data)
+							allYearTable(data)
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			//各商家销售金额
+			function allitemlist(time,month,prov){
+				// console.log(time,month,prov)
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/allitemlistdate',
+						data:{
+							"time":time,
+							"month":month,
+							"provice_id":prov
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							$('#five-ss1').html('销售额')
+							var itemStr=$('#five-one-ul').html('')
+							if(month==''){
+								$('#hb-box').addClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<10;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+												<div class="content-five-td blue-box">`+data[i].percentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].percentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else{
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+											<div class="content-five-td blue-box">`+data[i].percentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].percentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}else{
+								$('#hb-box').removeClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<10;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+												<div class="content-five-td blue-box">`+data[i].percentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].percentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_money_hb+`</div>
+												<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>10){
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+											<div class="content-five-td blue-box">`+data[i].percentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].percentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_money_hb+`</div>
+											<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  console.log("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 各商家利润排行榜
+			function allitemProlist(time,month,prov){
+				$('#five-ss1').html('利润')
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/allitemlistdate',
+						data:{
+							"time":time,
+							"month":month,
+							"provice_id":prov
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							console.log(data)
+							var itemStr=$('#five-one-ul').html('')
+							if(month==''){
+								$('#hb-box').addClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+												<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+									
+								}else if(data.length>10){
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+											<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+										</li>`)
+									}
+								}
+								
+								getCircle()
+							}else{
+								$('#hb-box').removeClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<10;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+												<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_profit_hb+`</div>
+												<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else{
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+											<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_profit_hb+`</div>
+											<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}
+							
+							
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  console.log("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 各门店销售金额
+			function allstorelist(time,month,prov){
+				$('#five-ss2').html('销售额')
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/allstorelistdate',
+						data:{
+							"time":time,
+							"month":month,
+							"provice_id":prov
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							// console.log(data)
+							var itemStr=$('#five-two-ul').html('')
+							if(month==''){
+								$('#hb-box2').addClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<10;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+												<div class="content-five-td blue-box">`+data[i].percentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].percentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else{
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+											<div class="content-five-td blue-box">`+data[i].percentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].percentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}else{
+								$('#hb-box2').removeClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<10;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+												<div class="content-five-td blue-box">`+data[i].percentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].percentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_money_hb+`</div>
+												<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else{
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_money+`</div>
+											<div class="content-five-td blue-box">`+data[i].percentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].percentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_money_hb+`</div>
+											<div class="content-five-td">`+data[i].percentage_money_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  console.log("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 各门店销售利润
+			function allstoreProlist(time,month,prov){
+				$('#five-ss2').html('利润')
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/allstorelistdate',
+						data:{
+							"time":time,
+							"month":month,
+							"provice_id":prov
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							var itemStr=$('#five-two-ul').html('')
+							if(month==''){
+								$('#hb-box2').addClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+												<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>10){
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+											<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}else{
+								$('#hb-box2').removeClass('display_none')
+								if(data.length==0){
+									for(var i=0;i<10;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>0 && data.length<=10){
+									for(var i=0;i<10;i++){
+										if(i<data.length){
+											itemStr.append(`
+											<li>
+												<div class="content-five-td">`+(i+1)+`</div>
+												<div class="content-five-td">`+data[i].name+`</div>
+												<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+												<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+													<div class="circle">
+															<div class="pie_left"><div class="left"></div></div>
+															<div class="pie_right"><div class="right"></div></div>
+															<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+													</div>
+												</div>
+												<div class="content-five-td">`+data[i].percentage_profit_hb+`</div>
+												<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+											</li>`)
+											continue;
+										}
+										itemStr.append(`
+										<li>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td blue-box"></div>
+											<div class="content-five-td blue-box">
+											</div>
+											<div class="content-five-td"></div>
+											<div class="content-five-td"></div>
+										</li>`)
+									}
+								}else if(data.length>10){
+									for(var i=0;i<data.length;i++){
+										itemStr.append(`
+										<li>
+											<div class="content-five-td">`+(i+1)+`</div>
+											<div class="content-five-td">`+data[i].name+`</div>
+											<div class="content-five-td blue-box">`+data[i].order_profit+`</div>
+											<div class="content-five-td blue-box">`+data[i].profitPercentage+`
+												<div class="circle">
+														<div class="pie_left"><div class="left"></div></div>
+														<div class="pie_right"><div class="right"></div></div>
+														<div class="mask"><span>`+data[i].profitPercentage+`</span></div>
+												</div>
+											</div>
+											<div class="content-five-td">`+data[i].percentage_profit_hb+`</div>
+											<div class="content-five-td">`+data[i].percentage_profit_tb+`</div>
+										</li>`)
+									}
+								}
+								getCircle()
+							}
+							
+							
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  console.log("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			// 销售额占比方法
+			function zbMethod(num,total){
+				return (Math.round(Number(num) / Number(total) * 10000) / 100.00 + "%")
+			}
+			function cancelPro(name){
+				return name.replace("省","")
+			}
+			
+			
+		
+			
+			// 中国地图			
+			function listMap(dataArray,type){
+				//颜色配色
+				var colorList_array = ['#55aaff','#aa55ff', '#ffff00', '#fb9904', '#fe5308','#fa2612','#a7194b', '#8603af','#0447fe', '#ffaaff']
+				var e_color = ['#0086FF','#0086FF', '#0086FF','#0086FF','#0086FF', '#0086FF','#0086FF','#0086FF','#0086FF','#0086FF',
+					'#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF',
+					'#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF','#0086FF',
+					'#0086FF','#0086FF','#0086FF','#0086FF','#0086FF']
+				
+					
+				var dataList=[
+						{name:"南海诸岛",salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '北京', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '天津', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '上海', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '重庆', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '河北', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '河南', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '云南', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '辽宁', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '黑龙江', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '湖南', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '安徽', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '山东', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '新疆', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '江苏', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '浙江', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '江西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '湖北', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '广西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '甘肃', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '山西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '内蒙古', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '陕西', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '吉林', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '福建', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '贵州', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '广东', salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '青海',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '西藏',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '四川',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '宁夏',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '海南',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '台湾',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '香港',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'},
+						{name: '澳门',salesValue:0,salesPer:'0%',profitValue:0,profitPer:'0%'}
+				]
+				
+				// 柱状图数据处理
+				if(type==1){
+					dataArray.sort(function(a,b){
+						if(a.salesValue>b.salesValue) return 1 ;
+						if(a.salesValue<b.salesValue) return -1 ;
+						return 0 ;
+					}) ;
+					dataArray.sort(function(a,b){
+						if(a.profitValue>b.profitValue) return 1 ;
+						if(a.profitValue<b.profitValue) return -1 ;
+						return 0 ;
+					})
+					var num2=[]
+					if(dataArray.length>=10){
+						for(var i=0;i<10;i++){
+							num2.push(dataArray[i].salesValue)
+						}
+					}else if(dataArray.length<10){
+						for(var i=0;i<dataArray.length;i++){
+							num2.push(dataArray[i].salesValue)
+						}
+					}
+					var proName=[]
+					if(dataArray.length>=10){
+						for(var i=0;i<10;i++){
+							proName.push(dataArray[i].name)
+						}
+					}else if(dataArray.length<10){
+						for(var i=0;i<dataArray.length;i++){
+							proName.push(dataArray[i].name)
+						}
+					}
+				}else if(type==2){
+					dataArray.sort(function(a,b){
+						if(a.profitValue>b.profitValue) return 1 ;
+						if(a.profitValue<b.profitValue) return -1 ;
+						return 0 ;
+					})
+					var num2=[]
+					if(dataArray.length>=10){
+						for(var i=0;i<10;i++){
+							num2.push(dataArray[i].profitValue)
+						}
+					}else if(dataArray.length<10){
+						for(var i=0;i<dataArray.length;i++){
+							num2.push(dataArray[i].profitValue)
+						}
+					}
+					var proName=[]
+					if(dataArray.length>=10){
+						for(var i=0;i<10;i++){
+							proName.push(dataArray[i].name)
+						}
+					}else if(dataArray.length<10){
+						for(var i=0;i<dataArray.length;i++){
+							proName.push(dataArray[i].name)
+						}
+					}
+				}
+				
+				
+				var proName_array = [] //名字数组
+				proName_array = [...proName] //名字倒序
+				
+				// console.log(proName_array)
+				// 名字相同的颜色下标对等
+				proName_array.forEach((item1,index1)=>{
+					dataList.forEach((item2,index2)=>{
+						if(item1 == item2.name){
+							e_color[index2] = colorList_array[index1]
+						}
+					})
+				})
+				
+				// 空地区数组与非空地区数组整合
+				dataList.forEach((item1,index1)=>{
+					dataArray.forEach((item2,index2)=>{
+						if(item1.name == item2.name){
+							dataList[index1] = dataArray[index2]
+						}
+					})
+				})
+				
+				var myChart = echarts.init(document.getElementById('three-left-table'));
+				// 指定图表的配置项和数据
+				var option = {
+					tooltip: {
+						formatter:function(params,ticket, callback){
+							return '省份：'+params.name+'<br />本年销售额/元：<span style="color:#F92626;font-weight:bold">'+params.data.salesValue+'</span><br />销售额全国占比：<span style="color:#FFF119;font-weight:bold">'+params.data.salesPer+'</span><br />本年利润/元：<span style="color:#F92626;font-weight:bold">'+params.data.profitValue+'</span><br />利润额全国占比：<span style="color:#FFF119;font-weight:bold">'+params.data.profitPer+'</span>'
+							
+						}//数据格式化
+					},
+					series: [
+						{
+							name: '中国-',
+							type: 'map',
+							mapType: 'china', // 自定义扩展图表类型
+							itemStyle:{
+								normal:{
+									color : function(params) {
+										 // 颜色列表  
+										var colorList = e_color;
+										 //返回颜色  
+										return colorList[params.dataIndex];
+									},
+									borderColor:'#fff',
+									
+								}
+							}, 
+							roam:true,
+							label:{
+								show:true,
+									textStyle: {
+										color: '#fff'
+									}
+							},
+							data:dataList
+						}
+					]
+					};
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+				
+				// 各省销售金额/利润排行榜--对应的销售利润
+				var myChart2 = echarts.init(document.getElementById('three-right-table'));
+				
+				var option2={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter: function (params) {
+								var tar = params[0];
+								return tar.marker+tar.name + ' : ' + tar.value+'元';
+						}
+					},
+					grid: {
+						left: '3%',
+						right: '3%',
+						bottom: '3%',
+						top:'3%',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'value',
+						show:false
+					},
+					yAxis: {
+						type: 'category',
+						data: proName,
+						axisLabel: {
+							show: true,
+							textStyle: {
+									color: '#fff'
+							}
+						 },
+						axisLine:{
+							show:false
+						},
+						axisTick:{
+							show:false
+						}
+					},
+					series: [
+						{
+							type:'bar',
+							data:num2,
+							barWidth:25,
+							itemStyle:{
+								normal:{
+											//柱状图颜色  
+											color:function(params) {
+												 // 颜色列表  
+												var colorList = colorList_array;
+												 //返回颜色  
+												return colorList[params.dataIndex];
+									},
+									label: {
+										show: true,
+										position: 'insideRight',
+										formatter: function(params) {
+											var zongren = sum(num2); //总人数
+											var baifenbi_num = params.value / zongren
+											var str = Number(baifenbi_num * 100).toFixed(1);
+											return str += "%";
+										},　　　　//这是关键，在需要的地方加上就行了
+										align:'right'
+									}	,
+								},
+							},
+							 
+						}
+						
+					]
+				};
+				myChart2.setOption(option2);
+			}
+			
+				
+				
+				// 近7日销售金额日报表
+			function sevenTable(data){
+				var saleNum3=[]
+				for(var i=0;i<data.length;i++){
+					saleNum3.push(data[i].order_money)
+				}
+				
+				var saleOrderNum3=[]
+				for(var i=0;i<data.length;i++){
+					saleOrderNum3.push(data[i].order_number)
+				}
+				
+				var saleProfitNum3=[]
+				for(var i=0;i<data.length;i++){
+					saleProfitNum3.push(data[i].order_profit)
+				}
+				
+				var saleDateTime=[]
+				for(var i=0;i<data.length;i++){
+					saleDateTime.push(data[i].date)
+				}
+				var myChart3 = echarts.init(document.getElementById('four-left-table'));
+				var option3={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					grid: {
+						left: '7%',
+						right: '7%',
+						bottom: '5%',
+						containLabel: true
+					},
+					legend: {
+						data: ['代表销售利润','代表销售订单','代表销售金额'],
+						top:10,
+						textStyle:{
+							color:'#fff'
+						},
+						itemHeight: 10,
+						itemWidth:18
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data:saleDateTime,
+							axisLabel:{
+								show: true,
+								textStyle: {
+									color: '#fff',
+									fontSize:11
+								},
+								interval: 0
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value',
+							name: '金额  （单位：元）',
+							nameTextStyle: {
+								color: '#fff'
+							},
+							splitLine: {
+								show:false
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							},
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#fff'
+								}
+							},
+						},
+						{
+							type: 'value',
+							name: '订单 （单位：个）',
+							nameTextStyle: {
+								color: '#fff'
+							},
+							splitLine: {
+								show:false
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							},
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#fff'
+								}
+							},
+						}
+					],
+					series:[
+						{
+							name: '代表销售利润',
+							type: 'bar',
+							data: saleProfitNum3,
+							color:'#FF6360',
+							stack: '销售',
+							barWidth:25,
+							yAxisIndex: 0
+						},
+						{
+							name: '代表销售订单',
+							type: 'line',
+							data: saleOrderNum3,
+							color:'#FFE153',
+							yAxisIndex: 1,
+							itemStyle:{
+								normal:{
+									label:{
+										show: true,
+										color:'#fff'
+									},
+								},
+							}
+						},
+						{
+							name: '代表销售金额',
+							type: 'bar',
+							data: saleNum3,
+							color:'#1599FF',
+							stack: '销售',
+							barWidth:25,
+							yAxisIndex: 0
+						}
+						
+					]
+				}
+				myChart3.setOption(option3)
+			}
+				
+				
+				// 全年销售金额月报表
+			function allYearTable(data){
+				var saleNum4=[]
+				for(var i=0;i<data.length;i++){
+					saleNum4.push(data[i].order_money)
+				}
+				var saleOrderNum4=[]
+				for(var i=0;i<data.length;i++){
+					saleOrderNum4.push(data[i].order_number)
+				}
+				var saleProfitNum4=[]
+				for(var i=0;i<data.length;i++){
+					saleProfitNum4.push(data[i].order_profit)
+				}
+				
+				var myChart4 = echarts.init(document.getElementById('four-right-table'));
+				var option4={
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					grid: {
+						left: '7%',
+						right: '7%',
+						bottom: '5%',
+						containLabel: true
+					},
+					legend: {
+						data: ['代表销售利润','代表销售订单','代表销售金额'],
+						top:10,
+						textStyle:{
+							color:'#fff'
+						},
+						itemHeight: 10,
+						itemWidth:18
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+							axisLabel:{
+								show: true,
+								textStyle: {
+									color: '#fff'
+								},
+								interval: 0
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value',
+							name: '金额  （单位：元）',
+							nameTextStyle: {
+								color: '#fff'
+							},
+							splitLine: {
+								show:false
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							},
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#fff'
+								}
+							},
+						},
+						{
+							type: 'value',
+							name: '订单 （单位：个）',
+							nameTextStyle: {
+								color: '#fff'
+							},
+							splitLine: {
+								show:false
+							},
+							axisLine: {
+								lineStyle: {
+									color: '#ffffff',
+									width: 1
+								}
+							},
+							axisLabel: {
+								show: true,
+								textStyle: {
+									color: '#fff'
+								}
+							},
+						}
+					],
+					series:[
+						{
+							name: '代表销售利润',
+							type: 'bar',
+							data: saleProfitNum4,
+							color:'#FF6360',
+							stack: '销售',
+							barWidth:25,
+							yAxisIndex: 0
+						},
+						{
+							name: '代表销售订单',
+							type: 'line',
+							data: saleOrderNum4,
+							color:'#FFE153',
+							yAxisIndex: 1,
+							itemStyle:{
+								normal:{
+									label:{
+										show: true,
+										color:'#fff'
+									},
+								},
+							}
+						},
+						{
+							name: '代表销售金额',
+							type: 'bar',
+							data: saleNum4,
+							color:'#1599FF',
+							stack: '销售',
+							barWidth:25,
+							yAxisIndex: 0
+						}
+						
+					]
+				}
+				myChart4.setOption(option4)
+			}
+			
+				
+				// 递归求和
+				function sum(arr) {
+						var len = arr.length;
+						if(len == 0){
+								return 0;
+						} else if (len == 1){
+								return Number(arr[0]);
+						} else {
+								return Number(arr[0]) + sum(arr.slice(1));
+						}
+				}
+				
+				function getCircle() {
+				    $('.circle').each(function(index, el) {
+				        var num = $(this).find('span').text() * 3.6;
+				        if (num<=180) {
+				            $(this).find('.right').css('transform', "rotate(" + num + "deg)");
+				        } else {
+				            $(this).find('.right').css('transform', "rotate(180deg)");
+				            $(this).find('.left').css('transform', "rotate(" + (num - 180) + "deg)");
+				        };
+				    });
+				
+				};
+				
+				
+				
+		</script>
+	
+	</body>
+</html>

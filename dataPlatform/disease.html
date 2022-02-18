@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>病症大数据</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		
+		<style type="text/css">
+			.content{width: 100%;padding: 20px 30px;}
+		/* 	.content-one-box{width: 100%;} */
+			.content-one-table{height: 148px;border-radius: 8px;margin-top: 35px;}
+			.content-one-border{height: 148px;border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			.content-one-left-ul{height: 148px;display: flex;flex-direction: row;align-items: center;}
+			.content-one-left-ul li{width: 33.3%;height: 148px;display: flex;flex-direction: column;align-items: center;justify-content: center;/* border-right:  1px solid rgba(9,84,109,0.5); */font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;}
+			.content-one-left-ul li:last-child{border-right: none;}
+			.kind-green{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #00D5AC;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			.kind-yellow{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #FFE488;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			.kind-orange{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #FF7443;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			.content-one-middle-ul{width: 100%;height: 148px;display: flex;flex-direction: row;align-items: center;}
+			.content-one-middle-ul li{display: flex;flex-direction: column;align-items: center;justify-content: center;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;}
+			.content-one-middle-ul li:nth-of-type(1){width: 33%;height: 148px;/* border-right:1px solid rgba(9,84,109,0.5) ; */}
+			.content-one-middle-ul li:nth-of-type(2){width: 67%;height: 148px;display: flex;flex-direction: row;align-items: center;}
+			.one-middle-right{display: flex;flex-direction: column;align-items: center;}
+			.one-middle-right:nth-of-type(1){width: 50%;}
+			.one-middle-right:nth-of-type(2){width: 25%;}
+			.one-middle-right:nth-of-type(3){width: 25%;}
+			.xz-pink{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #FF42F4;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			.xz-per{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #8C37FF;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			.xz-green{font-size: 18px;font-family: Helvetica;font-weight: bold;color: #1BB429;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 18px;}
+			.xz-red{font-size: 18px;font-family: Helvetica;font-weight: bold;color: #DD2122;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 18px;}
+			.content-one-right-ul{width: 100%;height: 148px;display: flex;flex-direction: row;align-items: center;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #F1F5FF;}
+			.content-one-right-ul li:nth-of-type(1){width: 46.6%;height: 148px;/* border-right: 1px solid rgba(9,84,109,0.5); */display: flex;flex-direction: row;align-items: center;}
+			.content-one-right-ul li:nth-of-type(2){width: 53.4%;height: 148px;display: flex;flex-direction: row;align-items: center;}
+			.one-right-left{display: flex;flex-direction: column;align-items: center;justify-content: center;}
+			.one-right-left:nth-of-type(1){width: 70%;}
+			.one-right-left:nth-of-type(2){width: 30%;}
+			.one-right-right{display: flex;flex-direction: column;align-items: center;justify-content: center;}
+			.one-right-right:nth-of-type(1){width: 50%;}
+			.one-right-right:nth-of-type(2){width: 25%;}
+			.one-right-right:nth-of-type(3){width: 25%;}
+			.yy-blue{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #34CDFF;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			.yy-yellow{font-size: 30px;font-family: Helvetica;font-weight: bold;color: #FFE488;text-shadow: 0px 40px 73px rgba(0, 0, 0, 0.56);margin-bottom: 5px;}
+			
+			
+			.content-two-detail{border-radius: 8px;margin-top: 42px;}
+			.content-two-border{border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;width: 100%;display: flex;flex-direction: row;}
+			.two-left-one{width: 45%;height: 561px;display: flex;flex-direction:column;}
+			.two-left-two{width:55%;height: 561px;display: flex;flex-direction:column;}
+			.content-two-title{height: 60px;text-align: center;line-height: 60px;font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;}
+			#two-left-table{width: 100%;height: 501px;}
+			.content-two-thead{width: 100%;display: flex;flex-direction: row;align-items: center;text-align: center;height: 45px;border-bottom: solid 2px rgba(5,54,71,0.7);}
+			.content-two-thead .content-two-td{border-right: solid 2px transparent !important;}
+			.content-two-table{width: 100%;height: 501px;display: flex;flex-direction: column;}
+			.content-two-table li{height: 45px;line-height: 45px;border-bottom: solid 2px rgba(5,54,71,0.7);display: flex;flex-direction: row;align-items: center;}
+			.content-two-table li:last-child{border-bottom: none;}
+			.content-two-td{text-align: center;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 16px;font-family: Microsoft YaHei;font-weight: 400;color: #E5E5E5;}
+			.table-white{font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #FFFFFF;}
+			.table-yellow{font-size: 18px;font-family: Helvetica;font-weight: bold;color: #E6FF40;}
+			.table-blue{font-size: 18px;font-family: Helvetica;font-weight: bold;color: #368FFF;}
+			.content-two-td:nth-of-type(1){width: 13.6%;height: 100%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(2){width: 24.5%;height: 100%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(3){width: 18.3%;height: 100%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(4){width: 20.6%;height: 100%;border-right: solid 2px rgba(5,54,71,0.4);}
+			.content-two-td:nth-of-type(5){width: 21.2%;height: 100%;}
+			
+			.two-right-one{width: 45%;height: 561px;display: flex;flex-direction:column;}
+			.two-right-two{width:55%;height: 561px;display: flex;flex-direction:column;}
+			#two-right-table{width: 100%;height: 501px;}
+			
+			.content-three-title{display: flex;flex-direction: row;align-items: center;color: #FFF;width: 100%;height: 40px;margin-top: 38px;}
+			.content-three-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-three-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-three-box{width: 100%;background: rgba(11, 36, 76, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;margin-top: 21px;}
+			.content-three-border{border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;width: 100%;display: flex;flex-direction: row;}
+			.content-three-detail{width: 50%;height: 561px;display: -wap-marquee;flex-direction: column;}
+			.content-three-head{height: 40px;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;margin: 15px 30px 0 0;}
+			.content-three-select{width:15%;height: 34px;background-color: #081833;}
+			.content-three-select .layui-input, .layui-textarea{padding-left: 0px !important;}
+			.content-three-select .layui-form-select .layui-input{border: 1px solid #fff;background-color: #081833;}
+			#three-right-table{width: 100%;height: 506px;}
+			.content-four-detail{margin-top: 35px;}
+			.content-four-title{height: 40px;width: 100%;display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-four-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-four-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-four-table{width: 100%;height: 436px;margin-top: 21px;background: rgba(11, 36, 76, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;}
+			.content-four-border{border: 0;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;width: 100%;height: 436px;display: flex;flex-direction: column;}
+			.content-four-head{height: 40px;display: flex;flex-direction: row;align-items: center;justify-content: flex-end;margin: 15px 30px 0 0;}
+			.content-four-select{width:15%;height: 34px;background-color: #081833;}
+			.content-four-select .layui-input, .layui-textarea{padding-left: 0px !important;}
+			.content-four-select .layui-form-select .layui-input{border: 1px solid #fff;background-color: #081833;}
+			#four-left-table{width: 100%;height: 383px;}
+			#four-right-table{width: 100%;height: 383px;}
+			
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {
+				    display: none;
+				}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				.content-two-border{display: flex;flex-direction: column;}
+				.two-left-one{width: 100%;}
+				.two-left-two{width: 100%;}
+				.two-right-one{width: 100%;}
+				.two-right-two{width: 100%;}
+				.content-three-border{display: flex;flex-direction: column;}
+				.content-three-detail{width: 100%;}
+			}
+			@media (max-width: 1024px){
+				.main-title {
+				    display: none;
+				}
+				.circle{display: none;}
+				.content-five-title{display: flex;flex-direction: column;align-items: start;}
+				.five-right-btn{justify-content: flex-start;display: flex;flex-direction: row;align-items: center;box-sizing: border-box;margin-top: 20px;}
+				
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<!-- <li>
+						<a href="javascript:;">
+							<div class="li-content">
+								<img src="img/中台1.png" >
+								<span>展示中台</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li> -->
+					<li>
+						<a href="area.html">
+							<div class="li-content">
+								<img src="img/区域1.png" >
+								<span>区域大数据</span>
+							</div>
+						</a>
+						<div class="li-tips  "></div>
+					</li>
+					<li>
+						<a href="variety.html">
+							<div class="li-content ">
+								<img src="img/品种1.png" >
+								<span>品种大数据</span>
+							</div>
+						</a>
+						<div class="li-tips "></div>
+					</li>
+					<li>
+						<a href="javascirpt:;">
+							<div class="li-content li-active">
+								<img src="img/病症.png" >
+								<span>病症大数据</span>
+							</div>
+						</a>
+						<div class="li-tips li-tips-active"></div>
+					</li>
+					<li>
+						<a href="season.html">
+							<div class="li-content">
+								<img src="img/季节1.png" >
+								<span>季节大数据</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">医药大数据展示</div>
+			
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li>
+					<a href="area.html" class="show-btn">
+						<img src="img/区域1.png" >
+						<span>区域大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="variety.html" class="show-btn">
+						<img src="img/品种1.png" >
+						<span>品种大数据</span>
+					</a>
+				</li>
+				<li class="menu-active">
+					<a href="javascript:;" class="show-btn">
+						<img src="img/病症.png" >
+						<span>病症大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="season.html" class="show-btn">
+						<img src="img/季节1.png" >
+						<span>季节大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="commonlyUse.html" class="show-btn">
+						<img src="img/常用药1.png" >
+						<span>常用药大数据</span>
+					</a>
+				</li>
+				<li>
+					<a href="pharmacy.html" class="show-btn">
+						<img src="img/处方药1.png" >
+						<span>处方药大数据</span>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="right-title">
+				<div class="right-data-title">
+					<ul>
+						<li>
+							<a href="commonlyUse.html">
+								<div class="li-content ">
+									<img src="img/常用药1.png" >
+									<span>常用药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips "></div>
+						</li>
+						<li>
+							<a href="pharmacy.html">
+								<div class="li-content">
+									<img src="img/处方药1.png" >
+									<span>处方药大数据</span>
+								</div>
+							</a>
+							<div class="li-tips"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-type-title layui-form">
+					<div class="right-select-data">
+						<select>
+						<option value="all">全部</option>
+					</select>
+					</div>
+					<div class="right-select-data2">
+						<select>
+							<option value="2021">2021</option>
+							<option value="2020">2020</option>
+							<option value="2019">2019</option>
+						</select>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="content container">
+			<div class="content-one-box row">
+				<div class="content-one-table col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-one-border">
+						<ul class="content-one-left-ul">
+							<li>
+								<p class="kind-green">25631</p>
+								<p>病症种类/种</p>
+							</li>
+							<li>
+								<p class="kind-yellow">25631</p>
+								<p>慢病种类/种</p>
+							</li>
+							<li>
+								<p class="kind-orange">25631</p>
+								<p>非慢病种类/种</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-one-table col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-one-border">
+						<ul class="content-one-middle-ul">
+							<li>
+								<p class="xz-pink">25631</p>
+								<p>病症人数/人</p>
+							</li>
+							<li>
+								<div class="one-middle-right">
+									<p class="xz-per">25631</p>
+									<p>当月新增病症人数/人</p>
+								</div>
+								<div class="one-middle-right">
+									<p class="xz-green">2.0%</p>
+									<p>同比</p>
+								</div>
+								<div class="one-middle-right">
+									<p class="xz-red">2.0%</p>
+									<p>环比</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-one-table col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="content-one-border">
+						<ul class="content-one-right-ul">
+							<li>
+								<div class="one-right-left">
+									<p class="yy-blue">25631.20</p>
+									<p>本年医药费用/元</p>
+								</div>
+								<div class="one-right-left">
+									<p class="xz-red">2.0%</p>
+									<p>同比</p>
+								</div>
+							</li>
+							<li>
+								<div class="one-right-right">
+									<p class="yy-yellow">25631.36</p>
+									<p>当月医药费用/元</p>
+								</div>
+								<div class="one-right-right">
+									<p class="xz-red">2.0%</p>
+									<p>同比</p>
+								</div>
+								<div class="one-right-right">
+									<p class="xz-green">2.0%</p>
+									<p>环比</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="content-two-box">
+				<div class="content-two-detail">
+					<div class="content-two-border">
+						<div class="two-left-one">
+							<div class="content-two-title">慢病病症人数排行榜</div>
+							<div id="two-left-table"></div>
+						</div>
+						<div class="two-left-two">
+							<div class="content-two-title">慢病病症治疗药品排行榜</div>
+							<div class="content-two-thead">
+								<div class="content-two-td">排名</div>
+								<div class="content-two-td">商品</div>
+								<div class="content-two-td">销量</div>
+								<div class="content-two-td">金额/元</div>
+								<div class="content-two-td">销量占比</div>
+							</div>
+							<ul class="content-two-table">
+								<li>
+									<div class="content-two-td">1</div>
+									<div class="content-two-td table-white">抗感冒类</div>
+									<div class="content-two-td table-yellow">1200</div>
+									<div class="content-two-td table-blue">12.5</div>
+									<div class="content-two-td table-blue">20%</div>
+								</li>
+								<li>
+									<div class="content-two-td">2</div>
+									<div class="content-two-td table-white">抗感冒类抗感冒类抗感冒类</div>
+									<div class="content-two-td table-yellow">1200</div>
+									<div class="content-two-td table-blue">12.5</div>
+									<div class="content-two-td table-blue">20%</div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="content-two-detail">
+					<div class="content-two-border">
+						<div class="two-right-one">
+							<div class="content-two-title">非慢病病症人数排行榜</div>
+							<div id="two-right-table"></div>
+						</div>
+						<div class="two-right-two">
+							<div class="content-two-title">非慢病病症治疗药品排行榜</div>
+							<div class="content-two-thead">
+								<div class="content-two-td">排名</div>
+								<div class="content-two-td">商品</div>
+								<div class="content-two-td">销量</div>
+								<div class="content-two-td">金额/元</div>
+								<div class="content-two-td">销量占比</div>
+							</div>
+							<ul class="content-two-table">
+								<li>
+									<div class="content-two-td">1</div>
+									<div class="content-two-td table-white">抗感冒类</div>
+									<div class="content-two-td table-yellow">1200</div>
+									<div class="content-two-td table-blue">12.5</div>
+									<div class="content-two-td table-blue">20%</div>
+								</li>
+								<li>
+									<div class="content-two-td">2</div>
+									<div class="content-two-td table-white">抗感冒类抗感冒类抗感冒类</div>
+									<div class="content-two-td table-yellow">1200</div>
+									<div class="content-two-td table-blue">12.5</div>
+									<div class="content-two-td table-blue">20%</div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+								<li>
+									<div class="content-two-td">3</div>
+									<div class="content-two-td table-white"></div>
+									<div class="content-two-td table-yellow"></div>
+									<div class="content-two-td table-blue"></div>
+									<div class="content-two-td table-blue"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		
+			<div class="content-three-title">
+				<p></p>
+				<p>各地区病症排行榜</p>
+			</div>
+			<div class="content-three-box">
+				<div class="content-three-border">
+					<div class="content-three-detail" id="three-table"></div>
+					<div class="content-three-detail">
+						<div class="content-three-head">
+							<div class="content-three-select layui-form">
+								<select name="">
+									<option value="高血压">高血压</option>
+								</select>
+							</div>
+						</div>
+						<div id="three-right-table"></div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="content-four-box row">
+				<div class="content-four-detail col-lg-6 col-md-12 col-sm-12 col-xs-12">
+					<div class="content-four-title">
+						<p></p>
+						<p>病症人群性别分析</p>
+					</div>
+					<div class="content-four-table">
+						<div class="content-four-border">
+							<div class="content-four-head">
+								<div class="content-four-select layui-form">
+									<select name="">
+										<option value="高血压">高血压</option>
+									</select>
+								</div>
+							</div>
+							<div id="four-left-table"></div>
+						</div>
+					</div>
+				</div>
+				<div class="content-four-detail col-lg-6 col-md-12 col-sm-12 col-xs-12">
+					<div class="content-four-title">
+						<p></p>
+						<p>病症人群年龄分析</p>
+					</div>
+					<div class="content-four-table">
+						<div class="content-four-border">
+							<div class="content-four-head">
+								<div class="content-four-select layui-form">
+									<select name="">
+										<option value="高血压">高血压</option>
+									</select>
+								</div>
+							</div>
+							<div id="four-right-table"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/echarts-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.18'
+			layui.use('form', function(){
+			    var form = layui.form; 
+			});
+			
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			// 慢病病症人数排行榜
+			var twoLeftData=[
+				{name:'肺结核',value:1000},
+				{name:'流感',value:2000},
+				{name:'子宫肌瘤',value:3000},
+				{name:'肺癌',value:4000},
+				{name:'痔疮',value:5000},
+				{name:'抑郁症',value:6000},
+				{name:'乙肝',value:7000},
+				{name:'糖尿病',value:8000},
+				{name:'高血脂',value:9000},
+				{name:'高血压',value:10000},
+			]
+			var twoLeftTitle=[]
+			for(var i=0;i<twoLeftData.length;i++){
+				twoLeftTitle.push(twoLeftData[i].name)
+			}
+			var twoLeftValue=[]
+			for(var i=0;i<twoLeftData.length;i++){
+				twoLeftValue.push(twoLeftData[i].value)
+			}
+			var myChart = echarts.init(document.getElementById('two-left-table'))
+			var option ={
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					},
+					formatter: function (params) {
+							var tar = params[0];
+							return tar.marker+'慢病病症'+tar.name + '人数: ' + tar.value+'万人';
+					}
+				},
+				grid: {
+					left: '5%',
+					right: '7%',
+					bottom: '3%',
+					top:'3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'value',
+					show:false
+				},
+				yAxis: {
+					type: 'category',
+					data: twoLeftTitle,
+					axisLabel: {
+						show: true,
+						textStyle: {
+								color: '#fff',
+								fontSize:14
+						}
+					 },
+					axisLine:{
+						show:false
+					},
+					axisTick:{
+						show:false
+					}
+				},
+				series: [
+					{
+						type:'bar',
+						data:twoLeftValue,
+						barWidth:28,
+						itemStyle:{
+							normal:{
+								color:'#00A0E9',
+								label: {
+									show: true,
+									position: 'insideRight',
+									formatter: function(params) {
+										var zongren = sum(twoLeftValue); //总人数
+										var baifenbi_num = params.value / zongren
+										var str = Number(baifenbi_num * 100).toFixed(1);
+										return str += "%";
+									},　　　　//这是关键，在需要的地方加上就行了
+									align:'right'
+								}	,
+							},
+						},
+						 
+					}
+					
+				]
+			}
+			myChart.setOption(option);
+			
+			// 非慢病病症人数排行榜
+			var twoRightData=[
+				{name:'肺结核',value:1000},
+				{name:'流感',value:2000},
+				{name:'子宫肌瘤',value:3000},
+				{name:'肺癌',value:4000},
+				{name:'痔疮',value:5000},
+				{name:'抑郁症',value:6000},
+				{name:'乙肝',value:7000},
+				{name:'糖尿病',value:8000},
+				{name:'高血脂',value:9000},
+				{name:'高血压',value:10000},
+			]
+			var twoRightTitle=[]
+			for(var i=0;i<twoRightData.length;i++){
+				twoRightTitle.push(twoRightData[i].name)
+			}
+			var twoRightValue=[]
+			for(var i=0;i<twoRightData.length;i++){
+				twoRightValue.push(twoRightData[i].value)
+			}
+			var myChart2 = echarts.init(document.getElementById('two-right-table'))
+			var option2={
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					},
+					formatter: function (params) {
+							var tar = params[0];
+							return tar.marker+'慢病病症'+tar.name + '人数: ' + tar.value+'万人';
+					}
+				},
+				grid: {
+					left: '5%',
+					right: '7%',
+					bottom: '3%',
+					top:'3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'value',
+					show:false
+				},
+				yAxis: {
+					type: 'category',
+					data: twoRightTitle,
+					axisLabel: {
+						show: true,
+						textStyle: {
+								color: '#fff',
+								fontSize:14
+						}
+					 },
+					axisLine:{
+						show:false
+					},
+					axisTick:{
+						show:false
+					}
+				},
+				series: [
+					{
+						type:'bar',
+						data:twoRightValue,
+						barWidth:28,
+						itemStyle:{
+							normal:{
+								color:'#FF2B67',
+								label: {
+									show: true,
+									position: 'insideRight',
+									formatter: function(params) {
+										var zongren = sum(twoRightValue); //总人数
+										var baifenbi_num = params.value / zongren
+										var str = Number(baifenbi_num * 100).toFixed(1);
+										return str += "%";
+									},　　　　//这是关键，在需要的地方加上就行了
+									align:'right'
+								}	,
+							},
+						},
+						 
+					}
+					
+				]
+			}
+			myChart2.setOption(option2);
+			
+			
+			// 各地区病症排行榜
+			var threeData=[
+					{name:"南海诸岛",salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '北京', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '天津', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '上海', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '重庆', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '河北', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '河南', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '云南', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '辽宁', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '黑龙江', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '湖南', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '安徽', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '山东', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '新疆', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '江苏', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '浙江', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '江西', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '湖北', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '广西', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '甘肃', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '山西', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '内蒙古', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '陕西', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '吉林', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '福建', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '贵州', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '广东', salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '青海',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '西藏',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '四川',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '宁夏',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '海南',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '台湾',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '香港',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'},
+					{name: '澳门',salesValue:200,salesPer:'30%',profitValue:100,profitPer:'30%'}
+			]
+			var myChart3=echarts.init(document.getElementById('three-table'))
+			var option3={
+				/* tooltip: {
+					formatter:function(params,ticket, callback){
+						return '省份：'+params.name+'<br />本年销售额/万：<span style="color:#F92626;font-weight:bold">'+params.data.salesValue+'</span><br />销售额全国占比：<span style="color:#FFF119;font-weight:bold">'+params.data.salesPer+'</span><br />本年利润/万：<span style="color:#F92626;font-weight:bold">'+params.data.profitValue+'</span><br />利润额全国占比：<span style="color:#FFF119;font-weight:bold">'+params.data.profitPer+'</span>'
+					}//数据格式化
+				}, */
+				visualMap: {
+					min: 0,
+					max: 1500,
+					left: 'left',
+					top: 'bottom',
+					text: ['高','低'],
+					show:false,
+					textStyle:{
+						color:'#fff'
+					}
+				},
+				geo: {
+					zoom:1.1,
+					show: true,
+					map: 'china',
+					label: {
+						show: true,
+						color:'#fff'
+					},
+					roam: false,
+					itemStyle: {
+						normal: {
+							color:'#0086FF',
+							areaColor: '#0086FF',
+							borderWidth: 3, //设置外层边框
+							borderColor:'#1B006C',
+							shadowColor: '#003e74'/* ,
+							shadowBlur: 5,
+							shadowOffsetY:18 */
+							// opacity:0.8,
+						},
+						emphasis: {
+							 color: '#fff',
+							 opacity:0.8
+						}
+					}
+				},
+				series: [
+					{
+						zoom:1.1,
+						type: 'map',
+						map: 'china',
+						label: {
+							normal: {
+								show: true,
+								// fontSize:'10',
+								color: '#fff'
+								// show:false
+							},
+							emphasis:{
+								 color: '#fff'
+								 // show:false
+							}
+						},
+						roam: false,
+						itemStyle: {
+							normal: {
+								areaColor: '#0086FF',
+								borderColor: '#d9d9d9',
+								borderWidth: 1
+							},
+							emphasis: {
+								areaColor: '#0058a6'
+							}
+						},
+						data:threeData
+					}
+				]
+			}
+			myChart3.setOption(option3);
+			
+			
+			// 各地区病症排行榜--柱状图
+			var threeRightData=[
+				{name:'海南',value:1000},
+				{name:'江西',value:2000},
+				{name:'浙江',value:3000},
+				{name:'河北',value:4000},
+				{name:'河南',value:5000},
+				{name:'黑龙江',value:6000},
+				{name:'湖北',value:7000},
+				{name:'湖南',value:8000},
+				{name:'广西',value:9000},
+				{name:'广东',value:10000},
+			]
+			var threeRightName=[]
+			for(var i=0;i<threeRightData.length;i++){
+				threeRightName.push(threeRightData[i].name)
+			}
+			var threeRightValue=[]
+			for(var i=0;i<threeRightData.length;i++){
+				threeRightValue.push(threeRightData[i].value)
+			}
+			var myChart4=echarts.init(document.getElementById('three-right-table'))
+			var option4={
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					},
+					formatter: function (params) {
+							var tar = params[0];
+							return tar.marker+tar.name + '地区该病症人数: ' + tar.value+'万人';
+					}
+				},
+				grid: {
+					left: '5%',
+					right: '7%',
+					bottom: '3%',
+					top:'3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'value',
+					show:false
+				},
+				yAxis: {
+					type: 'category',
+					data: threeRightName,
+					axisLabel: {
+						show: true,
+						textStyle: {
+								color: '#fff',
+								fontSize:14
+						}
+					 },
+					axisLine:{
+						show:false
+					},
+					axisTick:{
+						show:false
+					}
+				},
+				series: [
+					{
+						type:'bar',
+						data:threeRightValue,
+						barWidth:28,
+						itemStyle:{
+							normal:{
+								color:function(params){
+									var colorlist = ['#5B04FB','#FA3333','#D338FF','#FFC751','#2CCC47','#1B51FF','#FB3B72','#6B6AE1','#04D1BE','#0476FB'];
+									return colorlist[params.dataIndex];
+									},
+								label: {
+									show: true,
+									position: 'insideRight',
+									formatter: function(params) {
+										var zongren = sum(threeRightValue); //总人数
+										var baifenbi_num = params.value / zongren
+										var str = Number(baifenbi_num * 100).toFixed(1);
+										return str += "%";
+									},　　　　//这是关键，在需要的地方加上就行了
+									align:'right'
+								}	,
+							},
+						},
+						 
+					}
+					
+				]
+			}
+			myChart4.setOption(option4);
+			
+			// 病症人群性别分析
+			var pathSymbols ={
+				girl:'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAABkCAYAAADwkaJHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjUzRjgwMjcyNDAxQTExRUI5MjNGRDFDMkUyMjkyNDZEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjUzRjgwMjczNDAxQTExRUI5MjNGRDFDMkUyMjkyNDZEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTNGODAyNzA0MDFBMTFFQjkyM0ZEMUMyRTIyOTI0NkQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTNGODAyNzE0MDFBMTFFQjkyM0ZEMUMyRTIyOTI0NkQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6j1fiNAAAEXElEQVR42uybSYxMQRjHq5+2JWJfZoREbGPsROz7MnqxZ8KBBOFAxAUHsUQizMV2EQ4ixMkaYksIgjCCiy0ShBhinWGsCbG0/6cLrc3r7lf1Vb03iX/yu0z36/7Nq/eqvqpXHUokEuJnikuEYorABNALNAXNwCdQAcrAGXAY3M/4KfuXZXw5LNQzCywC3Vxez5evjQPrwFGwCZxT+TJH4ZgB4BrYkUEyPTXARHAW7AaNTIvSWSwFPTRaYhq4AgpNic6TZ5Ej7cFFeU2zivYFWwVvqPkPcoqGvHygxwwGa7hEV4CWwlyWgza6oiS4UpjPRl3RKaCmBdHJGHCa6IgOFfYyWlWURq1BFkUHqormG76J0pOnKlog7Ka5qmgDy6J1VUXvWRZ9qSpKteRni6KVqqJvwXWLord1+tHTFkWP6YgesSR5F1ORWzqil2RVbjqrOKqnhRauzd0cordyqW4U80VOTdgq/MXgpAHR6fJEsM6ZaNp7ilGSCvJ9JiZ31ExjwE4Gyblgrel5/WwwE9xQOJZWTPqD7TYWICi75NyepE+Abxne+xhsAcPkIsRllS8MazbhTklb4b72VMpRM4SZbowHEmNxRDXJf9H/okGP7l1PqxudQEeRXFH5VsXnvwI3wR0/RFuDpWAGqJ/D++lBwRVZhe21JdpFFtNNPRxDS5f9wB6RfDgx1/Q1SnLnPUqmZw7YbFp0NWjMcG8sAN1NibZQabIMWWlKdLzgXSuNg3omRMcyd4201jScW7QOGGmgHx/HLTqM6SZSbiWH+z/3mDagN6do1OAwHuESpblRO4OiMS7RmDAbGlrzOUSjhkXDcvzXEs2T83DTieqKRoSdJ3ejRHFJWEc0JuyEqrGhqqI1f/6n9hJXFTU1Gin1p44Po5FbOuM67aAiGvdhshn3KkrzovY+iEa8ikaFPxmO5m/gRTTuk2htt7rXcVlUGOzjokgkV9Go4Fs3ZaumnABdn7/SCtdpn2yiTi6VjB/dVLroEM1VEGPXqePzaOReTBeX5GUSjQdENJR+U6WK0hpnoQhOxrqJxkSwUpRaTAdZtKEsNVNEi0vojyNE8BJLP6NFPo9GWSd9TkCb/VcK0doFqaIREdyMTxVtEWDRXqmilQEW/ZoqujHAotv+iO5fRlvMN4jkhgAbSeTwHtr9OAluF0Ral7QErAddQS3x7+NC2sUwFcxnEKUtRLTxq45LjUxcheTvrZrpfedziVsaMYnS89G/f4WT5WdCXh+IvWdq+g9eD/Aq+jDH6ytbXpgWpWumnEG03LToe5WzUUXemBZNiCybpnPMa9OilLLqIvqYQbTChujT6nAzUR5pStIw/a46iNId/9GGaLnKGUlJpa0z+lrzOq0UmfebsonSlzyz2dmrigqGM2pNVKcvrbAp+kRD9J1N0bsaomU2RUtV+kKZ4zZFqUKnvfjfPR63QLXH0FlvOgB6iuSPUmh1OFRF9R+S0CBxSCR/dqSUHwIMAKHgwMkIsrveAAAAAElFTkSuQmCC',
+				boy:'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAABkCAYAAADwkaJHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjUzRjgwMjZFNDAxQTExRUI5MjNGRDFDMkUyMjkyNDZEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjUzRjgwMjZGNDAxQTExRUI5MjNGRDFDMkUyMjkyNDZEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTNGODAyNkM0MDFBMTFFQjkyM0ZEMUMyRTIyOTI0NkQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTNGODAyNkQ0MDFBMTFFQjkyM0ZEMUMyRTIyOTI0NkQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5qqRy8AAAD4UlEQVR42uycS2gTQRjHN218XMSDaAviq2ApHlQsLYooFSpiQezNiyCCFw8i9iYI3nqR+jh4FYuKXkR8HxRBERQtVKqHUqFF7YPabNOkaRqbNvH/0Yls16Tu7sy3zNgM/JnSZHZ/+c/O981Mpo3k83nLhBKVaVzXmaGqHjoC7YY2QFXi5VHoO/QGegD1utv3nljp+V6RoI4C8iiqNmi/xybPoSvQiyCg0QCA1ajuQk0+mx4WegidgmJ+Glf4hGxA9S4ApLNQT3ygy/lp5LnrAbkNVQ9UqWh80DNci+5PKnMUkKtQPVMIaYlBd19117dDmxiiTjNMOKuk63GhzagGGEPkDLQFj8CwrKPnmWP5cuiClKNwc4UI2uuYYYegGrg6E9TRphAgqayHdsh0/b4Q03m9DGhViKA1poDWyoCGOQfMyYCOhgjaJwM6EiJovwzoyxBB38uAvmVOn4XyFfocGBSZIi8mydzltriXVK6/CmUZIeNiiSI3zcMnHUN1iRG0DfeYVDUfvQh1M3X5TdVLEZqcfIQ2KoLsAmSD8sUdLvoTVSP0SQEkfeBmtlUoYClT7RVL3qCFunoPlGADFbBpqBU/HoCeQLMemqWhe2I35SQ05/e+EZm9J7GlsxVqES7Rlk61Y57wDXoNPYKGZbZ0ogqeN8oq14TYSoVlSCmDlkF1LyXDE0LPalRrRWTIhWAYxdZBhKxpT6AAPITqNLRdrEKjISzyIgKUdmWeQpcBPFQSFJC0z9SuQU/blMEA+/gvUEDSfnyHZo/mLsB2/xlMYje5Q8MxdMM96s9pOth3wsRGJ2iLxpGp1QlapTFojRM0rTFoxglqawxqO0FjGoOOGemoMaDjZdAlMphyBTbdHaWdvkkTHB0vJCPdR71d2OA1wdEF07wJTfO97Qad0rT74wtA8RxkNR35sWLretuErtc1lpoNapef0f/c0UQhz7tBdctONGZSJjg6jvg+a4qjVjFQyvczOqZPN2hKs+4v7qjY6dUp6NulHNUtO8VMAV3U0bgpjiY0Ap1YDHREI9Afi4G+0gSyB1FosCQoXqQjFNc12B054/5l0W/u6jozx1AdhOjbO1pPrbHmz4BwfCXZZc3/HQmdMqDzebdg2BdPoEXA6ZRDH5ODxwF2519v8urQMsauTnl5k1fQOcYJS1IlaIYRdFIl6C8h1SVriqMp1Y5ygU65U6UUKMJHxuI5Q5osdeIhqKMFV1mncqpAUwygExyg0wyg8TIo50pTZ1CWwZReyo4mTHE0YYKjea44qtrRKS5Q1QcJK/3EUT+HsQe8zh09ln46Ku/1zRFT/rXCbwEGAIkoVPhEQTnvAAAAAElFTkSuQmCC'
+			}
+			var boyData=240
+			var girlData=160
+			var totalData=400
+			var myChart5=echarts.init(document.getElementById('four-left-table'))
+			var option5={
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { 
+						type: 'shadow'
+					},
+					formatter: function (params) {
+							var tar = params[0];
+							var tar2=	params[1];
+							return tar.marker+tar.name +'性在'+tar2.value+'人中有'+ tar.value+'人';
+					}
+				},
+				xAxis: {
+					splitLine: {show: false},
+					axisLabel: {show: false},
+					axisTick: {show: false},
+					axisLine: {show: false}
+				},
+				yAxis: {
+						data: ['男', '女'],
+						inverse: true,
+						axisTick: {show: false},
+						axisLine: {show: false},
+						axisLabel: {
+								margin:60,
+								color: '#E6E6E6',
+								fontSize: 20
+						}
+				},
+				grid: {
+						top: 'center',
+						height: 280,
+						left: '15%',
+						right: '23%'
+				},
+				series: [{
+					// current data
+					type: 'pictorialBar',
+					symbolRepeat: 'fixed',
+					symbolMargin: '30%',
+					symbolClip: true,
+					symbolSize: [40, 89],
+					data: [
+					 { 
+							value: boyData,
+							symbol:pathSymbols.boy,
+						},
+						{
+							value:girlData,
+							symbol:pathSymbols.girl,
+						}
+					],
+					itemStyle:{
+						normal:{
+							color:function(params){
+								var colorlist = ['#27a0f7','#ff5385'];
+								return colorlist[params.dataIndex];
+								},
+							label: {
+								show: true,
+								position:'right',
+								right:0,
+								fontSize: 16,
+								offset: [70, 0],
+								formatter: function(params) {
+									var zongren = totalData; //总人数
+									var baifenbi_num = params.value / zongren
+									var str = Number(baifenbi_num * 100).toFixed(1);
+									return str= zongren +"万人\n\n"+str+"%";
+									console.log(params)
+								
+								},　
+								// 　formatter:'{c}',　　//这是关键，在需要的地方加上就行了
+								align:'center'
+							}	,
+						},
+					},
+					markLine: {
+							symbol: 'none',
+							label: {
+									formatter: 'max: {c}',
+									position: 'start'
+							},
+							lineStyle: {
+									color: 'green',
+									type: 'dotted',
+									opacity: 0.2,
+									width: 2
+							},
+					},
+						z: 10
+				}, {
+						// full data
+						type: 'pictorialBar',
+						itemStyle: {
+								normal: {
+										opacity: 0.2
+								}
+						},
+						animationDuration: 0,
+						symbolRepeat: 'fixed',
+						symbolMargin: '30%',
+						symbol: pathSymbols.girl,
+						symbolSize:  [40, 89],
+						data: [
+						 { 
+								value: totalData,
+								symbol:pathSymbols.boy,
+							},
+							{
+								value: totalData,
+								symbol:pathSymbols.girl,
+							}
+						],
+						z: 5
+				}]
+				
+			}
+			myChart5.setOption(option5);
+			
+			// 病症人群年龄分析
+			var fiveRightData=[
+				{title:'0-3岁',value:36.02},
+				{title:'4-10岁',value:36.02},
+				{title:'10-18岁',value:36.02},
+				{title:'18-45岁',value:36.02},
+				{title:'40-60岁',value:36.02},
+				{title:'60岁以上',value:36.02}
+			]
+			var fiveRightTitle=[]
+			for(var i=0;i<fiveRightData.length;i++){
+				fiveRightTitle.push(fiveRightData[i].title)
+			}
+			var fiveRightValue=[]
+			for(var i=0;i<fiveRightData.length;i++){
+				fiveRightValue.push(fiveRightData[i].value)
+			}
+			var myChart6=echarts.init(document.getElementById('four-right-table'))
+			var option6={
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+					},
+					formatter: function (params) {
+							var tar = params[0];
+							return tar.marker+'在'+tar.name+'患该病的有'+ tar.value+'万人';
+					}
+				},
+				grid: {
+						top: '15%',
+						left: '10%',
+						right: '5%',
+						
+				},
+				xAxis: {
+						type: 'category',
+						data: fiveRightTitle,
+						axisLabel: {
+								color: '#90E6FE',
+								fontSize: 16
+						},
+						axisTick: {
+							lineStyle:{
+								color:'#fff'
+							},
+							inside:true
+						},
+						axisLine: {
+							lineStyle:{
+								color:'#fff'
+							}
+						}
+				},
+				yAxis: {
+					name:'人数（单位：万人）',
+					type: 'value',
+					nameTextStyle:{
+						fontSize:14,
+						lineHeight:50
+					},
+					splitLine: {show: false},
+					axisLabel: {
+							color: '#FFFFFF',
+							fontSize: 20
+					},
+					axisTick: {
+						lineStyle:{
+							color:'#fff'
+						}
+					},
+					axisLine: {
+						lineStyle:{
+							color:'#fff'
+						}
+					}
+				},
+				series: [{
+						data: fiveRightValue,
+						type: 'bar',
+						barWidth:42,
+						itemStyle:{
+							normal:{
+								color:function(params){
+									var colorlist = ['#43FF5D','#0195FF','#F353F1','#FFFE72','#2E59F5','#FF6587'];
+									return colorlist[params.dataIndex];
+									},
+								label: {
+									show: true,
+									position:'top',
+									fontSize: 16,
+									formatter: '{c}万人',　　　　//这是关键，在需要的地方加上就行了
+									align:'center'
+								}	,
+							}
+						}
+				}]
+			}
+			myChart6.setOption(option6);
+			
+			
+			// 递归求和
+			function sum(arr) {
+					var len = arr.length;
+					if(len == 0){
+							return 0;
+					} else if (len == 1){
+							return arr[0];
+					} else {
+							return arr[0] + sum(arr.slice(1));
+					}
+			}
+		</script>
+	</body>
+</html>

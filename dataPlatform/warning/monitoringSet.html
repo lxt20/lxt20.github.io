@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>监控设置</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/iconfont2.css"/>
+	<link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<style type="text/css">
+			.content{width: 100%;padding: 20px 30px;}
+			.content-head{display: flex;flex-direction: row;align-items: center;margin-top: 15px;}
+			.content-title{display: flex;flex-direction: row;align-items: center;color: #FFF;}
+			.content-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-time{display: flex;flex-direction: row;align-items: center;color: #FFFFFF;margin-left: 44px;font-size: 20px;}
+			.content-box{width: 100%;border-radius: 8px;margin-top: 25px;}
+			.content-box-table{width: 100%;/* height:437px; */border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;}
+			.content-box-table ul{width: 100%;/* height: 437px; */display: flex;flex-direction: column;list-style: none;}
+			#setBox1{display: flex;flex-direction: column;}
+			.content-box-table ul li{width: 100%;border-bottom: solid 2px rgba(5,54,71,0.7);display: flex;flex-direction: row;align-items: center;}
+			.content-box-table ul li:last-child{border-bottom:none}
+			/* .content-box-table .content-box-li{height: 52px;}
+			.content-box-table .content-box-li2{height: 116px;}
+			.content-box-table .content-box-li3{height: 107px;} */
+			.content-box-td{width: 49%;/* height: 52px; */font-size: 15px;font-family: PingFang SC;font-weight: 400;color: #E8E8E8;line-height: 52px;padding-right: 1%;text-align: right;}
+			.content-box-td2{width: 49%;/* height: 52px; */font-size: 15px;font-family: PingFang SC;font-weight: 400;color: #E8E8E8;line-height: 52px;padding-right: 1%;text-align: right;}
+			.content-box-td{border-right: solid 2px rgba(5,54,71,0.4);}
+			.xl-red{color: #FF0000;}
+			.xl-green{color: #2A9A34;}
+			.content-box-td input{width: 10%;height: 30px;border: 1px solid #A7A7A7;background-color: #081832;border-radius: 4px;font-size: 16px;font-family: Arial;font-weight: bold;color: #FF0000;padding-left: 2%;outline: none;}
+			.content-box-td2 input{width: 10%;height: 30px;border: 1px solid #A7A7A7;background-color: #081832;border-radius: 4px;font-size: 16px;font-family: Arial;font-weight: bold;color:#2A9A34;padding-left: 2%;outline: none;}
+			.content-check-box{width: 100%;display: flex;flex-direction: row;color: #E8E8E8;font-size: 16px;font-family: PingFang SC;font-weight: 400;height: 92px;padding-top: 24px;}
+			.content-check-title{width: 17.5%;text-align: right;line-height: 34px;}
+			.content-check-detail{display: flex;flex-direction: column;}
+			.check-detail-one{display: flex;flex-direction: row;align-items:center;}
+			.check-detail-two{display: flex;flex-direction: row;align-items: center;}
+			.layui-form-checkbox{width: 24px;height: 24px;margin-right: 0px;padding-right: 0px;background-color:#081833;}
+			.layui-form-checkbox i{width: 24px;height: 24px;border: none;line-height: 24px;font-size: 15px;color: #081833;font-weight: bold;top: 0;left: 0;background-color:#081833 ;border: 1px solid #fff;border-radius: 4px;}
+			.layui-form-checked i{border: 1px solid #FF0000;}
+			.layui-form-checkbox i:hover{color: #081833;}
+			.layui-unselect .layui-form-checkbox i:hover{color: #081833;}
+			.layui-form-checked i, .layui-form-checked:hover i{color: #FF0000;}
+			.layui-unselect .layui-form-checkbox .layui-icon-ok:before{color: #081833;}
+			.layui-unselect .layui-form-checkbox .layui-form-checked .layui-icon-ok:before{color: #FF0000 ;}
+			.check-detail-one p{margin-left: 9px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 25px;height: 25px;}
+			.check-detail-two p{margin-left: 9px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 25px;height: 25px;}
+			.input-phone{font-size: 14px;background-color: #081833;color: #FFF;width: 183px;height: 32px;border: 1px solid #A7A7A7;border-radius: 4px;margin-left: 15px;padding-left: 15px;}
+			.input-phone::-webkit-input-placeholder{font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;}
+			.content-btn-box{width: 82.5%;height: 107px;display: flex;flex-direction: row;align-items: center;padding-left: 17.5%;}
+			.cancel-btn{width: 16%;height: 40px;background: #E9E9E9;border-radius: 4px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #666666;line-height: 40px;border: none;}
+			.save-btn{width: 16%;height: 40px;margin-left: 1.6%;background: #FF0000;border-radius: 4px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;border: none;}
+			
+			
+			.content-two-title{display: flex;flex-direction: row;align-items: center;margin-top: 44px;}
+			.content-two-title p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-two-title p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-two-table{width: 100%;border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;margin: 30px 0 50px 0}
+			.content-two-table ul {width: 100%;background: rgba(235, 255, 101, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);}
+			.content-two-table ul li{border-bottom: solid 2px rgba(5,54,71,0.7);display: flex;flex-direction: row;align-items: center;}
+			.content-two-table ul li:last-child{border-bottom:none}
+			.content-two-th{font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #E8E8E8;line-height: 60px;text-align: left;padding: 0 2%;border-right: solid 2px rgba(5,54,71,0.4);width: 33.3%;}
+			.content-two-td{font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #E8E8E8;line-height: 48px;text-align: left;padding-left: 7%;}
+			.two-num{width: 35%;height: 30px;border: 1px solid #A7A7A7;background-color: #081832;border-radius: 4px;font-size: 16px;font-family: Arial;font-weight: bold;color:#FF0000;padding-left: 2%;outline: none;margin: 0 5px;}
+			.save-btn2{width: 30%;height: 35px;background: #FF0000;border-radius: 4px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 35px;border: none;}
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				
+				.content-box-table ul li{display: flex;flex-direction: column;}
+				.content-box-td{border-right:none;text-align: left;width: 100%;padding-left: 3%;}
+				.content-box-td2{text-align: left;width: 100%;padding-left: 3%;}
+			}
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<li>
+						<a href="drugCT.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-02"></span>
+								<span>药品销量监控</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="warningList.html">
+							<div class="li-content ">
+								<span class="iconfont icon-yujingtubiao-03"></span>
+								<span>预警信息列表</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<div class="li-content li-active">
+								<span class="iconfont icon-yujingtubiao-01"></span>
+								<span>监控设置</span>
+							</div>
+						</a>
+						<div class="li-tips  li-tips-active"></div>
+					</li>
+					<li>
+						<a href="salesRanking.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-04"></span>
+								<span>药品销量排行榜</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">预警信息列表</div>
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li>
+					<a href="drugCT.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-02"></span>
+						<span>药品销量监控</span>
+					</a>
+				</li>
+				<li>
+					<a href="warningList.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-03"></span>
+						<span>预警信息列表</span>
+					</a>
+				</li>
+				<li class="menu-active">
+					<a href="monitoringSet.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-01"></span>
+						<span>监控设置</span>
+					</a>
+				</li>
+				<li>
+					<a href="salesRanking.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-04"></span>
+						<span>药品销量排行榜</span>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="dataTime layui-form">
+				<div class="right-select-data2">
+					<select  lay-filter="selectYear" id="year">
+						<option value="2021">2021</option>
+						<option value="2020">2020</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="content layui-form">
+			<div class="content-head">
+				<div class="content-title">
+					<p></p>
+					<p>监控设置</p>
+				</div>
+				<div class="content-time display_none">
+					<p>刷新时间：</p>
+					<div class="option">
+						<select class="selCode" >
+							<option value="" class="selItem">请选择</option>
+							<option value="30" class="selItem">30分钟</option>
+							<option value="15" class="selItem">15分钟</option>
+							<option value="10" class="selItem">10分钟</option>
+						<select>
+					</div>
+				</div>
+				
+			</div>
+			<div class="content-box ">
+				<div class="content-box-table">
+					<ul >
+						<!-- <li class="content-box-li">
+							<div class="content-box-td">
+						
+							</div>
+							<div class="content-box-td2"></div>
+						</li> -->
+						<li class="content-box-li">
+							<div class="content-box-td"></div>
+							<div class="content-box-td2"></div>
+						</li>
+						<li class="content-box-li">
+							<div class="content-box-td"></div>
+							<div class="content-box-td2"></div>
+						</li>
+						<li class="content-box-li">
+							<div class="content-box-td"></div>
+							<div class="content-box-td2"></div>
+						</li>
+						<li class="content-box-li">
+							<div class="content-box-td"></div>
+							<div class="content-box-td2"></div>
+						</li>
+						
+						<li class="content-box-li2">
+							<div class="content-check-box">
+										<div class="content-check-title">报警方式：</div>
+										<div class="content-check-detail">
+											<div class="check-detail-one display_none">
+												<input type="checkbox" name="" id="voice" value="0" >
+												<p>声音提示</p>
+											</div>
+											<div class="check-detail-two">
+												<input type="checkbox" name="" id="message">
+												<p>短信提示</p>
+												<input type="input" placeholder="输入手机号" class="input-phone" value="" id="phone" oninput="value=value.replace(/[^\d]/g,'')" maxlength="11">
+											</div>
+										</div>
+									</div>
+						</li>
+						<li class="content-box-li3">
+							<div class="content-btn-box">
+								<input type="button" name="" id="" value="取消" class="cancel-btn" />
+								<input type="button" name="" id="" value="保存" class="save-btn" />
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="content-two-title">
+					<p></p>
+					<p>涨跌幅榜销量门槛设置</p>
+				</div>
+				<div class="content-two-table">
+					<ul>
+						<li>
+							<div class="content-two-th">
+								
+							</div>
+							<div class="content-two-th">
+							
+							</div>
+							<div class="content-two-th">
+								
+							</div>
+							
+						</li>
+						<li>
+							<div class="content-two-th">
+								
+							</div>
+							<div class="content-two-th">
+								
+							</div>
+							<div class="content-two-th">
+								<input type="button" name="" id="" value="确定" class="save-btn2" />
+							</div>
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+		</div>
+		
+		
+		<script src="../js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script>
+			var urlHead='http://10.0.0.24'
+		layui.use(['layer', 'form'], function(){
+		  var layer = layui.layer
+		  ,form = layui.form;
+		  
+		});
+		
+		// 小屏幕导航显示
+		$('.left-title').click(function(event){
+			$(".top-menu").slideToggle();
+			event.stopPropagation();
+		})
+		$('body').click(function(event) {  
+				$(".top-menu").hide();  
+		});
+		
+		$.ajax({
+		//请求方式
+				type:'GET',
+				//发送请求的地址以及传输的数据
+				url:urlHead+'/show_all/monitor',
+				data:'',
+				//服务器返回的数据类型
+				success:function(data){
+					console.log(data)
+					for(var i=1;i<6;i++){
+						$('.content-box-table li').eq(i-1).children('.content-box-td').append(getRed(data[2*i].title)+`<input type="input" name="`+data[2*i].name+`" id="" value="`+data[2*i].value+`" /> % 以上
+						 &nbsp;&nbsp;
+						`+data[2*i+1].title+`
+						<input type="input" name="`+data[2*i+1].name+`"  value="`+data[2*i+1].value+`" />
+						单以上
+				`)
+						
+						$('.content-box-table li').eq(i-1).children('.content-box-td2').append(getGreen(data[2*i+10].title)+`<input type="input" name="`+data[2*i+10].name+`" id="" value="`+data[2*i+10].value+`" />
+					% 以上
+					&nbsp;&nbsp;
+					`+data[2*i+11].title+`
+					<input type="input" name="`+data[2*i+11].name+`" value="`+data[2*i+11].value+`" />
+					单以上`)
+						
+						$('.content-two-th').eq(i-1).append(data[i+21].title+`
+								<input type="input" name="`+data[i+21].name+`" value="`+data[i+21].value+`" class="two-num" />单&nbsp;&nbsp;以上
+`)
+					}
+					checkCheckBox(data[20].value)
+					$('#message').attr({'name':data[20].name})
+					$('#phone').val(data[21].value).attr({'name':data[21].name})
+					
+					
+			}
+		});
+		 
+		
+		$('.save-btn').click(function(){
+			var day=$('input[name="MONITOR_DAY"]').val()
+			var dayNum=$('input[name="MONITOR_DAY_NUM"]').val()
+			var week=$('input[name="MONITOR_WEEK"]').val()
+			var weekNum=$('input[name="MONITOR_WEEK_NUM"]').val()
+			var month=$('input[name="MONITOR_MONTH"]').val()
+			var monthNum=$('input[name="MONITOR_MONTH_NUM"]').val()
+			var season=$('input[name="MONITOR_SEASON"]').val()
+			var seasonNum=$('input[name="MONITOR_SEASON_NUM"]').val()
+			var dayReduce=$('input[name="MONITOR_DAY_REDUCE"]').val()
+			var dayReduceNum=$('input[name="MONITOR_DAY_REDUCE_NUM"]').val()
+			var weekReduce=$('input[name="MONITOR_WEEK_REDUCE"]').val()
+			var weekReduceNum=$('input[name="MONITOR_WEEK_REDUCE_NUM"]').val()
+			var monthReduce=$('input[name="MONITOR_MONTH_REDUCE"]').val()
+			var monthReduceNum=$('input[name="MONITOR_MONTH_REDUCE_NUM"]').val()
+			var seasonReduce=$('input[name="MONITOR_SEASON_REDUCE"]').val()
+			var seasonReduceNum=$('input[name="MONITOR_SEASON_REDUCE_NUM"]').val()
+			var mobileTrue=checkCheckBox2($('input[name="MONITOR_MOBILE_TRUE"]').is(':checked'))	
+			
+			var mobile=$('input[name="MONITOR_MOBILE"]').val()
+			var saleDay=$('input[name="SALE_DAY"]').val()
+			var saleWeek=$('input[name="SALE_WEEK"]').val()
+			var saleMonth=$('input[name="SALE_MONTH"]').val()
+			var saleSeason=$('input[name="SALE_SEASON"]').val()
+			var saleYear=$('input[name="SALE_YEAR"]').val()
+			
+			
+			 var truthBeTold = window.confirm("确定保存该设置？")
+			 if(mobile.length != 11){
+				 alert('手机号码格是不正确')
+					truthBeTold=false
+			 }else if(mobile.length == 11){
+				 if (truthBeTold) {
+				 				 setMon(day,dayNum,week,weekNum,month,monthNum,season,seasonNum,dayReduce,dayReduceNum,weekReduce,weekReduceNum,monthReduce,monthReduceNum,seasonReduce,seasonReduceNum,mobileTrue,mobile,saleDay,saleWeek,saleMonth,saleSeason,saleYear)
+				 }
+			 }
+			
+			
+		})
+		
+	$('.save-btn2').click(function(){
+		var day=$('input[name="MONITOR_DAY"]').val()
+		var dayNum=$('input[name="MONITOR_DAY_NUM"]').val()
+		var week=$('input[name="MONITOR_WEEK"]').val()
+		var weekNum=$('input[name="MONITOR_WEEK_NUM"]').val()
+		var month=$('input[name="MONITOR_MONTH"]').val()
+		var monthNum=$('input[name="MONITOR_MONTH_NUM"]').val()
+		var season=$('input[name="MONITOR_SEASON"]').val()
+		var seasonNum=$('input[name="MONITOR_SEASON_NUM"]').val()
+		var dayReduce=$('input[name="MONITOR_DAY_REDUCE"]').val()
+		var dayReduceNum=$('input[name="MONITOR_DAY_REDUCE_NUM"]').val()
+		var weekReduce=$('input[name="MONITOR_WEEK_REDUCE"]').val()
+		var weekReduceNum=$('input[name="MONITOR_WEEK_REDUCE_NUM"]').val()
+		var monthReduce=$('input[name="MONITOR_MONTH_REDUCE"]').val()
+		var monthReduceNum=$('input[name="MONITOR_MONTH_REDUCE_NUM"]').val()
+		var seasonReduce=$('input[name="MONITOR_SEASON_REDUCE"]').val()
+		var seasonReduceNum=$('input[name="MONITOR_SEASON_REDUCE_NUM"]').val()
+		var mobileTrue=checkCheckBox2($('input[name="MONITOR_MOBILE_TRUE"]').is(':checked'))	
+		
+		var mobile=$('input[name="MONITOR_MOBILE"]').val()
+		var saleDay=$('input[name="SALE_DAY"]').val()
+		var saleWeek=$('input[name="SALE_WEEK"]').val()
+		var saleMonth=$('input[name="SALE_MONTH"]').val()
+		var saleSeason=$('input[name="SALE_SEASON"]').val()
+		var saleYear=$('input[name="SALE_YEAR"]').val()
+		
+		 var truthBeTold = window.confirm("确定保存该设置？")
+		 if (truthBeTold) {
+			 setMon(day,dayNum,week,weekNum,month,monthNum,season,seasonNum,dayReduce,dayReduceNum,weekReduce,weekReduceNum,monthReduce,monthReduceNum,seasonReduce,seasonReduceNum,mobileTrue,mobile,saleDay,saleWeek,saleMonth,saleSeason,saleYear)
+		 }
+	})
+		
+		// 修改设置
+		function setMon(day,dayNum,week,weekNum,month,monthNum,season,seasonNum,dayReduce,dayReduceNum,weekReduce,weekReduceNum,monthReduce,monthReduceNum,seasonReduce,seasonReduceNum,mobileTrue,mobile,saleDay,saleWeek,saleMonth,saleSeason,saleYear){
+			$.ajax({
+				type:"GET",
+				url:urlHead+'/show_all/monitor_set',
+				data:{
+					/* "MONITOR_HOUR":hour,
+					"MONITOR_HOUR_NUM":hourNum, */
+					"MONITOR_DAY":day,
+					"MONITOR_DAY_NUM":dayNum,
+					"MONITOR_WEEK":week,
+					"MONITOR_WEEK_NUM":weekNum,
+					"MONITOR_MONTH":month,
+					"MONITOR_MONTH_NUM":monthNum,
+					"MONITOR_SEASON":season,
+					"MONITOR_SEASON_NUM":seasonNum,
+					/* "MONITOR_HOUR_REDUCE":hourReduce,
+					"MONITOR_HOUR_REDUCE_NUM":hourReduceNum, */
+					"MONITOR_DAY_REDUCE":dayReduce,
+					"MONITOR_DAY_REDUCE_NUM":dayReduceNum,
+					"MONITOR_WEEK_REDUCE":weekReduce,
+					"MONITOR_WEEK_REDUCE_NUM":weekReduceNum,
+					"MONITOR_MONTH_REDUCE":monthReduce,
+					"MONITOR_MONTH_REDUCE_NUM":monthReduceNum,
+					"MONITOR_SEASON_REDUCE":seasonReduce,
+					"MONITOR_SEASON_REDUCE_NUM":seasonReduceNum,
+					"MONITOR_MOBILE_TRUE":mobileTrue,
+					"MONITOR_MOBILE":mobile,
+					"SALE_DAY":saleDay,
+					"SALE_WEEK":saleWeek,
+					"SALE_MONTH":saleMonth,
+					"SALE_SEASON":saleSeason,
+					"SALE_YEAR":saleYear
+				},
+				success:function(res){
+					alert('保存成功')
+				}
+			})
+		}
+		
+		
+		
+		
+		function getRed(text){
+			let res = new RegExp("(增加)",'g');
+			text = text.replace(res,"<span style='color:#f00;'>增加</span>");
+			return text;
+		}
+		function getGreen(text){
+			let res = new RegExp("(降幅)",'g');
+			text = text.replace(res,"<span style='color:#2A9A34;'>降幅</span>");
+			return text;
+		}
+		function checkCheckBox(value){
+			if(value==1){
+				$("#message").prop("checked",true)
+					$(".layui-form-checkbox").eq(1).addClass('layui-form-checked')
+					
+				}else if(value==0){
+				$("#message").removeProp("checked")
+				$(".layui-form-checkbox").eq(1).removeClass('layui-form-checked')
+			}
+		}
+		
+		function checkCheckBox2(e){
+			if(e){
+				return 1
+			}else{
+				return 0
+			}
+		}
+		</script> 
+	</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>药品销量排行榜</title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont2.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<style type="text/css">
+			
+			.content-box{width: 100%;padding: 20px 30px;margin-bottom: 44px;}
+			.content-title{display: flex;flex-direction: row;align-items: center;justify-content: space-between;margin-top: 15px;}
+			.content-title-left{display: flex;flex-direction: row;align-items: center;}
+			.content-title-left p:nth-of-type(1){width: 4px;height: 22px;background: #FFFFFF;}
+			.content-title-left p:nth-of-type(2){font-size: 20px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;margin-left: 20px;}
+			.content-title-data select{width: 140px;height:32px;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;background-color:#081833;border: 1px solid #A7A7A7;border-radius: 4px !important;}
+			.content-title-data .layui-input{height: 32px !important;background-color: #081833 !important;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8 !important;line-height: 40px;line-height: 32px;}
+			.layui-form-select dl dd, .layui-form-select dl dt{line-height: 32px;background-color: #081833;color: #FFFFFF ;}
+			.layui-select-title input::-webkit-input-placeholder{color: #FFFFFF !important;}
+			.layui-form-select dl{background-color: #081833 !important;font-size: 14px;}
+			.layui-form-select dl dd.layui-this{background-color: #fff;color: #081833;}
+			.layui-form-select dl dd:hover{color: #081833;background-color: #fff;}
+			.content-title-right{display: flex;flex-direction: row;align-items: center;}
+			
+			.data-btn{width: 80px;height: 32px;border: 1px solid #A7A7A7;border-radius: 4px !important;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #E8E8E8;line-height: 40px;background-color: #081833;line-height: 32px;margin-left: 9px;}
+			.data-active{background-color: #FFFFFF;color: #666666;}
+			.content-box-table{width: 100%;/* height: 572px; */background: rgba(235, 255, 101, 0);box-shadow: 0px 6px 27px 0px rgba(0, 3, 11, 0.3);border-radius: 8px;margin-top: 25px;}
+			.content-box-border{border-radius: 5px;box-shadow: 0 0 30px #093d55 inset;background: none;width: 100%;/* height: 572px; */}
+			.content-box-head{width: 100%;height: 65px;border-bottom: 1px solid rgba(9,84,109,0.5);display: flex;flex-direction: row;align-items: center;    font-size: 15px;font-family: PingFang SC;font-weight: 400;color: #E9E9E9;}
+			.content-box-head div{width: 8%;text-align: center;height: 65px;line-height: 65px;border-right: solid 2px transparent;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+			.content-box-head div:last-child{width: 3.2% !important;border-right: none;}
+			
+			.content-box-table ul{width: 100%;/* height: 506px; */display: flex;flex-direction: column;}
+			.content-box-table ul li{display: flex;flex-direction: row;align-items: center;border-bottom: solid 2px rgba(5,54,71,0.7);height: 49px;width: 100%;}
+			/* .content-box-table ul li:nth-of-type(1){width: 100%;height: 65px;border-bottom: 1px solid rgba(9,84,109,0.5);} */
+			.content-box-td{width: 8%;text-align: center;font-size: 16px;font-family: PingFang SC;font-weight: 400;color: #E9E9E9;border-right: solid 2px rgba(5,54,71,0.4);line-height: 49px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 14px !important;height: 49px;}
+			.content-box-td:nth-child(13n){width: 3.2% !important;border-right: none;}
+			/* .content-box-table ul li:last-child{border-bottom: none;} */
+			.content-box-td{}
+			.content-box-td a{width: 100%;height: 49px;text-decoration: none;color: #1BFFD3;}
+			.red-box{font-weight: bold !important;color: #FF0000 !important;}
+			.green-box{font-weight: bold !important;color: #00B54D !important;}
+			.yellow-box{font-weight: bold !important;color: #EBFF65 !important;}
+			
+			.content-cover{width: 100%;height: 100%;position:fixed;z-index: 999;background-color: rgba(0,0,0,0.2);top: 0;left: 0;}
+			.content-loading{position:fixed;width: 100px;height: 100px;z-index: 998;top: 250px;left: 45%;}
+			.content-loading img{width: 150px;height: 110px;}
+			@media (max-width: 1310px){
+				.head-box{display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
+				.main-title {display: none;}
+				.head-title{display: none;}
+				.right-data-title{display: none;}
+				.right-title{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;width: 49%;padding-right: 1%;}
+				.right-select-data{min-width:80px;}
+				.right-select-data2{min-width:80px;}
+				.left-title{display: block !important;}
+				.one-right-head{font-size: 12px}
+			}
+			@media (max-width: 1024px){
+				.main-title {display: none;}
+				.contentTwo-one-table{display: flex;flex-direction: column;align-items: center;}
+				.contentTwo-one-left{width: 100%;}
+				.contentTwo-one-right{width: 100%;}
+				.contentTwo-two-table{display: flex;flex-direction: column;align-items: center;}
+				.contentTwo-two-left{width: 100%;}
+				.contentTwo-two-right{width: 100%;}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<div class="head-box">
+			<div class="head-title">
+				<ul>
+					<li>
+						<a href="drugCT.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-02"></span>
+								<span>药品销量监控</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="warningList.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-03"></span>
+								<span>预警信息列表</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="monitoringSet.html">
+							<div class="li-content">
+								<span class="iconfont icon-yujingtubiao-01"></span>
+								<span>监控设置</span>
+							</div>
+						</a>
+						<div class="li-tips"></div>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<div class="li-content li-active">
+								<span class="iconfont icon-yujingtubiao-04"></span>
+								<span>药品销量排行榜</span>
+							</div>
+						</a>
+						<div class="li-tips li-tips-active"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="main-title">药品销量排行榜</div>
+			<!-- 小屏幕图标导航 -->
+			<div class="left-title">
+				<div class="top-logo">
+					<span class="iconfont icon-project"></span>
+				</div>
+			</div>
+			<ul class="top-menu">
+				<li>
+					<a href="drugCT.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-02"></span>
+						<span>药品销量监控</span>
+					</a>
+				</li>
+				<li>
+					<a href="warningList.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-03"></span>
+						<span>预警信息列表</span>
+					</a>
+				</li>
+				<li>
+					<a href="monitoringSet.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-01"></span>
+						<span>监控设置</span>
+					</a>
+				</li>
+				<li class="menu-active">
+					<a href="salesRanking.html" class="show-btn">
+						<span class="iconfont icon-yujingtubiao-04"></span>
+						<span>药品销量排行榜</span>
+					</a>
+				</li>
+			</ul>
+			<div class="dataTime layui-form">
+				<div class="right-select-data2">
+					<!-- <select  lay-filter="selectYear" id="year">
+						<option value="2021">2021</option>
+						<option value="2020">2020</option>
+					</select> -->
+				</div>
+			</div>
+		</div>
+		<!-- 药品销量排行榜 -->
+		<div class="content-box">
+			<div class="content-title">
+				<div class="content-title-left">
+					<p></p>
+					<p>药品销量排行榜</p>
+				</div>
+				<div class="content-title-right layui-form">
+					<div class="content-title-data">
+						<select id='selectNum' lay-filter="test">
+						  <option value="100">显示100个</option>
+						  <option value="50">显示50个</option>
+						  <option value="20">显示20个</option>
+						  <option value="10">显示10个</option>
+						</select>     
+					</div>
+					<div>
+						<input type="button" class="data-btn data-active" name="" id="1" value="昨日" />
+						<input type="button" class="data-btn" name="" id="2" value="近7天" />
+						<input type="button" class="data-btn" name="" id="3" value="本月" />
+						<input type="button" class="data-btn" name="" id="4" value="本季" />
+						<input type="button" class="data-btn" name="" id="5" value="今年" />
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="content-box-table">
+				<div class="content-box-border">
+				<div class="content-box-head">
+					<div>排名</div>
+					<div>药品名称</div>
+					<div>批准文号</div>
+					<div>订单量（件）</div>
+					<div>销售额（元）</div>
+					<div>平均单价（元）</div>
+					<div>平均毛利（元）</div>
+					<div>销售商家</div>
+					<div>销售门店</div>
+					<div>最畅销省份</div>
+					<div>最畅销城市</div>
+					<div>最畅销门店</div>
+					<div></div>
+				</div>
+				<ul class="content-box-ul">
+					<li>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+						<div class="content-box-td"></div>
+					</li>
+					
+					
+				</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="content-cover display_none"></div>
+		<div class="content-loading display_none">
+			<img src="../img/timg.gif" >
+		</div>
+		<script src="../js/jquery-2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var urlHead='http://10.0.0.24'
+			layui.use('form', function(){
+			  form = layui.form;
+			  form.on('select(test)', function(data){
+					if($('.data-btn').eq(0).is('.data-active')){
+						getSaleTable(1,data.value);
+					}else if($('.data-btn').eq(1).is('.data-active')){
+						getSaleTable(2,data.value);
+					}else if($('.data-btn').eq(2).is('.data-active')){
+						getSaleTable(3,data.value);
+					}else if($('.data-btn').eq(3).is('.data-active')){
+						getSaleTable(4,data.value);
+					}else if($('.data-btn').eq(4).is('.data-active')){
+						getSaleTable(5,data.value);
+					}
+			  });
+			});
+			// 小屏幕导航显示
+			$('.left-title').click(function(event){
+				$(".top-menu").slideToggle();
+				event.stopPropagation();
+			})
+			$('body').click(function(event) {  
+					$(".top-menu").hide();  
+			});
+			
+			// 天数切换
+			$('.data-btn').click(function(){
+				$(this).addClass('data-active')
+				$(this).siblings().removeClass('data-active')
+				$('.content-cover').removeClass('display_none')
+				$('.content-loading').removeClass('display_none')
+				console.log($('#selectNum').val())
+			  getSaleTable($(this).index()+1,$('#selectNum').val())
+			})
+		
+			     
+			$('.content-cover').removeClass('display_none')
+			$('.content-loading').removeClass('display_none')
+			var select = 'dd[lay-value=20]';  
+			$('#selectNum').siblings("div.layui-form-select").find('dl').find(select).click();
+			// 获取药品销量排行榜
+			function getSaleTable(type,limit){
+				console.log(type,limit)
+				$.ajax({
+				//请求方式
+						type:'GET',
+						//发送请求的地址以及传输的数据
+						url:urlHead+'/show_all/ranking_list',
+						data:{
+							"type":type,
+							"limit":limit
+						},
+						//服务器返回的数据类型
+						success:function(data){
+							console.log(data)
+							var str=$('.content-box-ul').html('')
+							if(data.length<10){
+								for(var i=0;i<10;i++){
+									if(i<data.length){
+													str.append(`	<li>
+											<div class="content-box-td">`+getRed(i+1)+`</div>
+											<div class="content-box-td">`+data[i].goods_name+`</div>
+											<div class="content-box-td">`+data[i].number+`</div>
+											<div class="content-box-td green-box">`+data[i].goods_number+`</div>
+											<div class="content-box-td red-box">`+data[i].order_money+`</div>
+											<div class="content-box-td yellow-box">`+data[i].unit_price+`</div>
+											<div class="content-box-td red-box">`+data[i].order_profit+`</div>
+											<div class="content-box-td">`+data[i].itemnum+`</div>
+											<div class="content-box-td">`+data[i].storenum+`</div>
+											<div class="content-box-td">`+data[i].provice_name+`</div>
+											<div class="content-box-td">`+data[i].city_name+`</div>
+											<div class="content-box-td">`+data[i].store_name+`</div>
+											<div class="content-box-td"><a href="javascript:;">查看</a></div>
+										</li>`)
+										continue;
+									}
+									str.append(`	<li>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td green-box"></div>
+										<div class="content-box-td red-box"></div>
+										<div class="content-box-td yellow-box"></div>
+										<div class="content-box-td red-box"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+										<div class="content-box-td"></div>
+									</li>`)
+								}
+							}
+							for(var i=0;i<data.length;i++){
+								str.append(`	<li>
+						<div class="content-box-td">`+getRed(i+1)+`</div>
+						<div class="content-box-td">`+data[i].goods_name+`</div>
+						<div class="content-box-td">`+data[i].number+`</div>
+						<div class="content-box-td green-box">`+data[i].goods_number+`</div>
+						<div class="content-box-td red-box">`+data[i].order_money+`</div>
+						<div class="content-box-td yellow-box">`+data[i].unit_price+`</div>
+						<div class="content-box-td red-box">`+data[i].order_profit+`</div>
+						<div class="content-box-td">`+data[i].itemnum+`</div>
+						<div class="content-box-td">`+data[i].storenum+`</div>
+						<div class="content-box-td">`+data[i].provice_name+`</div>
+						<div class="content-box-td">`+data[i].city_name+`</div>
+						<div class="content-box-td">`+data[i].store_name+`</div>
+						<div class="content-box-td"><a href="javascript:;">查看</a></div>
+					</li>`)
+							}
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						},
+						error: function(msg){
+							$('.content-cover').addClass('display_none')
+							$('.content-loading').addClass('display_none')
+						  alert("Data delete failed:"+JSON.stringify(msg));
+						}
+				});
+			}
+			
+			function getRed(num){
+				if(num<=3){
+					return "<span class='red-box'>"+num+"</span>"
+				}else{
+					return num
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>
